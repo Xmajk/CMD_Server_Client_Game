@@ -20,7 +20,9 @@ class Login_int:
     def loop(self)->None:
         self.connect.send(name_of_game,next_message=Next_message.POSLI,prompt=self.prompt)
         while True:
-            response:str = self.connect.recieve(next_message=Next_message.PRIJMI)
-            
-            server_response:str="opověd"
-            self.connect.send(server_response,next_message=Next_message.POSLI,prompt=self.prompt)
+            client_response:str = self.connect.recieve(next_message=Next_message.PRIJMI)
+            print(client_response)
+            if client_response=="help":
+                self.connect.send("nevim\nnevim2\nnevim3 --option",next_message=Next_message.POSLI,prompt=self.prompt)
+            else:
+                self.connect.send("",next_message=Next_message.POSLI,prompt=self.prompt)

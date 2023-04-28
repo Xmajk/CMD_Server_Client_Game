@@ -13,7 +13,6 @@ class Connection:
         response=None
         while response==None:
             response = self.client_socket.recv(self.number_of_recieve).decode(self.znakova_sada)
-        print(response)
         self.send("|||doruceno|||",next_message=next_message)
         return response
     
