@@ -3,6 +3,7 @@ import threading
 import time
 from Others.Connection import Connection
 from Interfaces.First_view import Login_int
+from Database.Database import Database
 
 MAX_HOSTS:int=25
 
@@ -13,10 +14,7 @@ port_number:int=5000
 # definice funkce pro obsluhu klienta
 def handle_client(connection:Connection):
     try:
-        # zde vložte kód pro obsluhu klienta
-        # například přijmout data od klienta, zpracovat je a odeslat zpět
-        while True:
-            Login_int(connection).loop()
+        Login_int(connection).loop()
         # uzavření spojení s klientem
     except (ConnectionResetError, ConnectionAbortedError):
         print(f'{connection.ip_adress}-Sever spadnul nebo se uživatel odpojil')
@@ -25,6 +23,8 @@ def handle_client(connection:Connection):
 
 # definice funkce pro start serveru
 def start_server():
+    database:Database = Database()
+    
     # vytvoření nového socketu
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -39,7 +39,7 @@ def start_server():
         client_socket, client_address = server_socket.accept()
 
         # spuštění nového vlákna pro obsluhu klienta
-        client_thread = threading.Thread(target=handle_client, args=(Connection(client_address[0],client_socket),))
+        client_thread = threading.Thread(target=handle_client, args=(Connection(client_address[0],client_socket,database),))
         client_thread.start()
 
 if __name__=="__main__":

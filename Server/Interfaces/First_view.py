@@ -23,6 +23,26 @@ class Login_int:
             client_response:str = self.connect.recieve(next_message=Next_message.PRIJMI)
             print(client_response)
             if client_response=="help":
-                self.connect.send("nevim\nnevim2\nnevim3 --option",next_message=Next_message.POSLI,prompt=self.prompt)
+                help_message:str="""----------------------
+-help=vypíšou se všechny příkazy, které můžete aktuálně použít
+-login=přihlášení
+----------------------"""
+                self.connect.send(help_message,next_message=Next_message.POSLI,prompt=self.prompt)
+            elif client_response=="login":
+                self.do_login()
             else:
-                self.connect.send("neznámí příkaz",next_message=Next_message.POSLI,prompt=self.prompt)
+                self.connect.send("neznámý příkaz",next_message=Next_message.POSLI,prompt=self.prompt)
+    
+    def do_login(self):
+        self.connect.send("",next_message=Next_message.POSLI,prompt="přezdívka:")
+        username:str=self.connect.recieve(next_message=Next_message.POSLI,prompt="heslo:")
+        password:str=self.connect.recieve(next_message=Next_message.PRIJMI)
+        login_succesful:bool=self.connect.login(username,password)
+        if login_succesful:
+            self.connect.send("úspěšné přihlášení",next_message=Next_message.POSLI)
+        else:
+            self.connect.send("neúspěšné přihlášení",next_message=Next_message.POSLI)
+        print(username,password,sep="-->")
+                
+if __name__=="__main__":
+    pass
