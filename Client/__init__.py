@@ -1,6 +1,8 @@
 import socket
 import threading
 import time
+import pwinput as pin
+from lib import hashing
 
 class Client:
     
@@ -15,7 +17,8 @@ class Client:
         output:dict={
             "prompt":output[0],
             "text":output[1],
-            "next_message":output[2]
+            "next_message":output[2],
+            "typ":output[3]
         }
         self.prompt=output.get("prompt")
         return output
@@ -26,7 +29,12 @@ class Client:
             print(self.__processed_data(recieve_data).get("text"))
             while True:
                 if self.__processed_data(recieve_data).get("next_message")=="posli":
-                    send_data:str = input(self.prompt)
+                    if self.__processed_data(recieve_data).get("typ")=="text":
+                        send_data:str = input(self.prompt)
+                    elif self.__processed_data(recieve_data).get("typ")=="heslo":
+                        send_data:str = pin.pwinput(self.prompt,'*')
+                    else:
+                        raise ValueError("Hodnota typ neplňuje hodnoty")
                     if send_data.strip()=="":
                         continue
                     self.client_socket.send(send_data.encode())

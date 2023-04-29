@@ -14,21 +14,30 @@ class Connection:
         self.player:Player=None
         
         
-    def recieve(self,next_message:Next_message,prompt=">")->str:
+    def recieve(self,next_message:Next_message,prompt=">",typ="text")->str:
         response=None
         while response==None:
             response = self.client_socket.recv(self.number_of_recieve).decode(self.znakova_sada)
-        self.send("|||doruceno|||",next_message=next_message,prompt=prompt)
+        self.send("|||doruceno|||",next_message=next_message,prompt=prompt,typ=typ)
         return response
     
-    def send(self,value:str,next_message:Next_message,prompt=">")->None:
-        message=f'{prompt}@@{value}@@{next_message}'
+    def send(self,value:str,next_message:Next_message,prompt=">",typ="text")->None:
+        message=f'{prompt}@@{value}@@{next_message}@@{typ}'
         self.client_socket.sendall(message.encode(self.znakova_sada))
         
     def login(self,username:str,password:str)->bool:
-        db_password:str=self.databaze.get_password(username)
-        if db_password==None:
+        db_password_tuple:tuple|None=self.databaze.get_password(username)
+        if db_password_tuple==None:
             return False
+        db_player_id,db_password=db_password_tuple
+        if db_password==password:
+            self.player=Player(db_player_id,self.databaze)
+            return True
+        return False
+    
+    def load_player(self):
+        self.player.load()
+        
         
 if __name__=="__main__":
     pass
