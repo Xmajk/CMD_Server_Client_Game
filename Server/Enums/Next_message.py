@@ -6,4 +6,3 @@ class Next_message:
     """
     PRIJMI="prijmi"
     POSLI="posli"
-    

@@ -25,4 +25,4 @@ class Login_int:
             if client_response=="help":
                 self.connect.send("nevim\nnevim2\nnevim3 --option",next_message=Next_message.POSLI,prompt=self.prompt)
             else:
-                self.connect.send("",next_message=Next_message.POSLI,prompt=self.prompt)
+                self.connect.send("neznámí příkaz",next_message=Next_message.POSLI,prompt=self.prompt)
