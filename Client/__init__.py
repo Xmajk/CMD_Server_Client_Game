@@ -3,6 +3,7 @@ import threading
 import time
 import pwinput as pin
 from lib import hashing
+import sys
 
 class Client:
     
@@ -37,19 +38,29 @@ class Client:
                         raise ValueError("Hodnota typ neplňuje hodnoty")
                     if send_data.strip()=="":
                         continue
-                    self.client_socket.send(send_data.encode())
+                    try:
+                        self.client_socket.send(send_data.encode())
+                    except socket.error as error:
+                        if error.errno == 10054:
+                            input("Stávající připojení bylo vynuceně ukončeno vzdáleným hostitelem.")
+                            sys.exit()
                     tmp:str=self.client_socket.recv(self.response_size).decode()
                     if self.__processed_data(tmp).get("text")=="|||doruceno|||":
                         recieve_data:str=tmp
                 else:
                     recieve_data:str=self.client_socket.recv(self.response_size).decode()
+                    if self.__processed_data(recieve_data).get("text")=="kill_client":
+                        input("Byl jste odpojen")
+                        break
                     if not self.__processed_data(recieve_data).get("text")=="":
                         print(f'{self.__processed_data(recieve_data).get("text")}')
         except Exception as e:
             print(e)
 
-
-
 if __name__=="__main__":
-    client=Client()
-    client.run()
+    try:
+        client=Client()
+        client.run()
+    except ConnectionRefusedError:
+        input("Nelze se připojit k serveru")
+        sys.exit()

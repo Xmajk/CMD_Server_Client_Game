@@ -31,12 +31,15 @@ class Connection:
             return False
         db_player_id,db_password=db_password_tuple
         if db_password==password:
-            self.player=Player(db_player_id,self.databaze)
+            self.player=Player(db_player_id)
             return True
         return False
     
     def load_player(self):
         self.player.load()
+        
+    def database_get_location(self)->tuple:
+        return self.databaze.get_location(self.player)
         
         
 if __name__=="__main__":

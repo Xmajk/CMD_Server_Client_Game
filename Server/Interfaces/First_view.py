@@ -30,7 +30,12 @@ class Login_int:
 ----------------------"""
                 self.connect.send(help_message,next_message=Next_message.POSLI,prompt=self.prompt)
             elif client_response=="login":
-                self.do_login()
+                try:
+                    self.do_login()
+                except ConnectionResetError:
+                    if not self.connect.player.username==None:
+                        self.connect.databaze.set_online(self.connect.player.username,0)
+                    raise ConnectionResetError()
             elif client_response=="register":
                 self.do_register()
             else:
@@ -41,7 +46,11 @@ class Login_int:
         password:str=self.connect.recieve(next_message=Next_message.PRIJMI)
         login_succesful:bool=self.connect.login(username,password)
         if login_succesful:
+            if self.connect.databaze.player_is_online(username):
+                self.connect.send(f'Uživatel {username} je už online',next_message=Next_message.POSLI)
+                return
             self.connect.player.username=username
+            self.connect.databaze.set_online(username,1)
             Load_user(self.connect).load()
         else:
             self.connect.send("neúspěšné přihlášení",next_message=Next_message.POSLI)
