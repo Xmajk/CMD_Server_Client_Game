@@ -108,7 +108,7 @@ class Register_command(ICommand):
         self.connect:Connection=connect
         
     def execute(self):
-        pass
+        raise NotImplementedError("Register")
     
 class Exit_command(ICommand):
     

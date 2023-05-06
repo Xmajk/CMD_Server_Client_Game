@@ -1,6 +1,7 @@
 from Others.Connection import Connection
 from Enums.Next_message import Next_message
 import time
+from lib.ICommand import ICommand
 
 class Capital_city:
     """
@@ -42,3 +43,4 @@ class Capital_city:
         self.connect.send(' ',next_message=Next_message.PRIJMI,prompt=self.promtp)
         self.connect.send('NPCs',next_message=Next_message.PRIJMI,prompt=self.promtp)
         self.connect.send('----------------------',next_message=Next_message.PRIJMI,prompt=self.promtp)
+        
