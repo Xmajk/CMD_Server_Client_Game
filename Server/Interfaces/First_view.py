@@ -6,6 +6,7 @@ from Database.Actions.Set_status import set_online
 from Database.Actions.Authentication import login
 from Gameobjects.Player import Player
 from Database.Actions.Authentication import username_exists
+from Database.Actions.Get_user_informations import player_is_online
 
 name_of_game:str="""███╗   ███╗██╗   ██╗███████╗████████╗██╗ ██████╗         ██╗███████╗██╗    ██╗███████╗██╗     ███████╗
 ████╗ ████║╚██╗ ██╔╝██╔════╝╚══██╔══╝██║██╔════╝         ██║██╔════╝██║    ██║██╔════╝██║     ██╔════╝
@@ -87,6 +88,9 @@ class Login_command(ICommand):
                 self.connect.send("",next_message=Next_message.POSLI,prompt="heslo:",typ="heslo")
             password:str=self.connect.recieve(next_message=Next_message.PRIJMI)
             if login(self.connect,username,password):
+                if player_is_online(self.connect.databaze,username):
+                    self.connect.send(f'Uživatel \"{username}\" je online',next_message=Next_message.PRIJMI)
+                    return
                 self.connect.player=Player(username)
                 set_online(self.connect.databaze,username,1)
                 Load_user(self.connect).load()
