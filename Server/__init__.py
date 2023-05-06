@@ -1,10 +1,11 @@
 import socket
 import threading
-import time
 from Others.Connection import Connection
-from Interfaces.First_view import Login_int
+from Interfaces.First_view import First_view
 from Database.Database import Database
 from Enums.Next_message import Next_message
+import sys
+from Database.Actions.Set_status import set_everyone_offline
 
 MAX_HOSTS:int=2
 clients:list=[]
@@ -14,7 +15,6 @@ semaphore:threading.Semaphore = threading.Semaphore(1)
 ip_adresa:str="localhost"
 port_number:int=5000
 
-# definice funkce pro obsluhu klienta
 def handle_client(connection:Connection)->None:
     try:
         with semaphore:
@@ -25,13 +25,13 @@ def handle_client(connection:Connection)->None:
                 return None
             else:
                 clients.append(connection.ip_adress)
-        
-        Login_int(connection).loop()
-        # uzavření spojení s klientem
+                connection.set_ip_list(clients)
+        interface:First_view=First_view(connection)
+        interface.loop()
     except ConnectionResetError:
         print(f'{connection.ip_adress}-uživatel se odpojil')
     except ConnectionAbortedError:
-        print(f'{connection.ip_adress}-Sever spadnul nebo se uživatel odpojil')
+        print(f'{connection.ip_adress}-Sever spadnul')
     finally:
         connection.client_socket.close()
     with semaphore:
@@ -39,26 +39,25 @@ def handle_client(connection:Connection)->None:
 
 # definice funkce pro start serveru
 def start_server():
-    database:Database = Database()   
-    database.set_everyone_offline()
+    database:Database = Database()
+    set_everyone_offline(database)
     
-    # vytvoření nového socketu
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    # nastavení parametrů socketu
     server_socket.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
     server_socket.bind((ip_adresa, port_number))
-    server_socket.listen(MAX_HOSTS) # maximální počet připojených klientů
-
-    # vytvoření nekonečné smyčky pro přijímání připojení od klientů
+    server_socket.listen(MAX_HOSTS)
+    
     while True:
-        # přijetí nového spojení od klienta
         client_socket, client_address = server_socket.accept()
 
-        # spuštění nového vlákna pro obsluhu klienta
         client_thread = threading.Thread(target=handle_client, args=(Connection(client_address[0],client_socket,database),))
         client_thread.start()
 
 if __name__=="__main__":
-    # spuštění serveru
-    start_server()
+    try:
+        start_server()
+    except socket.error as error:
+        if error.errno == 10048:
+            input("Protokol, síťová adresa a portu socketu jsou obsazeny")
+            sys.exit()    

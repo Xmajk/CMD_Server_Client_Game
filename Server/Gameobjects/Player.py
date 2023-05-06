@@ -1,7 +1,7 @@
 class Player:
     
-    def __init__(self,id:int) -> None:
-        self.username:str=None
+    def __init__(self,username) -> None:
+        self.username:str=username
     
     def load()->None:
         pass

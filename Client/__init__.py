@@ -59,6 +59,7 @@ class Client:
 
 if __name__=="__main__":
     try:
+        #client=Client(ip_address='dev.spsejecna.net',port=20148)
         client=Client()
         client.run()
     except ConnectionRefusedError:
