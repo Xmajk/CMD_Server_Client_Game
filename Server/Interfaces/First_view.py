@@ -7,6 +7,7 @@ from Database.Actions.Authentication import login
 from Gameobjects.Player import Player
 from Database.Actions.Authentication import username_exists
 from Database.Actions.Get_user_informations import player_is_online
+from Interfaces.Register_view import Register_view
 
 name_of_game:str="""███╗   ███╗██╗   ██╗███████╗████████╗██╗ ██████╗         ██╗███████╗██╗    ██╗███████╗██╗     ███████╗
 ████╗ ████║╚██╗ ██╔╝██╔════╝╚══██╔══╝██║██╔════╝         ██║██╔════╝██║    ██║██╔════╝██║     ██╔════╝
@@ -17,6 +18,20 @@ name_of_game:str="""███╗   ███╗██╗   ██╗████
 """
 
 class First_view:
+    """
+    Třída, která zajišťuje první pohled uživatele do hry.
+    Zobrazuje prompt a přijímá vstup od uživatele, který je poté
+    interpretován jako příkaz a vykonán. Podporované příkazy jsou
+    předem definovány v slovníku `commands`.
+
+    Atributy:
+    - prompt: string - prompt, který je zobrazován uživateli
+    - connect: Connection - instance třídy Connection pro komunikaci s klientem
+    - commands: dict - slovník příkazů, kde klíčem je název příkazu a hodnotou je třída příkazu
+
+    Metody:
+    - loop(): Zobrazuje prompt a přijímá vstup od uživatele, který je poté interpretován jako příkaz a vykonán.
+    """
     
     prompt=">"
 
@@ -25,11 +40,15 @@ class First_view:
         self.commands:dict={
             "help":Help_command,
             "login":Login_command,
-            "register":Register_command,
+            "registrovat":Register_command,
             "exit":Exit_command
         }
         
     def loop(self)->None:
+        """
+        Loop interfacu, který se zobrazí ihned po pripojení uživatele.
+        Přijímá vstup od uživatele, který je poté interpretován jako příkaz a vykonán.
+        """
         self.connect.send(name_of_game,next_message=Next_message.POSLI,prompt=self.prompt)
         while True:
             client_response:str = self.connect.recieve(next_message=Next_message.PRIJMI)
@@ -40,33 +59,18 @@ class First_view:
             else:
                 self.connect.send("Neznámý příkaz",Next_message.PRIJMI)
             self.connect.send("",next_message=Next_message.POSLI)
-    
-    def do_register(self)->None:
-        self.connect.send("",next_message=Next_message.POSLI,prompt="přezdívka:")
-        username:str=self.connect.recieve(next_message=Next_message.POSLI,prompt="heslo:",typ="heslo")
-        heslo:str=self.connect.recieve(next_message=Next_message.POSLI,prompt="potvrzení hesla:",typ="heslo")
-        heslo_potvrz:str=self.connect.recieve(next_message=Next_message.PRIJMI,prompt="")
-        """
-        TODO
-        kontrola integrity
-        """
-        try:
-            self.connect.databaze.register_user(username,heslo)
-            self.connect.send("Ůčet vytvořen úspěšně",next_message=Next_message.POSLI)
-        except:    
-            self.connect.send("Ůčet nejde vytvořit",next_message=Next_message.POSLI)
             
 class Help_command(ICommand):
     
     def __init__(self,connect:Connection) -> None:
         self.connect:Connection=connect
         
-    def execute(self):
+    def execute(self)->None:
         self.connect.send("",next_message=Next_message.PRIJMI)
         self.connect.send("----------------------",next_message=Next_message.PRIJMI)
         self.connect.send("-help=>vypíšou se všechny příkazy, které můžete aktuálně použít",next_message=Next_message.PRIJMI)
         self.connect.send("-login=>přihlášení",next_message=Next_message.PRIJMI)
-        self.connect.send("-register=>registrace",next_message=Next_message.PRIJMI)
+        self.connect.send("-registrovat=>registrace",next_message=Next_message.PRIJMI)
         self.connect.send("-exit=>ukončení programu",next_message=Next_message.PRIJMI)
         self.connect.send("----------------------",next_message=Next_message.PRIJMI)
         self.connect.send("",next_message=Next_message.PRIJMI)
@@ -76,7 +80,7 @@ class Login_command(ICommand):
     def __init__(self,connect:Connection) -> None:
         self.connect:Connection=connect
         
-    def execute(self):
+    def execute(self)->None:
         self.connect.send("",next_message=Next_message.PRIJMI)
         try:
             self.connect.send("",next_message=Next_message.POSLI,prompt="přezdívka:")
@@ -107,15 +111,15 @@ class Register_command(ICommand):
     def __init__(self,connect:Connection) -> None:
         self.connect:Connection=connect
         
-    def execute(self):
-        raise NotImplementedError("Register")
+    def execute(self)->None:
+        Register_view(self.connect).loop()
     
 class Exit_command(ICommand):
     
     def __init__(self,connect:Connection) -> None:
         self.connect:Connection=connect
         
-    def execute(self):
+    def execute(self)->None:
         self.connect.close_connection()
         
                 

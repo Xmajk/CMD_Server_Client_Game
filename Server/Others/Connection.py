@@ -24,10 +24,11 @@ class Connection:
         self.__all_ip_list=arr
                 
     def recieve(self,next_message:Next_message,prompt=">",typ="text")->str:
-        response=None
+        response:str=None
         while response==None:
             response = self.client_socket.recv(self.number_of_recieve).decode(self.znakova_sada)
         self.send("|||doruceno|||",next_message=next_message,prompt=prompt,typ=typ)
+        response=response.strip()
         return response
     
     def send(self,value:str,next_message:Next_message,prompt=">",typ="text")->None:
