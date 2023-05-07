@@ -49,7 +49,8 @@ class First_view:
         Loop interfacu, který se zobrazí ihned po pripojení uživatele.
         Přijímá vstup od uživatele, který je poté interpretován jako příkaz a vykonán.
         """
-        self.connect.send(name_of_game,next_message=Next_message.POSLI,prompt=self.prompt)
+        self.connect.send(name_of_game,next_message=Next_message.PRIJMI,prompt=self.prompt)
+        self.connect.send("Autor: Michal Hrouda",next_message=Next_message.POSLI,prompt=self.prompt)
         while True:
             client_response:str = self.connect.recieve(next_message=Next_message.PRIJMI)
             client_response:str=client_response.strip()

@@ -16,7 +16,7 @@ class Connection:
         self.number_of_recieve:int=number_of_recieve
         self.znakova_sada:str=znakova_sada
         self.databaze:Database=database
-        self.player:Player=None
+        self.player:Player=Player(None)
         self.time_delay:int=time_delay
         self.__all_ip_list:list=None
         

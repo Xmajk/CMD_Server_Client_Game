@@ -28,8 +28,14 @@ class Register_view:
         if username_exists(self.connect.databaze,self.username):
             self.connect.send(f'Uživatelské jméno \"{self.username}\" už existuje',next_message=Next_message.PRIJMI)
             return
+        if len(self.username)>240:
+            self.connect.send(f'Uživatelské jméno nesmí mít více jak 240 znaků',next_message=Next_message.PRIJMI)
+            return
         self.connect.send("",next_message=Next_message.POSLI,prompt="Heslo:",typ="heslo")
         self.password:str=self.connect.recieve(next_message=Next_message.PRIJMI)
+        if len(self.password)>240:
+            self.connect.send(f'Heslo nesmí mít více jak 240 znaků',next_message=Next_message.PRIJMI)
+            return
         valid,error=valid_password(self.password)
         if not valid:
             self.connect.send(error,next_message=Next_message.PRIJMI)
