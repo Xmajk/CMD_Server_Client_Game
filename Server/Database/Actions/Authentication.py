@@ -22,13 +22,6 @@ def get_password(db:Database,username:str)->tuple|None:
         if db_output==None:
             return None
     return db_output
-    
-def register_user(db:Database,username:str,password:str)->None:
-    data:tuple=(username,password)
-    template:str="INSERT INTO player(username,passwd) values(%s,%s);"
-    with db.mydb.cursor() as cursor:
-        cursor.execute(template,data)
-        db.mydb.commit()
         
 def username_exists(db:Database,username:str)->bool:
     data:tuple=(username,)

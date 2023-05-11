@@ -10,6 +10,32 @@ from Database.Actions.Set_status import set_online
 semaphore:threading.Semaphore = threading.Semaphore(1)
 
 class Connection:
+    """
+    Třída Connection slouží pro uchování informací o klientovi a komunikaci s ním.
+    
+    Parametery
+    ----------
+    
+    
+    Atributy:
+    ---------
+    ip_adress: str
+        IP adresa klienta.
+    client_socket: socket
+        Socket klienta pro komunikaci se serverem.
+    number_of_recieve: int
+        Maximální délka zprávy, kterou klient může přijmout najednou.
+    znakova_sada: str
+        Použitá znaková sada.
+    databaze: Database
+        Objekt třídy Database pro práci s databází.
+    player: Player
+        Objekt třídy Player pro uchování informací o hráči.
+    time_delay: int
+        Časová prodleva mezi odesláním zpráv.
+    __all_ip_list: list
+        Seznam IP adres všech připojených klientů.
+    """
     def __init__(self,address:str,client_socket:socket,database:Database,znakova_sada='UTF-8',number_of_recieve:int=4096,time_delay:float=0.001) -> None:
         self.ip_adress:str=address
         self.client_socket:socket=client_socket
@@ -21,9 +47,29 @@ class Connection:
         self.__all_ip_list:list=None
         
     def set_ip_list(self,arr:list)->None:
+        """
+        nastaví vstupní list jako seznam všech ip adress
+        
+        Parametry:
+        ----------
+        arr: list
+            list ip adres
+        """
         self.__all_ip_list=arr
                 
     def recieve(self,next_message:Next_message,prompt=">",typ="text")->str:
+        """
+        Metoda, která přijímá zprávu od klineta, po přijetí zprávy odešle, že zpráva byla doručena.
+        
+        Parametry:
+        ----------
+        next_message: Next_message
+            Enum, jestli má klient přijímat nebo odesílat.
+        prompt: str, defaultně '>'
+            Určuje prompt u klienta.
+        typ: str, defaultně 'text'
+            Určuje jaký typ bude u klinta input.
+        """
         response:str=None
         while response==None:
             response = self.client_socket.recv(self.number_of_recieve).decode(self.znakova_sada)
@@ -35,12 +81,6 @@ class Connection:
         message=f'{prompt}@@{value}@@{next_message}@@{typ}'
         self.client_socket.sendall(message.encode(self.znakova_sada))
         time.sleep(self.time_delay)
-    
-    def load_player(self):
-        self.player.load()
-        
-    def database_get_location(self)->tuple:
-        return self.databaze.get_location(self.player)
     
     def close_connection(self)->None:
         with semaphore:

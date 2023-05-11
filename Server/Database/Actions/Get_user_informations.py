@@ -17,3 +17,11 @@ def get_location(db:Database,player:Player)->tuple:
         cursor.execute(template,data)
         db_output:tuple=cursor.fetchone()
     return db_output
+
+def get_player_code(db:Database,username:str)->str:
+    data:tuple=(username,)
+    template:str="SELECT kod from player WHERE username=%s"
+    with db.mydb.cursor() as cursor:
+        cursor.execute(template,data)
+        db_output:tuple=cursor.fetchone()
+    return db_output[0]

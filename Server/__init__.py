@@ -16,6 +16,14 @@ ip_adresa:str="localhost"
 port_number:int=5000
 
 def handle_client(connection:Connection)->None:
+    """
+    Funkce pro obsluhu konkrétního klienta.
+
+    Parametry:
+    ----------
+    connection: Connection 
+        Instance třídy Connection, která reprezentuje spojení s klientem.
+    """
     try:
         with semaphore:
             if len(clients)==MAX_HOSTS:
@@ -28,6 +36,9 @@ def handle_client(connection:Connection)->None:
                 connection.set_ip_list(clients)
         interface:First_view=First_view(connection)
         interface.loop()
+    except NotImplementedError as e:
+        connection.close_connection()
+        raise NotImplementedError(e)
     except ConnectionResetError:
         print(f'{connection.ip_adress}-uživatel se odpojil')
     except ConnectionAbortedError:
@@ -38,7 +49,10 @@ def handle_client(connection:Connection)->None:
         clients.remove(connection.ip_adress)
 
 # definice funkce pro start serveru
-def start_server():
+def start_server()->None:
+    """
+    Spustí server pro síťovou aplikaci a čeká na připojení klientů.
+    """
     database:Database = Database()
     set_everyone_offline(database)
     

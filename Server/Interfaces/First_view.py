@@ -23,25 +23,25 @@ class First_view:
     Zobrazuje prompt a přijímá vstup od uživatele, který je poté
     interpretován jako příkaz a vykonán. Podporované příkazy jsou
     předem definovány v slovníku `commands`.
+    
+    Parametry:
+    ----------
 
     Atributy:
-    - prompt: string - prompt, který je zobrazován uživateli
+    ---------
     - connect: Connection - instance třídy Connection pro komunikaci s klientem
     - commands: dict - slovník příkazů, kde klíčem je název příkazu a hodnotou je třída příkazu
-
-    Metody:
-    - loop(): Zobrazuje prompt a přijímá vstup od uživatele, který je poté interpretován jako příkaz a vykonán.
     """
     
     prompt=">"
 
     def __init__(self,connect:Connection) -> None:
-        self.connect=connect
+        self.connect:Connection=connect
         self.commands:dict={
-            "help":Help_command,
-            "login":Login_command,
-            "registrovat":Register_command,
-            "exit":Exit_command
+            "help":Help_command(),
+            "login":Login_command(),
+            "registrovat":Register_command(),
+            "exit":Exit_command()
         }
         
     def loop(self)->None:
@@ -50,78 +50,88 @@ class First_view:
         Přijímá vstup od uživatele, který je poté interpretován jako příkaz a vykonán.
         """
         self.connect.send(name_of_game,next_message=Next_message.PRIJMI,prompt=self.prompt)
-        self.connect.send("Autor: Michal Hrouda",next_message=Next_message.POSLI,prompt=self.prompt)
+        self.connect.send("Autor: Michal Hrouda",next_message=Next_message.PRIJMI,prompt=self.prompt)
+        self.connect.send(" ",next_message=Next_message.POSLI,prompt=self.prompt)
         while True:
             client_response:str = self.connect.recieve(next_message=Next_message.PRIJMI)
             client_response:str=client_response.strip()
-            command:str=self.commands.get(client_response,None)
+            command:ICommand=self.commands.get(client_response,Neznamy_command())
             if not command==None:
-                command(self.connect).execute()
+                command.execute(self.connect)
             else:
                 self.connect.send("Neznámý příkaz",Next_message.PRIJMI)
             self.connect.send("",next_message=Next_message.POSLI)
             
 class Help_command(ICommand):
     
-    def __init__(self,connect:Connection) -> None:
-        self.connect:Connection=connect
+    def __init__(self) -> None:
+        pass
         
-    def execute(self)->None:
-        self.connect.send("",next_message=Next_message.PRIJMI)
-        self.connect.send("----------------------",next_message=Next_message.PRIJMI)
-        self.connect.send("-help=>vypíšou se všechny příkazy, které můžete aktuálně použít",next_message=Next_message.PRIJMI)
-        self.connect.send("-login=>přihlášení",next_message=Next_message.PRIJMI)
-        self.connect.send("-registrovat=>registrace",next_message=Next_message.PRIJMI)
-        self.connect.send("-exit=>ukončení programu",next_message=Next_message.PRIJMI)
-        self.connect.send("----------------------",next_message=Next_message.PRIJMI)
-        self.connect.send("",next_message=Next_message.PRIJMI)
+    def execute(self,connect:Connection)->None:
+        connect.send("",next_message=Next_message.PRIJMI)
+        connect.send("----------------------",next_message=Next_message.PRIJMI)
+        connect.send("-login=>přihlášení",next_message=Next_message.PRIJMI)
+        connect.send("-registrovat=>registrace",next_message=Next_message.PRIJMI)
+        connect.send("-help=>vypíšou se všechny příkazy, které můžete aktuálně použít",next_message=Next_message.PRIJMI)
+        connect.send("-exit=>ukončení programu",next_message=Next_message.PRIJMI)
+        connect.send("----------------------",next_message=Next_message.PRIJMI)
+        connect.send("",next_message=Next_message.PRIJMI)
         
 class Login_command(ICommand):
     
-    def __init__(self,connect:Connection) -> None:
-        self.connect:Connection=connect
+    def __init__(self) -> None:
+        pass
         
-    def execute(self)->None:
-        self.connect.send("",next_message=Next_message.PRIJMI)
+    def execute(self,connect:Connection)->None:
+        connect.send("",next_message=Next_message.PRIJMI)
         try:
-            self.connect.send("",next_message=Next_message.POSLI,prompt="přezdívka:")
-            username:str=self.connect.recieve(next_message=Next_message.PRIJMI)
-            if not username_exists(self.connect.databaze,username):
-                self.connect.send(f'Uživatelské jméno \"{username}\" neexistuje',next_message=Next_message.PRIJMI)
+            connect.send("",next_message=Next_message.POSLI,prompt="přezdívka:")
+            username:str=connect.recieve(next_message=Next_message.PRIJMI)
+            if not username_exists(connect.databaze,username):
+                connect.send(f'Uživatelské jméno \"{username}\" neexistuje',next_message=Next_message.PRIJMI)
                 return
             else:
-                self.connect.send("",next_message=Next_message.POSLI,prompt="heslo:",typ="heslo")
-            password:str=self.connect.recieve(next_message=Next_message.PRIJMI)
-            if login(self.connect,username,password):
-                if player_is_online(self.connect.databaze,username):
-                    self.connect.send(f'Uživatel \"{username}\" je online',next_message=Next_message.PRIJMI)
+                connect.send("",next_message=Next_message.POSLI,prompt="heslo:",typ="heslo")
+            password:str=connect.recieve(next_message=Next_message.PRIJMI)
+            if login(connect,username,password):
+                if player_is_online(connect.databaze,username):
+                    connect.send(f'Uživatel \"{username}\" je online',next_message=Next_message.PRIJMI)
                     return
-                self.connect.player=Player(username)
-                set_online(self.connect.databaze,username,1)
-                Load_user(self.connect).load()
+                connect.player=Player(username)
+                set_online(connect.databaze,username,1)
+                Load_user(connect).load()
             else:
-                self.connect.send("Neúspěšné přihlášení",next_message=Next_message.PRIJMI)
+                connect.send("Neúspěšné přihlášení",next_message=Next_message.PRIJMI)
         except ConnectionResetError:
-            if not self.connect.player.username==None:
-                    set_online(self.connect.databaze,self.connect.player.username,0)
+            if not connect.player.username==None:
+                    set_online(connect.databaze,connect.player.username,0)
             raise ConnectionResetError()
-        self.connect.send("",next_message=Next_message.PRIJMI)
+        connect.send("",next_message=Next_message.PRIJMI)
     
 class Register_command(ICommand):
 
-    def __init__(self,connect:Connection) -> None:
-        self.connect:Connection=connect
+    def __init__(self) -> None:
+        pass
         
-    def execute(self)->None:
-        Register_view(self.connect).loop()
+    def execute(self,connect:Connection)->None:
+        Register_view(connect).loop()
     
 class Exit_command(ICommand):
     
-    def __init__(self,connect:Connection) -> None:
-        self.connect:Connection=connect
+    def __init__(self) -> None:
+        pass
         
-    def execute(self)->None:
-        self.connect.close_connection()
+    def execute(self,connect:Connection)->None:
+        connect.close_connection()
+        
+class Neznamy_command(ICommand):
+    
+    def __init__(self) -> None:
+        pass
+    
+    def execute(self,connect:Connection) -> bool:
+        connect.send("Neznámý příkaz",next_message=Next_message.PRIJMI)
+        return True
         
                 
 if __name__=="__main__":
