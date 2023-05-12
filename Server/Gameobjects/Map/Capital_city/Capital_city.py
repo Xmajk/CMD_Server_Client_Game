@@ -6,7 +6,7 @@ from Others.Help_methods import edit_response
 from Interfaces.Profil.Profile import Profil_view
 from Database.Actions.Authentication import username_exists
 from Gameobjects.Map.Place import Place
-from Gameobjects.Map.Route1.Route1 import Route1
+from Others.Crossing.To_route1 import to_route1
 
 class Capital_city(Place):
     """
@@ -18,7 +18,9 @@ class Capital_city(Place):
         self.budovy:list=[]
         self.connect:Connection=connect
         self.prompt="Hlavní město>"
-        self.ways:list=[Route1(connect)]
+        self.ways:dict={
+            "Route1":to_route1
+        }
         self.commands:dict={
             "help":Help_command(),
             "profil":Profil_command(),#interface, options(1)
@@ -90,8 +92,7 @@ class Cesta_command(ICommand):
         if not len(options) == 1:
             capital_city.connect.send("Příkaz \"cesta\" má jeden povinný argument",next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
             return True
-        if not options[0] in [element.nazev for element in capital_city.ways]:
+        if not options[0] in capital_city.ways.keys():
             capital_city.connect.send(f'Cesta \"{options[0]}\" neexistuje',next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
             return True
-        for element in capital_city.ways:
-            element.loop()
+        capital_city.ways[options[0]](capital_city.connect)

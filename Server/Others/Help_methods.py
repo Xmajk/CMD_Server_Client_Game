@@ -20,6 +20,6 @@ def edit_response(client_response:str)->tuple:
     command = parts[0].strip()
     args = []
     for part in parts[1:]:
-        arg = part.strip().split(" ")[0]
+        arg = part.strip()
         args.append(arg)
     return (command, args)
