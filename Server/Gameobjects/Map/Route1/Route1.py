@@ -3,7 +3,7 @@ from lib.ICommand import ICommand
 from Enums.Next_message import Next_message
 from Others.Help_methods import edit_response
 from Gameobjects.Map.Place import Place
-from Others.Crossing.To_capit_city import to_capital_city
+from Others.Crossing import to_capital_city
 
 class Route1(Place):
     

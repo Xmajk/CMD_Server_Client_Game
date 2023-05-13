@@ -6,7 +6,7 @@ from Database.Actions.Authentication import username_exists
 
 class Profil_view:
     
-    def __init__(self,connect:Connection,prompt:str,username:str|None) -> None:
+    def __init__(self,connect:Connection,prompt:str,username:str|None=None) -> None:
         self.connect:Connection=connect
         self.prompt:str=prompt+"profil>"
         self.commands:dict={

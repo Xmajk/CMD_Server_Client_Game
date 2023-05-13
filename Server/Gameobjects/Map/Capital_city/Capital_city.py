@@ -6,42 +6,35 @@ from Others.Help_methods import edit_response
 from Interfaces.Profil.Profile import Profil_view
 from Database.Actions.Authentication import username_exists
 from Gameobjects.Map.Place import Place
-from Others.Crossing.To_route1 import to_route1
+from Others.Crossing import to_route1
 
 class Capital_city(Place):
     """
         Označení v databázi jako 1
     """    
     def __init__(self,connect:Connection) -> None:
-        self.NPCs:list=[]
-        self.nazev:str="Hlavní město"
-        self.budovy:list=[]
-        self.connect:Connection=connect
-        self.prompt="Hlavní město>"
-        self.ways:dict={
-            "Route1":to_route1
-        }
-        self.commands:dict={
-            "help":Help_command(),
-            "profil":Profil_command(),#interface, options(1)
-            "vypis_budovy":None,
-            "budova":None,#options (1)
-            "vypis_cesty":None,
-            "cesta":Cesta_command(),#options (1)
-            "vypis_postavy":None,
-            "postava":None#options (1)
-        }
-        
-    def loop(self)->None:
-        self.connect.send("",next_message=Next_message.POSLI,prompt=self.prompt)
-        while True:
-            client_response:str=self.connect.recieve(next_message=Next_message.PRIJMI,prompt=self.prompt)
-            client_command,options=edit_response(client_response)
-            client_command:ICommand=self.commands.get(client_command,Neznamy_command())
-            continue_loop:bool=client_command.execute(self,options)
-            if not continue_loop:
-                return
-            self.connect.send('',next_message=Next_message.POSLI,prompt=self.prompt)
+        super().__init__(
+            name="Hlavní město",
+            prompt="Hlavní město>",
+            connect=connect,
+            NPCs=[],
+            buildings=[],
+            ways={"Route1": to_route1},
+            commands={
+                "help": Help_command(),
+                "profil": Profil_command(),
+                "vypis_budovy": None,
+                "budova": None,
+                "vypis_cesty": None,
+                "cesta": Cesta_command(),
+                "vypis_postavy": None,
+                "postava": None
+            }
+        )
+    
+    def loop(self):
+        print("loop capital city")
+        super().loop()
         
 class Neznamy_command(ICommand):
     
@@ -74,7 +67,7 @@ class Profil_command(ICommand):
     def __init__(self) -> None:
         pass
         
-    def execute(self,capital_city:Capital_city,options:list):
+    def execute(self,capital_city:Place,options:list):
         if not len(options) in [0,1]:
             capital_city.connect.send("Příkaz \"profil\" má jeden dobrovolný argument",next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
             return True
@@ -88,7 +81,7 @@ class Profil_command(ICommand):
         return True
     
 class Cesta_command(ICommand):
-    def execute(self,capital_city:Capital_city,options:list):
+    def execute(self,capital_city:Place,options:list):
         if not len(options) == 1:
             capital_city.connect.send("Příkaz \"cesta\" má jeden povinný argument",next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
             return True
