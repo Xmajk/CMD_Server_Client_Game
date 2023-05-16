@@ -12,7 +12,9 @@ def player_is_online(db:Database,username:str)->bool:
 
 def get_location(db:Database,player:Player)->tuple:
     data:tuple=(player.username,)
-    template:str="SELECT location,building from player WHERE username=%s"
+    template:str="""SELECT l.nazev,b.nazev FROM 
+(player p inner join lokace l on p.id_lokace=l.id)left join building b
+on b.id=p.id_building WHERE p.username=%s;"""
     with db.mydb.cursor() as cursor:
         cursor.execute(template,data)
         db_output:tuple=cursor.fetchone()

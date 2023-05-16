@@ -1,91 +1,69 @@
 from Others.Connection import Connection
 from Enums.Next_message import Next_message
-import time
 from lib.ICommand import ICommand
-from Others.Help_methods import edit_response
-from Interfaces.Profil.Profile import Profil_view
-from Database.Actions.Authentication import username_exists
 from Gameobjects.Map.Place import Place
+from typing import List
 from Others.Crossing import to_route1
+from Gameobjects.Building import Building
+from Gameobjects.Map.Capital_city.Capital_city_tawern import Capital_city_tawern
+from Database.Actions.Set_status import set_building
+from Database.Actions.Quests import Capital_city_tawern as cptq
 
 class Capital_city(Place):
     """
         Označení v databázi jako 1
-    """    
+    """ 
+    name:str="Hlavní město"
+    prompt:str="Hlavní město>"
+    
     def __init__(self,connect:Connection) -> None:
         super().__init__(
-            name="Hlavní město",
-            prompt="Hlavní město>",
+            name=self.name,
+            prompt=self.prompt,
             connect=connect,
             NPCs=[],
-            buildings=[],
+            buildings={
+            "hospoda":Capital_city_tawern(connect=connect)    
+            },
             ways={"Route1": to_route1},
             commands={
-                "help": Help_command(),
-                "profil": Profil_command(),
-                "vypis_budovy": None,
-                "budova": None,
-                "vypis_cesty": None,
-                "cesta": Cesta_command(),
-                "vypis_postavy": None,
-                "postava": None
+                "help": Help_command(self),
+                "budova":Budova_command(self)
             }
         )
     
     def loop(self):
-        print("loop capital city")
         super().loop()
-        
-class Neznamy_command(ICommand):
-    
-    def __init__(self) -> None:
-        pass
-    
-    def execute(self,capital_city:Capital_city,options:list):
-        capital_city.connect.send("Neznámý příkaz",next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
-        return True
         
 class Help_command(ICommand):
     
-    def __init__(self) -> None:
-        pass
+    def __init__(self,capital_city:Capital_city) -> None:
+        self.capital_city:Capital_city=capital_city
         
-    def execute(self,capital_city:Capital_city,options:list):
+    def execute(self,options:list):
         if not len(options)==0:
-            capital_city.connect.send("Příkaz \"help\" nemá žádné argumenty",next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
+            self.capital_city.connect.send("Příkaz \"help\" nemá žádné argumenty",next_message=Next_message.PRIJMI,prompt=self.capital_city.prompt)
             return True
-        capital_city.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
-        capital_city.connect.send("-profil --[jméno hráče (dobrovolné)]=>když napíšete příkaz bez argumentu, tak",next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
-        capital_city.connect.send("zobrazíte svůj profil, jinak zobrazíte profil hráče",next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
-        capital_city.connect.send("-cesta --[název cesty]=>přejdete na cestu",next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
-        capital_city.connect.send("-help=>vypíšou se všechny příkazy, které můžete aktuálně použít",next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
-        capital_city.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
+        self.capital_city.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.capital_city.prompt)
+        self.capital_city.supplementary_help()
+        self.capital_city.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.capital_city.prompt)
         return True
     
-class Profil_command(ICommand):
+class Budova_command(ICommand):
     
-    def __init__(self) -> None:
-        pass
+    def __init__(self,capital_city:Capital_city) -> None:
+        self.capital_city:Capital_city=capital_city   
         
-    def execute(self,capital_city:Place,options:list):
-        if not len(options) in [0,1]:
-            capital_city.connect.send("Příkaz \"profil\" má jeden dobrovolný argument",next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
+    def execute(self,options:List[str]) -> bool:
+        if not len(options)==1:
+            self.capital_city.connect.send(f'Příkaz \"budova\" má jeden povinný argument',next_message=Next_message.PRIJMI,prompt=self.capital_city.prompt)
             return True
-        if len(options)==1:
-            if username_exists(capital_city.connect.databaze,options[0]):
-                pass
-            else:
-                capital_city.connect.send(f'Uživatel \"{options[0]}\" neexistuje',next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
+        if not options[0] in self.capital_city.buildings.keys():
+            self.capital_city.connect.send(f'Budova \"{options[0]}\" neexistuje',next_message=Next_message.PRIJMI,prompt=self.capital_city.prompt)
             return True
-        Profil_view(capital_city.connect,capital_city.prompt).loop()
+        if options[0]=="hospoda" and not cptq(self.capital_city.connect.databaze,self.capital_city.connect.player.username):
+            self.capital_city.connect.send(f'Hospoda je uzavřena, protože hospodského unesli banditi!',next_message=Next_message.PRIJMI,prompt=self.capital_city.prompt)
+            return True
+        set_building(self.capital_city.connect.databaze,self.capital_city.connect.player.username,self.capital_city.name,options[0])
+        self.capital_city.buildings[options[0]].loop()
         return True
-    
-class Cesta_command(ICommand):
-    def execute(self,capital_city:Place,options:list):
-        if not len(options) == 1:
-            capital_city.connect.send("Příkaz \"cesta\" má jeden povinný argument",next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
-            return True
-        if not options[0] in capital_city.ways.keys():
-            capital_city.connect.send(f'Cesta \"{options[0]}\" neexistuje',next_message=Next_message.PRIJMI,prompt=capital_city.prompt)
-            return True
-        capital_city.ways[options[0]](capital_city.connect)

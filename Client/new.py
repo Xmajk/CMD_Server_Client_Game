@@ -15,6 +15,16 @@ class Client:
         
     def __processed_data(self,raw_data:str)->dict:
         output:list=raw_data.split("@@")
+        if not len(output)==4:
+            print("chybyčka se vloudila")
+            print(output)
+            time.sleep(1)
+            return{
+            "prompt":self.prompt,
+            "text":"",
+            "next_message":"prijmi",
+            "typ":"text"
+        } 
         output:dict={
             "prompt":output[0],
             "text":output[1],
@@ -50,6 +60,8 @@ class Client:
                     except socket.error as error:
                         if error.errno == 10054:
                             input("Stávající připojení bylo vynuceně ukončeno vzdáleným hostitelem.")
+                            input()
+                            Client().run()
                             sys.exit()
                     tmp:str=self.recieve()
                     tmp:dict=self.__processed_data(tmp)
@@ -59,6 +71,7 @@ class Client:
                     recieved_data:dict=self.__processed_data(self.recieve())
                     if recieved_data.get("text")=="kill_client":
                         input("Byl jste odpojen")
+                        Client().run()
                         break
                     if not recieved_data.get("text")=="":
                         print(f'{recieved_data.get("text")}')

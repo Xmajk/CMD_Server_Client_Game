@@ -166,12 +166,14 @@ class Finich_command(ICommand):
             rv.connect.send("Prosím vyčkejte než vás zaregistrujeme",next_message=Next_message.PRIJMI)
             register(rv.connect.databaze,rv.username,rv.trida,rv.password)
         except mysql.connector.Error as error:
-            if error.errno==1062:
+            print(error.sqlstate)
+            if error.sqlstate=="45000":
                 rv.connect.send(f'Během vaší registrace si username \"{rv.username}\" někdo zaregistroval',next_message=Next_message.PRIJMI)
                 return False
             rv.connect.send("Při registraci nastala chyba",next_message=Next_message.PRIJMI)
             return False
         except Exception as e:
+            print(e)
             rv.connect.send("Při registraci nastala chyba",next_message=Next_message.PRIJMI)
             return False
         rv.connect.send(f'Úspěšně jste se zaregistroval \"{rv.username}\"',next_message=Next_message.PRIJMI)

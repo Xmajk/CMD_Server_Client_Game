@@ -20,7 +20,7 @@ def get_info_class(db:Database,trida:str)->tuple:
 
 def register(db:Database,username:str,trida:str,password:str)->None:
     data:tuple=(username,password,trida)
-    template:str="INSERT INTO player (username, passwd, id_class) VALUES (%s, %s, (SELECT id FROM class WHERE nazev = %s));"
+    template:str="call mp_register(%s,%s,%s);"
     with db.mydb.cursor() as cursor:
         cursor.execute(template,data)
         db.mydb.commit()
