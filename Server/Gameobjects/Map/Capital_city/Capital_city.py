@@ -14,7 +14,7 @@ class Capital_city(Place):
         Označení v databázi jako 1
     """ 
     name:str="Hlavní město"
-    prompt:str="Hlavní město>"
+    prompt:str="Hlavní_město>"
     
     def __init__(self,connect:Connection) -> None:
         super().__init__(

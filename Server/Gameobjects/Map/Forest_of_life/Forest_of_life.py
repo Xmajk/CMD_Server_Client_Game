@@ -1,20 +1,21 @@
 from Others.Connection import Connection
+from lib.ICommand import ICommand
+from Enums.Next_message import Next_message
+from Others.Help_methods import edit_response
 from Gameobjects.Map.Place import Place
-from Others.Crossing import to_capital_city,to_life_of_forest,to_route2
+from Others.Crossing import to_route1
 
-class Route1(Place):
-    
+class Forest_of_life(Place):
+
     def __init__(self,connect:Connection) -> None:
         super().__init__(
-            name="Route1",
-            prompt="Route1>",
+            name="Les života",
+            prompt="Les_života>",
             connect=connect,
             NPCs=[],
             buildings={},
             ways={
-                "Hlavní město":to_capital_city,
-                "Les života":to_life_of_forest,
-                "Route2":to_route2
+                "Route1":to_route1
             },
             commands={
             }

@@ -5,6 +5,9 @@ from Gameobjects.Map.Capital_city.Capital_city import Capital_city
 from Gameobjects.Map.Route1.Route1 import Route1
 from Database.Actions.Get_user_informations import get_location
 from Gameobjects.Map.Capital_city.Capital_city_tawern import Capital_city_tawern
+from Gameobjects.Map.Forest_of_life.Forest_of_life import Forest_of_life
+from Gameobjects.Map.Route2.Route2 import Route2
+from Gameobjects.Map.Gem_town.Gem_town import Gem_town
 
 class Load_user:
     def __init__(self,connect:Connection) -> None:
@@ -19,7 +22,13 @@ class Load_user:
                 Capital_city_tawern(self.connect).loop()
             place=Capital_city(self.connect)
             place.loop()
-        if location=="Route1":
+        elif location=="Route1":
             Route1(self.connect).loop()
+        elif location=="Les života":
+            Forest_of_life(self.connect).loop() 
+        elif location=="Route2":
+            Route2(self.connect).loop()
+        elif location=="Rubínové město":
+            Gem_town(self.connect).loop()
         else:
             raise NotImplementedError('Load')

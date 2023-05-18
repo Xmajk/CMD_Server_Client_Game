@@ -1,20 +1,18 @@
 from Others.Connection import Connection
 from Gameobjects.Map.Place import Place
-from Others.Crossing import to_capital_city,to_life_of_forest,to_route2
+from Others.Crossing import to_route1,to_gem_town
 
-class Route1(Place):
-    
+class Route2(Place):
     def __init__(self,connect:Connection) -> None:
         super().__init__(
-            name="Route1",
-            prompt="Route1>",
+            name="Route2",
+            prompt="Route2>",
             connect=connect,
             NPCs=[],
             buildings={},
             ways={
-                "Hlavní město":to_capital_city,
-                "Les života":to_life_of_forest,
-                "Route2":to_route2
+                "Rubínové město":to_gem_town,
+                "Route1":to_route1
             },
             commands={
             }
