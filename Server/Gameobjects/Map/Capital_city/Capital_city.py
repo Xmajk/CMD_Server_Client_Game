@@ -7,7 +7,7 @@ from Others.Crossing import to_route1
 from Gameobjects.Building import Building
 from Gameobjects.Map.Capital_city.Capital_city_tawern import Capital_city_tawern
 from Database.Actions.Set_status import set_building
-from Database.Actions.Quests import Capital_city_tawern as cptq
+from Database.Actions.Quests import capital_city_tawern as cptq
 
 class Capital_city(Place):
     """

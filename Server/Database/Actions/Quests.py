@@ -3,7 +3,7 @@ from Gameobjects.Player import Player
 from Database.Database import Database
 
 #Hlavní město
-def Capital_city_tawern(db:Database,username:str)->bool:
+def capital_city_tawern(db:Database,username:str)->bool:
     data:tuple=(username,)
     template:str="""SELECT q.nazev FROM
 player p inner join

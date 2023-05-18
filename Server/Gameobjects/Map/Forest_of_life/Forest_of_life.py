@@ -1,9 +1,9 @@
 from Others.Connection import Connection
-from lib.ICommand import ICommand
-from Enums.Next_message import Next_message
-from Others.Help_methods import edit_response
+from Database.Actions.Quests import capital_city_tawern
+from Database.Actions.Set_quests import set_capital_city_tawern
 from Gameobjects.Map.Place import Place
 from Others.Crossing import to_route1
+from Enums.Next_message import Next_message
 
 class Forest_of_life(Place):
 
@@ -22,4 +22,7 @@ class Forest_of_life(Place):
         )
         
     def loop(self):
+        if not capital_city_tawern(self.connect.databaze,self.connect.player.username):
+            set_capital_city_tawern(self.connect.databaze,self.connect.player.username)
+            self.connect.send("Zachránil jste hospodského a splnili jste úkol!",next_message=Next_message.PRIJMI,prompt=self.prompt)
         super().loop()
