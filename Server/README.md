@@ -4,20 +4,15 @@ od serveru jde zprava ve formátu ==> prompt@@text@@další_akce(poslání,přij
 po přijetí serveru se odešle zpráva |||doručeno|||
 
 ## Třídy
------
--warrior
--assasin
--wizard
+- warrior
+- assasin
+- wizard
 
 ## Ability
--------
--
 
 ## Itemy
------
 
 ## Lokace
-------
 - Hlavní město
 - Route1
 - Les života
@@ -25,9 +20,7 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 - Rubínové město
 
 ## Budovy
-------
--hopoda -> nachází se v hlavním městě a tubínové městě
+- hopoda -> nachází se v hlavním městě a tubínové městě
 
 ## Questy
-------
-Capital_city_tawern_quest->zachránit hospodského z hlavního města a otevřít si tím lokaci hospody v hlavním městě
+- Capital_city_tawern_quest->zachránit hospodského z hlavního města a otevřít si tím lokaci hospody v hlavním městě
