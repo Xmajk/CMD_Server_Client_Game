@@ -1,4 +1,4 @@
-![SPŠE Ječná](https://www.spsejecna.cz/)
+<img src="/Jecna_logo.png" alt="SPŠE Ječná"/>
 # PV-Game
 
 od serveru jde zprava ve formátu ==> prompt@@text@@další_akce(poslání,přijímání)
