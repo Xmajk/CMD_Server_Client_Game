@@ -44,7 +44,7 @@ def handle_client(connection:Connection)->None:
     except ConnectionAbortedError:
         print(f'{connection.ip_adress}-Sever spadnul')
     finally:
-        connection.client_socket.close()
+        connection.close_connection()
     with semaphore:
         clients.remove(connection.ip_adress)
 

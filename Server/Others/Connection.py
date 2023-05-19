@@ -84,7 +84,8 @@ class Connection:
     
     def close_connection(self)->None:
         with semaphore:
-            self.send("kill_client",next_message=Next_message.PRIJMI,prompt="")
+            try: self.send("kill_client",next_message=Next_message.PRIJMI,prompt="")
+            except:pass
             if not self.player==None:
                 set_online(self.databaze,self.player.username,0)
             self.__all_ip_list.remove(self.ip_adress)

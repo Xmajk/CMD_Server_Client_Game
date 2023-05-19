@@ -53,7 +53,9 @@ class First_view(CMD_level):
         Loop interfacu, který se zobrazí ihned po pripojení uživatele.
         Přijímá vstup od uživatele, který je poté interpretován jako příkaz a vykonán.
         """
-        self.connect.send(name_of_game,next_message=Next_message.PRIJMI,prompt=self.prompt)
+        for element in name_of_game.split("\n"):
+            self.connect.send(element,next_message=Next_message.PRIJMI,prompt=self.prompt)
+        #self.connect.send(name_of_game,next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("Autor: Michal Hrouda",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send(" ",next_message=Next_message.PRIJMI,prompt=self.prompt)
         super().loop()
