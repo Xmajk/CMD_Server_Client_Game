@@ -12,7 +12,7 @@ clients:list=[]
 
 semaphore:threading.Semaphore = threading.Semaphore(1)
 
-ip_adresa:str="localhost"
+ip_adresa:str="0.0.0.0"
 port_number:int=5000
 
 def handle_client(connection:Connection)->None:
