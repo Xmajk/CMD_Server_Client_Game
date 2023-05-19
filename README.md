@@ -9,7 +9,8 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 ## CLIENT
 
 ### PODPOROVANÉ OPERAČNÍ SYSTÉMY
-U+1FA9F;
+:window: Windows 10, Windows 11
+:penguin: Debian
 
 ### Kofigurace:
 ```
