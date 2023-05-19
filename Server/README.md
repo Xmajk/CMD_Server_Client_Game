@@ -18,11 +18,11 @@ Itemy
 
 Lokace
 ------
--Hlavní město
--Route1
--Les života
--Route2
--Rubínové město
+- Hlavní město
+- Route1
+- Les života
+- Route2
+- Rubínové město
 
 Budovy
 ------
