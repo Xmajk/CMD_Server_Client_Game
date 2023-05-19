@@ -1,4 +1,5 @@
 <img src="/readme_content/Jecna_logo.png" alt="SPŠE Ječná"/>
+
 # PV-Game
 
 od serveru jde zprava ve formátu ==> prompt@@text@@další_akce(poslání,přijímání)
@@ -7,9 +8,9 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 
 ## SERVER
 
-### - Třídy
+### Třídy
 - warrior
-- assasin
+  - assasin
 - wizard
 
 ### Ability
