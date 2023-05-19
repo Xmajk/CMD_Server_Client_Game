@@ -3,20 +3,20 @@
 od serveru jde zprava ve formátu ==> prompt@@text@@další_akce(poslání,přijímání)
 po přijetí serveru se odešle zpráva |||doručeno|||
 
-Třídy
+## Třídy
 -----
 -warrior
 -assasin
 -wizard
 
-Ability
+## Ability
 -------
 -
 
-Itemy
+## Itemy
 -----
 
-Lokace
+## Lokace
 ------
 - Hlavní město
 - Route1
@@ -24,10 +24,10 @@ Lokace
 - Route2
 - Rubínové město
 
-Budovy
+## Budovy
 ------
 -hopoda -> nachází se v hlavním městě a tubínové městě
 
-Questy
+## Questy
 ------
 Capital_city_tawern_quest->zachránit hospodského z hlavního města a otevřít si tím lokaci hospody v hlavním městě
