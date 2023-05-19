@@ -2,11 +2,12 @@
 
 # PV-Game
 
+Hru si můžete stáhnou na [Odkaz na stránky](https://www.spsejecna.cz).
+
 od serveru jde zprava ve formátu ==> prompt@@text@@další_akce(poslání,přijímání)
 po přijetí serveru se odešle zpráva |||doručeno|||
 ## CLIENT
-kofigurace:
-- [ ] ahojky
+Kofigurace:
 ```
 {
     "server_ip":None
