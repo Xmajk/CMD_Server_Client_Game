@@ -7,7 +7,7 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 
 ## SERVER
 
-### Třídy
+### - Třídy
 - warrior
 - assasin
 - wizard
