@@ -7,7 +7,11 @@ Hru si můžete stáhnou na [Odkaz na stránky](https://www.spsejecna.cz).
 od serveru jde zprava ve formátu ==> prompt@@text@@další_akce(poslání,přijímání)
 po přijetí serveru se odešle zpráva |||doručeno|||
 ## CLIENT
-Kofigurace:
+
+### PODPOROVANÉ OPERAČNÍ SYSTÉMY
+U+1FA9F;
+
+### Kofigurace:
 ```
 {
     "server_ip":None
@@ -18,7 +22,7 @@ Kofigurace:
 
 ### Třídy
 - warrior
-[] - assasin
+- assasin
 - wizard
 
 ### Ability
