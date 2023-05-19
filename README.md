@@ -10,6 +10,7 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 
 ### PODPOROVANÉ OPERAČNÍ SYSTÉMY
 :window: Windows 10, Windows 11
+
 :penguin: Debian
 
 ### Kofigurace:
