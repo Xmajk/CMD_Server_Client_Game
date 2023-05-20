@@ -19,6 +19,8 @@ Klienta si můžete stáhnou na [Odkaz na stránky](https://www.spsejecna.cz).
 | server_port         | `port serveru` |
 | response_size       | `velikost přijímaných zpráv` |
 
+Pro náš veřejný server
+----------------------
 ```
 {
     "server_address":ip adresa serveru,
