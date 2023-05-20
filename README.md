@@ -58,3 +58,18 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 
 ### Questy
 - Capital_city_tawern_quest->zachránit hospodského z hlavního města a otevřít si tím lokaci hospody v hlavním městě
+
+### Typy itemů
+- zbraň:
+    - bronzový meč
+    - zlatý meč
+    - diamantový meč
+    - kouzelný proutek
+    - kouzelnická hůl
+- helma
+- zbroj
+- kalhoty
+- boty
+- useable:
+    - v kombatu
+    - mimo kombat
