@@ -14,7 +14,9 @@ Klienta si můžete stáhnou na [Odkaz na stránky](https://www.spsejecna.cz).
 ### Kofigurace:
 ```
 {
-    "server_ip":Noney
+    "server_address":<span style="color:red">ip adresa serveru</span>,
+    "server_port":<span style="color:red">port serveru</span>,
+    "response_size":<span style="color:red">velikost přijímaných zpráv</span>
 }
 ```
 
