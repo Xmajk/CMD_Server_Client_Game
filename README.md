@@ -12,11 +12,18 @@ Klienta si můžete stáhnou na [Odkaz na stránky](https://www.spsejecna.cz).
 :penguin: Debian
 
 ### Kofigurace:
+
+| Nastavení           | Hodnota              |
+|---------------------|----------------------|
+| server_address      | `<span style="color:red">ip adresa serveru</span>` |
+| server_port         | `<span style="color:red">port serveru</span>` |
+| response_size       | `<span style="color:red">velikost přijímaných zpráv</span>` |
+
 ```
 {
-    "server_address":<span style="color:red">ip adresa serveru</span>,
-    "server_port":<span style="color:red">port serveru</span>,
-    "response_size":<span style="color:red">velikost přijímaných zpráv</span>
+    "server_address":ip adresa serveru,
+    "server_port":port serveru,
+    "response_size":velikost přijímaných zpráv
 }
 ```
 
