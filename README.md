@@ -18,13 +18,15 @@ Klienta si můžete stáhnou na [Odkaz na stránky](https://www.spsejecna.cz).
 | server_address      | `ip adresa serveru` |
 | server_port         | `port serveru` |
 | response_size       | `velikost přijímaných zpráv` |
+| time_delay          | `pauza po zpracování protokolu` |
 
 Pro náš veřejný server
 ```
 {
     "server_address":"127.0.0.1",
     "server_port":5000,
-    "response_size":4096
+    "response_size":4096,
+    "time_delay":0.01
 }
 ```
 

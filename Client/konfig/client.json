@@ -1,5 +1,6 @@
 {
     "server_address":"localhost",
     "server_port":5000,
-    "response_size":4096
+    "response_size":4096,
+    "time_delay":0.01
 }

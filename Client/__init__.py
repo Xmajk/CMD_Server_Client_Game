@@ -5,6 +5,7 @@ import sys
 import re
 from typing import List,Tuple,Dict,Union
 import json
+import time
 
 class Client:
     _instance = None
@@ -14,7 +15,7 @@ class Client:
             cls._instance = super().__new__(cls)
         return cls._instance
 
-    def __init__(self, ip_address='localhost', port=5000, response_size=4096):
+    def __init__(self, ip_address:str='localhost', port:int=5000, response_size:int=4096,time_delay:float=1.0):
         if not hasattr(self, 'client_socket'):
             self.client_socket:socket.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.client_socket.connect((ip_address, port))
@@ -23,6 +24,7 @@ class Client:
             self.recieved:List[Dict[str,str]]=[]
             self.next_move:str="prijmi"
             self.expect_control:bool=False
+            self.time_delay:float=time_delay
             
     def __split_and_proccess_data(self,raw_data:str)->str:
         regex:str = r"@\|start\|@([^@]+)?@@([^@]+)?@@([^@]+)@@([^@]+)@\|end\|@"
@@ -85,6 +87,7 @@ class Client:
                 protocol:Dict[str,str] = self.recieved.pop(0)
                 self.prompt=protocol.get("prompt",">")
                 self.__process_recieve(protocol)
+                time.sleep(self.time_delay)
      
     def close_client(self):
         print("Aplikace byla uzavřena")
@@ -94,29 +97,38 @@ if __name__=="__main__":
     with open("konfig/client.json", 'r') as file:
         data:Dict[str,int] = json.load(file)
     if not "server_address" in data.keys():
-        print("V konfiguračním souboru není adresa serveru")
+        input("V konfiguračním souboru není adresa serveru")
         sys.exit()
     if not "server_port" in data.keys():
-        print("V konfiguračním souboru není port serveru")
+        input("V konfiguračním souboru není port serveru")
         sys.exit()
     if not "response_size" in data.keys():
-        print("V konfiguračním souboru není velikost odpovědi")
+        input("V konfiguračním souboru není velikost odpovědi")
         sys.exit()
+    if not "time_delay" in data.keys():
+        input("V konfiguračním souboru není pauza po zpracování protokolu")
     if not type(data.get("server_address"))==str:
-        print("Adresa serveru musí být řetězec")
+        input("Adresa serveru musí být řetězec")
         sys.exit()
     if not type(data.get("server_port"))==int:
-        print("Port serveru musí být celé číslo")
+        input("Port serveru musí být celé číslo")
         sys.exit()
     if not type(data.get("response_size"))==int:
-        print("Velikost odpovědi musí být celé číslo")
+        input("Velikost odpovědi musí být celé číslo")
         sys.exit()
+    if not type(data.get("time_delay"))==float:
+        input("Pauza po zpracování protokolu musí být typu float")
+        sys.exit()
+        
     try:
         #client=Client(ip_address='dev.spsejecna.net',port=20148)
-        client=Client(ip_address=data.get("server_address"),port=data.get("server_port"),response_size=data.get("response_size"))
+        client=Client(ip_address=data.get("server_address"),port=data.get("server_port"),response_size=data.get("response_size"),time_delay=data.get("time_delay"))
         recieve_thread=threading.Thread(target=client.thread_recieve,args=())
         recieve_thread.start()
         client.run()
     except ConnectionRefusedError:
         input("Nelze se připojit k serveru")
         sys.exit()
+    except KeyboardInterrupt:
+        print()
+        client.close_client()
