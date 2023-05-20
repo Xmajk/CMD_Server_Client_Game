@@ -60,6 +60,9 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 - Capital_city_tawern_quest->zachránit hospodského z hlavního města a otevřít si tím lokaci hospody v hlavním městě
 
 ### Typy itemů
+| zbraňe | damage | speed | ability |
+|--------|--------|-------|---------|
+|bronzový meč|        |       |         |
 - zbraň:
     - bronzový meč
     - zlatý meč
