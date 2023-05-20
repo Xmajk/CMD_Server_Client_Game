@@ -20,12 +20,11 @@ Klienta si můžete stáhnou na [Odkaz na stránky](https://www.spsejecna.cz).
 | response_size       | `velikost přijímaných zpráv` |
 
 Pro náš veřejný server
-----------------------
 ```
 {
-    "server_address":ip adresa serveru,
-    "server_port":port serveru,
-    "response_size":velikost přijímaných zpráv
+    "server_address":"127.0.0.1",
+    "server_port":5000,
+    "response_size":4096
 }
 ```
 

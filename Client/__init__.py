@@ -1,6 +1,5 @@
 import socket
 import threading
-import time
 import pwinput as pin
 import sys
 import re
@@ -102,6 +101,15 @@ if __name__=="__main__":
         sys.exit()
     if not "response_size" in data.keys():
         print("V konfiguračním souboru není velikost odpovědi")
+        sys.exit()
+    if not type(data.get("server_address"))==str:
+        print("Adresa serveru musí být řetězec")
+        sys.exit()
+    if not type(data.get("server_port"))==int:
+        print("Port serveru musí být celé číslo")
+        sys.exit()
+    if not type(data.get("response_size"))==int:
+        print("Velikost odpovědi musí být celé číslo")
         sys.exit()
     try:
         #client=Client(ip_address='dev.spsejecna.net',port=20148)
