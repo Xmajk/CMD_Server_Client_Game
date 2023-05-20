@@ -65,7 +65,7 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 |bronzový meč|  30    |   0    |   -5      | -   |
 |zlatý meč|   50    |     0  |       -10  | - |
 |diamantový meč| 80      |  0     |     -40    |   |
-|kouzelný protek| 25     |   20    |     0    | každé kouzlo stojí o 10 many méně |
+|kouzelný proutek| 25     |   20    |     0    | každé kouzlo stojí o 10 many méně |
 |kouzelnická hůl|  45     |    40   |    -10     | každé kouzlo stojí o 5 many méně a přidá 10 poškození |
 - helma
 - zbroj
