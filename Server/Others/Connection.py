@@ -36,7 +36,7 @@ class Connection:
     __all_ip_list: list
         Seznam IP adres všech připojených klientů.
     """
-    def __init__(self,address:str,client_socket:socket,database:Database,znakova_sada='UTF-8',number_of_recieve:int=4096,time_delay:float=0.001) -> None:
+    def __init__(self,address:str,client_socket:socket,database:Database,znakova_sada='UTF-8',number_of_recieve:int=4096,time_delay:float=0) -> None:
         self.ip_adress:str=address
         self.client_socket:socket=client_socket
         self.number_of_recieve:int=number_of_recieve
@@ -78,7 +78,7 @@ class Connection:
         return response
     
     def send(self,value:str,next_message:Next_message,prompt=">",typ="text")->None:
-        message=f'{prompt}@@{value}@@{next_message}@@{typ}'
+        message=f'@|start|@{prompt}@@{value}@@{next_message}@@{typ}@|end|@'
         self.client_socket.sendall(message.encode(self.znakova_sada))
         time.sleep(self.time_delay)
     

@@ -2,65 +2,95 @@ import socket
 import threading
 import time
 import pwinput as pin
-from lib import hashing
 import sys
+import re
+from typing import List,Tuple,Dict,Union
 
 class Client:
-    
-    def __init__(self,ip_address='localhost',port=5000,response_size=4096) -> None:
-        self.client_socket:socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.client_socket.connect((ip_address,port))
-        self.response_size:int=response_size
-        self.prompt:str=None
-        
-    def __processed_data(self,raw_data:str)->dict:
-        output:list=raw_data.split("@@")
-        output:dict={
-            "prompt":output[0],
-            "text":output[1],
-            "next_message":output[2],
-            "typ":output[3]
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+    def __init__(self, ip_address='localhost', port=5000, response_size=4096):
+        if not hasattr(self, 'client_socket'):
+            self.client_socket:socket.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.client_socket.connect((ip_address, port))
+            self.response_size:int = response_size
+            self.prompt:Union[str,None] = None
+            self.recieved:List[str]=[]
+            self.next_move:str="prijmi"
+            self.expect_control:bool=False
+            
+    def __split_and_proccess_data(self,raw_data:str)->str:
+        regex:str = r"@\|start\|@([^@]+)?@@([^@]+)?@@([^@]+)@@([^@]+)@\|end\|@"
+        matches:List[Tuple[str]] = re.findall(regex, raw_data)
+        for protocol_data in matches:
+            data:Dict[str,str]=self.__processed_data(protocol_data)
+            self.recieved.append(data)
+            
+    def __processed_data(self,protocol_data:Tuple[str,str,str,str])->Dict[str,str]:
+        if not len(protocol_data)==4:
+            raise ValueError("Protokol nemá správný počet dat")
+        return {
+            "prompt":protocol_data[0],
+            "value":protocol_data[1],
+            "next_message":protocol_data[2],
+            "type":protocol_data[3]
         }
-        self.prompt=output.get("prompt")
-        return output
+    
+    def thread_recieve(self):
+        while True:
+            server_message:str=self.recieve()
+            self.__split_and_proccess_data(server_message)
+            
+    def recieve(self)->str:
+        return self.client_socket.recv(self.response_size).decode()
+    
+    def send(self,value:str)->None:
+        self.client_socket.send(value.encode())
+    
+    def __process_recieve(self,protocol:Dict[str,str]):
+        self.next_move=protocol.get("next_message","prijmi")
+        if self.next_move == "prijmi":
+            if protocol.get("value","")=="":
+                return
+            if protocol.get("value","kill_client")=="kill_client":
+                self.close_client()
+            if self.expect_control:
+                if protocol.get("value",None)=="|||doruceno|||":
+                    self.expect_control:bool=True
+                    return
+            print(protocol.get("value"))            
+        elif self.next_move == "posli":
+            send_data:str=""
+            while send_data=="":
+                if protocol.get("type","text")=="text":
+                    send_data:str = input(self.prompt)
+                elif protocol.get("type","text")=="heslo":
+                    send_data:str = pin.pwinput(self.prompt,'*')
+            self.send(send_data)
+            self.expect_control:bool=True
         
     def run(self):
-        try:
-            recieve_data:str = self.client_socket.recv(self.response_size).decode()
-            print(self.__processed_data(recieve_data).get("text"))
-            while True:
-                if self.__processed_data(recieve_data).get("next_message")=="posli":
-                    if self.__processed_data(recieve_data).get("typ")=="text":
-                        send_data:str = input(self.prompt)
-                    elif self.__processed_data(recieve_data).get("typ")=="heslo":
-                        send_data:str = pin.pwinput(self.prompt,'*')
-                    else:
-                        raise ValueError("Hodnota typ neplňuje hodnoty")
-                    if send_data.strip()=="":
-                        continue
-                    try:
-                        self.client_socket.send(send_data.encode())
-                    except socket.error as error:
-                        if error.errno == 10054:
-                            input("Stávající připojení bylo vynuceně ukončeno vzdáleným hostitelem.")
-                            sys.exit()
-                    tmp:str=self.client_socket.recv(self.response_size).decode()
-                    if self.__processed_data(tmp).get("text")=="|||doruceno|||":
-                        recieve_data:str=tmp
-                else:
-                    recieve_data:str=self.client_socket.recv(self.response_size).decode()
-                    if self.__processed_data(recieve_data).get("text")=="kill_client":
-                        input("Byl jste odpojen")
-                        break
-                    if not self.__processed_data(recieve_data).get("text")=="":
-                        print(f'{self.__processed_data(recieve_data).get("text")}')
-        except Exception as e:
-            print(e)
-
+        while True:
+            if not len(self.recieved)==0:
+                protocol:Dict[str,str] = self.recieved.pop(0)
+                self.prompt=protocol.get("prompt",">")
+                self.__process_recieve(protocol)
+     
+    def close_client(self):
+        print("Aplikace byla uzavřena")
+        sys.exit()
+                        
 if __name__=="__main__":
     try:
         #client=Client(ip_address='dev.spsejecna.net',port=20148)
-        client=Client()
+        client=Client(ip_address="192.168.1.39")
+        recieve_thread=threading.Thread(target=client.thread_recieve,args=())
+        recieve_thread.start()
         client.run()
     except ConnectionRefusedError:
         input("Nelze se připojit k serveru")

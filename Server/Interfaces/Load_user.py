@@ -15,7 +15,6 @@ class Load_user:
     
     def load(self):
         location,building=get_location(self.connect.databaze,self.connect.player)
-        print(location,building)
         self.connect.send("úspěšné přihlášení",next_message=Next_message.PRIJMI)
         if location=="Hlavní město":
             if building == "hospoda":

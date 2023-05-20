@@ -4,11 +4,12 @@ from Enums.Next_message import Next_message
 from Others.Help_methods import edit_response
 from Database.Actions.Authentication import username_exists
 from Interfaces.CMD_level import CMD_level
+from typing import Union
 
 
 class Profil_view(CMD_level):
     
-    def __init__(self,connect:Connection,prompt:str,username:str|None=None) -> None:
+    def __init__(self,connect:Connection,prompt:str,username:Union[str,None]=None) -> None:
         if username==None:
             self.username=connect.player.username
             add_prompt:str="profil>"

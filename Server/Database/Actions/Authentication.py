@@ -2,6 +2,7 @@ import mysql.connector
 from Database.Database import Database
 from Others.Connection import Connection
 from Gameobjects.Player import Player
+from typing import Union
 
 def login(connect:Connection,username:str,password:str)->bool:
     db_password_tuple:tuple|None=get_password(connect.databaze,username)
@@ -13,7 +14,7 @@ def login(connect:Connection,username:str,password:str)->bool:
         return True
     return False
 
-def get_password(db:Database,username:str)->tuple|None:
+def get_password(db:Database,username:str)->Union[tuple,None]:
     data:tuple=(username,)
     template:str="SELECT id,passwd from player WHERE username=%s;"
     with db.mydb.cursor() as cursor:

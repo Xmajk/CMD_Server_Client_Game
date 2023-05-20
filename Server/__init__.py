@@ -46,7 +46,10 @@ def handle_client(connection:Connection)->None:
     finally:
         connection.close_connection()
     with semaphore:
-        clients.remove(connection.ip_adress)
+        try:
+            clients.remove(connection.ip_adress)
+        except:
+            pass
 
 # definice funkce pro start serveru
 def start_server()->None:

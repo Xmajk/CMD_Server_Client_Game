@@ -2,10 +2,8 @@
 
 # PV-Game
 
-Hru si můžete stáhnou na [Odkaz na stránky](https://www.spsejecna.cz).
+Klienta si můžete stáhnou na [Odkaz na stránky](https://www.spsejecna.cz).
 
-od serveru jde zprava ve formátu ==> prompt@@text@@další_akce(poslání,přijímání)
-po přijetí serveru se odešle zpráva |||doručeno|||
 ## CLIENT
 
 ### PODPOROVANÉ OPERAČNÍ SYSTÉMY
@@ -21,6 +19,11 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 ```
 
 ## SERVER
+
+od serveru jde zprava ve formátu ==> @|start|@prompt@@value@@next_message@@typ@|end|@
+po přijetí serveru se odešle zpráva |||doručeno|||
+
+## Hra
 
 ### Třídy
 - warrior
@@ -39,7 +42,7 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 - Rubínové město
 
 ### Budovy
-- hopoda -> nachází se v hlavním městě a tubínové městě
+- hopoda -> nachází se v hlavním městě a rubínové městě
 
 ### Questy
 - Capital_city_tawern_quest->zachránit hospodského z hlavního města a otevřít si tím lokaci hospody v hlavním městě

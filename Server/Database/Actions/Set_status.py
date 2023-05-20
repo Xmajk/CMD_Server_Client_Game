@@ -1,5 +1,6 @@
 import mysql.connector
 from Database.Database import Database
+from typing import Union
 
 def set_everyone_offline(db:Database)->None:
     template:str="UPDATE player SET is_online=0 Where True;"
@@ -21,7 +22,7 @@ def set_location(db:Database,username:str,lokace:str)->None:
         cursor.execute(template,data)
         db.mydb.commit()
         
-def set_building(db:Database,username:str,lokace:str|None=None,building:str|None=None)->None:
+def set_building(db:Database,username:str,lokace:Union[str,None]=None,building:Union[str,None]=None)->None:
     if building==None:
         data:tuple=(username,)
         template:str="UPDATE player SET id_building=null WHERE username=%s;"
