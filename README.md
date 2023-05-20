@@ -60,15 +60,13 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 - Capital_city_tawern_quest->zachránit hospodského z hlavního města a otevřít si tím lokaci hospody v hlavním městě
 
 ### Typy itemů
-| zbraňe | damage | speed | ability |
-|--------|--------|-------|---------|
-|bronzový meč|        |       |         |
-- zbraň:
-    - bronzový meč
-    - zlatý meč
-    - diamantový meč
-    - kouzelný proutek
-    - kouzelnická hůl
+| zbraňe | damage | mana | speed | ability |
+|--------|--------|-------|---------|------|
+|bronzový meč|  30    |   0    |   -5      | -   |
+|zlatý meč|   50    |     0  |       -10  | - |
+|diamantový meč| 80      |  0     |     -40    |   |
+|kouzelný protek| 25     |   20    |     0    | každé kouzlo stojí o 10 many méně |
+|kouzelnická hůl|  45     |    40   |    -10     | každé kouzlo stojí o 5 many méně a přidá 10 poškození |
 - helma
 - zbroj
 - kalhoty
