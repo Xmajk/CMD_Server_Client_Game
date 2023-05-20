@@ -38,7 +38,7 @@ class Connection:
     """
     def __init__(self,address:str,client_socket:socket,database:Database,znakova_sada='UTF-8',number_of_recieve:int=4096,time_delay:float=0) -> None:
         self.ip_adress:str=address
-        self.client_socket:socket=client_socket
+        self.client_socket:socket.socket=client_socket
         self.number_of_recieve:int=number_of_recieve
         self.znakova_sada:str=znakova_sada
         self.databaze:Database=database
@@ -88,7 +88,10 @@ class Connection:
             except:pass
             if not self.player==None:
                 set_online(self.databaze,self.player.username,0)
-            self.__all_ip_list.remove(self.ip_adress)
+            try:    
+                self.__all_ip_list.remove(self.ip_adress)
+            except:
+                pass
             self.client_socket.close()
             sys.exit(0)
         

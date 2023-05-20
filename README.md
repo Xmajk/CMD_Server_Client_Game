@@ -14,7 +14,7 @@ Klienta si můžete stáhnou na [Odkaz na stránky](https://www.spsejecna.cz).
 ### Kofigurace:
 ```
 {
-    "server_ip":None
+    "server_ip":Noney
 }
 ```
 

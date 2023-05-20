@@ -5,6 +5,7 @@ import pwinput as pin
 import sys
 import re
 from typing import List,Tuple,Dict,Union
+import json
 
 class Client:
     _instance = None
@@ -20,7 +21,7 @@ class Client:
             self.client_socket.connect((ip_address, port))
             self.response_size:int = response_size
             self.prompt:Union[str,None] = None
-            self.recieved:List[str]=[]
+            self.recieved:List[Dict[str,str]]=[]
             self.next_move:str="prijmi"
             self.expect_control:bool=False
             
@@ -40,6 +41,11 @@ class Client:
             "next_message":protocol_data[2],
             "type":protocol_data[3]
         }
+        
+    def control_kill_client(self):
+        while True:
+            if "kill_client" in [element.get("value") for element in self.recieved]:
+                self.close_client()
     
     def thread_recieve(self):
         while True:
@@ -86,9 +92,20 @@ class Client:
         sys.exit()
                         
 if __name__=="__main__":
+    with open("konfig/client.json", 'r') as file:
+        data:Dict[str,int] = json.load(file)
+    if not "server_address" in data.keys():
+        print("V konfiguračním souboru není adresa serveru")
+        sys.exit()
+    if not "server_port" in data.keys():
+        print("V konfiguračním souboru není port serveru")
+        sys.exit()
+    if not "response_size" in data.keys():
+        print("V konfiguračním souboru není velikost odpovědi")
+        sys.exit()
     try:
         #client=Client(ip_address='dev.spsejecna.net',port=20148)
-        client=Client(ip_address="192.168.1.39")
+        client=Client(ip_address=data.get("server_address"),port=data.get("server_port"),response_size=data.get("response_size"))
         recieve_thread=threading.Thread(target=client.thread_recieve,args=())
         recieve_thread.start()
         client.run()
