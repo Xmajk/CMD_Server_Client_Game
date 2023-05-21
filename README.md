@@ -68,8 +68,8 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 |kouzelný proutek| 0004 | zbraň | +0 | +15 | +30 | +0 | každé kouzlo stojí o 10 many méně |
 |kouzelnická hůl| 0005 | zbraň | +0 | +50 | +45 | -10 | každé kouzlo stojí o 5 many méně a přidá 10 poškození |
 |zlatá přilba | 0006 | přilba | +15 | +0 | +0 | -2 | - |
-|kožené boty |   | boty | +0 | +0 | +0 | +5 | - |
-|hermesovy boty |  | boty | +0 | +0 | +0 | +50 | -|
-|léčivý lektvar |  | useable | +20 | +0 | +0 | +0 | - |
-|mana lektvar | |useable| +0 | +0 | +30 | +0 | - |
-|energy drink| |useable|+0|+0|+0|+10|efekt trvá po dobu 3 kol|
+|kožené boty | 0007 | boty | +0 | +0 | +0 | +5 | - |
+|hermesovy boty | 0008 | boty | +0 | +0 | +0 | +50 | -|
+|léčivý lektvar | 0009 | useable | +20 | +0 | +0 | +0 | - |
+|mana lektvar | 0010 |useable| +0 | +0 | +30 | +0 | - |
+|energy drink| 0011 |useable|+0|+0|+0|+10|efekt trvá po dobu 3 kol|
