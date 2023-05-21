@@ -2,7 +2,7 @@
 
 # PV-Game
 
-Klienta si můžete stáhnou na [Odkaz na stránky](https://www.spsejecna.cz).
+Klienta si můžete stáhnou na naší [webové stránce](https://www.spsejecna.cz).
 
 ## CLIENT
 
