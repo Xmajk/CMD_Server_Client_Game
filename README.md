@@ -60,17 +60,17 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 - Capital_city_tawern_quest->zachránit hospodského z hlavního města a otevřít si tím lokaci hospody v hlavním městě
 
 ### Itemy ve hře
-| item | kod | typ itemu | player hp | player damage | player mana | player speed | abilita |
-|------|-----|-----------|-----------|---------------|-------------|--------------|---------|
-|bronzový meč| 0001 | zbraň | +0 | +12 | +0 | -10 | - |
-|zlatý meč| 0002 | zbraň | +0 | +20 | +0 | -15 | - |
-|diamantový meč| 0003 | zbraň | +0 | +30 | +0 | -25 | - |
-|kouzelný proutek| 0004 | zbraň | +0 | +15 | +30 | +0 | každé kouzlo stojí o 10 many méně |
-|kouzelnická hůl| 0005 | zbraň | +0 | +50 | +45 | -10 | každé kouzlo stojí o 5 many méně a přidá 10 poškození |
-|zlatá přilba | 0006 | přilba | +15 | +0 | +0 | -2 | - |
-|kožené boty | 0007 | boty | +0 | +0 | +0 | +5 | - |
-|hermesovy boty | 0008 | boty | +0 | +0 | +0 | +50 | -|
-|léčivý lektvar | 0009 | useable | +20 | +0 | +0 | +0 | - |
-|mana lektvar | 0010 |useable| +0 | +0 | +30 | +0 | - |
-|energy drink| 0011 |useable|+0|+0|+0|+10|efekt trvá po dobu 3 kol|
-|kouzelnický klobouk|0012|přilba|+20|+5|+10|-5| - |
+| item              | kod  | typ itemu | player hp | player damage | player mana | player speed | abilita |
+|-------------------|------|-----------|-----------|---------------|-------------|--------------|---------|
+|bronzový meč       | 0001 | zbraň     | +0        | +12           | +0          | -10          | - |
+|zlatý meč          | 0002 | zbraň     | +0        | +20           | +0          | -15          | - |
+|diamantový meč     | 0003 | zbraň     | +0        | +30           | +0          | -25          | - |
+|kouzelný proutek   | 0004 | zbraň     | +0        | +15           | +30         | +0           | každé kouzlo stojí o 10 many méně |
+|kouzelnická hůl    | 0005 | zbraň     | +0        | +50           | +45         | -10          | každé kouzlo stojí o 5 many méně a přidá 10 poškození |
+|zlatá přilba       | 0006 | přilba    | +15       | +0            | +0          | -2           | - |
+|kožené boty        | 0007 | boty      | +0        | +0            | +0          | +5           | - |
+|hermesovy boty     | 0008 | boty      | +0        | +0            | +0          | +50          | -|
+|léčivý lektvar     | 0009 | useable   | +20       | +0            | +0          | +0           | - |
+|mana lektvar       | 0010 |useable    | +0        | +0            | +30         | +0           | - |
+|energy drink       | 0011 |useable    | +0        |+0             |+0           |+10           |efekt trvá po dobu 3 kol|
+|kouzelnický klobouk| 0012 |přilba     |+20        |+5             |+10          |-5            | - |
