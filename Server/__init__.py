@@ -43,6 +43,8 @@ def handle_client(connection:Connection)->None:
         print(f'{connection.ip_adress}-uživatel se odpojil')
     except ConnectionAbortedError:
         print(f'{connection.ip_adress}-Sever spadnul')
+    except BaseException as be:
+        print(be)
     finally:
         connection.close_connection()
     with semaphore:

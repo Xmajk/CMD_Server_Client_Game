@@ -94,7 +94,9 @@ class Connection:
                 pass
             self.client_socket.close()
             sys.exit(0)
-        
+    
+    def load_player(self)->None:
+        self.player.load(self.databaze)
         
 if __name__=="__main__":
     pass

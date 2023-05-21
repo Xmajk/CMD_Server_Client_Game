@@ -98,6 +98,7 @@ class Login_command(ICommand):
                     return True
                 self.first_view.connect.player=Player(username)
                 set_online(self.first_view.connect.databaze,username,1)
+                self.first_view.connect.load_player()
                 Load_user(self.first_view.connect).load()
             else:
                 self.first_view.connect.send("Neúspěšné přihlášení",next_message=Next_message.PRIJMI)
