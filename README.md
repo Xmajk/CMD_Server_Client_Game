@@ -14,11 +14,11 @@ Napsaný v jazyce :snake: Python 3.10.10
 
 ### Kofigurace:
 
-| Nastavení           | Hodnota              |
-|---------------------|----------------------|
-| server_address      | `ip adresa serveru` |
-| server_port         | `port serveru` |
-| response_size       | `velikost přijímaných zpráv` |
+| Nastavení           | Hodnota                         |
+|---------------------|---------------------------------|
+| server_address      | `ip adresa serveru`             |
+| server_port         | `port serveru`                  |
+| response_size       | `velikost přijímaných zpráv`    |
 | time_delay          | `pauza po zpracování protokolu` |
 
 Pro náš veřejný server:
