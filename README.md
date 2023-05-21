@@ -73,3 +73,4 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 |léčivý lektvar | 0009 | useable | +20 | +0 | +0 | +0 | - |
 |mana lektvar | 0010 |useable| +0 | +0 | +30 | +0 | - |
 |energy drink| 0011 |useable|+0|+0|+0|+10|efekt trvá po dobu 3 kol|
+|kouzelnický klobouk|0012|přilba|+20|+5|+10|-5| - |
