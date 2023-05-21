@@ -60,7 +60,7 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 - Capital_city_tawern_quest->zachránit hospodského z hlavního města a otevřít si tím lokaci hospody v hlavním městě
 
 ### Itemy ve hře
-| item | kod | typ itemu | player hp | player damage | player mana | player speed | ability |
+| item | kod | typ itemu | player hp | player damage | player mana | player speed | abilita |
 |------|-----|-----------|-----------|---------------|-------------|--------------|---------|
 |bronzový meč| 0001 | zbraň | +0 | +12 | +0 | -10 | - |
 |zlatý meč| 0002 | zbraň | +0 | +20 | +0 | -15 | - |
@@ -70,11 +70,6 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 |zlatá přilba | 0006 | přilba | +15 | +0 | +0 | -2 | - |
 |kožené boty |   | boty | +0 | +0 | +0 | +5 | - |
 |hermesovy boty |  | boty | +0 | +0 | +0 | +50 | -|
-|léčivý lektvar |  | usable | +20 | +0 | +0 | +0 | - |
+|léčivý lektvar |  | useable | +20 | +0 | +0 | +0 | - |
 |mana lektvar | |useable| +0 | +0 | +30 | +0 | - |
 |energy drink| |useable|+0|+0|+0|+10|efekt trvá po dobu 3 kol|
-- helma
-- kalhoty
-- useable:
-    - v kombatu
-    - mimo kombat
