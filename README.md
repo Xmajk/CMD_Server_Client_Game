@@ -23,8 +23,8 @@ Klienta si můžete stáhnou na naší [webové stránce](https://www.spsejecna.
 Pro náš veřejný server
 ```
 {
-    "server_address":"127.0.0.1",
-    "server_port":5000,
+    "server_address":"dev.spsejecna.net",
+    "server_port":20148,
     "response_size":4096,
     "time_delay":0.01
 }

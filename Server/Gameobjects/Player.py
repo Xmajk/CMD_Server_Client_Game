@@ -27,4 +27,3 @@ class Player:
         data:Tuple[int,int,int,int,int,int,int,int,int,str]=load_base(db,self.username)
         print(data)
         
-        
