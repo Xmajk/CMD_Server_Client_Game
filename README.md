@@ -67,11 +67,14 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 |diamantový meč| 0003 | zbraň | +0 | +30 | +0 | -25 | - |
 |kouzelný proutek| 0004 | zbraň | +0 | +15 | +30 | +0 | každé kouzlo stojí o 10 many méně |
 |kouzelnická hůl| 0005 | zbraň | +0 | +50 | +45 | -10 | každé kouzlo stojí o 5 many méně a přidá 10 poškození |
-
+|zlatá přilba | 0006 | přilba | +15 | +0 | +0 | -2 | - |
+|kožené boty |   | boty | +0 | +0 | +0 | +5 | - |
+|hermesovy boty |  | boty | +0 | +0 | +0 | +50 | -|
+|léčivý lektvar |  | usable | +20 | +0 | +0 | +0 | - |
+|mana lektvar | |useable| +0 | +0 | +30 | +0 | - |
+|energy drink| |useable|+0|+0|+0|+10|efekt trvá po dobu 3 kol|
 - helma
-- zbroj
 - kalhoty
-- boty
 - useable:
     - v kombatu
     - mimo kombat
