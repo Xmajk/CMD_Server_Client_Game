@@ -21,7 +21,7 @@ Napsaný v jazyce :snake: Python 3.10.10
 | response_size       | `velikost přijímaných zpráv` |
 | time_delay          | `pauza po zpracování protokolu` |
 
-Pro náš veřejný server
+Pro náš veřejný server:
 ```
 {
     "server_address":"dev.spsejecna.net",
