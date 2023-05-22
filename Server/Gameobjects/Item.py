@@ -11,5 +11,5 @@ class Item:
         self.add_mana:int=db_data[5]
         self.add_speed:int=db_data[6]
         self.ability:Union[str,None]=db_data[7]
-        self.is_using:bool=db_data[8]
+        self.is_using:bool=db_data[8]==1
         

@@ -1,7 +1,7 @@
 import mysql.connector
 
 class Database:
-    
+
     def __init__(self) -> None:
         self.mydb=mysql.connector.connect(
             host="127.0.0.1",

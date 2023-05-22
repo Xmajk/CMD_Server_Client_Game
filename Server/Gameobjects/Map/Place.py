@@ -171,5 +171,5 @@ class Inventar_command(ICommand):
         if not len(options)==0:
             self.place.connect.send("Příkaz \"inventář\" nemá žádné argumenty",next_message=Next_message.PRIJMI,prompt=self.place.prompt)
             return True
-        Inventory_level(connect=self.place.connect,prompt=self.place.prompt).loop()
+        Inventory_level(connect=self.place.connect,base_prompt=self.place.prompt).loop()
         return True

@@ -1,11 +1,14 @@
 import socket
 import threading
+from typing import IO,Union
 from Others.Connection import Connection
 from Interfaces.First_view import First_view
 from Database.Database import Database
 from Enums.Next_message import Next_message
 import sys
 from Database.Actions.Set_status import set_everyone_offline
+from cmd import Cmd as konzole
+import os
 
 MAX_HOSTS:int=2
 clients:list=[]

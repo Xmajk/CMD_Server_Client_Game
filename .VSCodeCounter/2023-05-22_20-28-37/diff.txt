@@ -1,0 +1,35 @@
+Date : 2023-05-22 20:28:37
+Directory : c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game
+Total : 5 files,  21 codes, 3 comments, 1 blanks, all 25 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Python   |          5 |         21 |          3 |          1 |         25 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                  | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                     |          5 |         21 |          3 |          1 |         25 |
+| Server                                                                                |          5 |         21 |          3 |          1 |         25 |
+| Server (Files)                                                                        |          1 |          1 |          0 |          0 |          1 |
+| Server\Database                                                                       |          2 |         11 |          3 |          1 |         15 |
+| Server\Database\Actions                                                               |          2 |         11 |          3 |          1 |         15 |
+| Server\Gameobjects                                                                    |          1 |          4 |          0 |          0 |          4 |
+| Server\Interfaces                                                                     |          1 |          5 |          0 |          0 |          5 |
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                              | language | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Database\Actions\Inventory_db.py | Python   |          7 |          3 |          1 |         11 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Database\Actions\Load_player.py  | Python   |          4 |          0 |          0 |          4 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Player.py            | Python   |          4 |          0 |          0 |          4 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\Inventory_level.py    | Python   |          5 |          0 |          0 |          5 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\__init__.py                      | Python   |          1 |          0 |          0 |          1 |
+| Total                                                                                 |          |         21 |          3 |          1 |         25 |
++---------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

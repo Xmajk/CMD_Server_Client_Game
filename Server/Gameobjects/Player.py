@@ -6,6 +6,7 @@ class Player:
     
     def __init__(self,username) -> None:
         self.username:str=username
+        self.current_hp:int=0
         self.trida:Union[str,None]=None
         self.base_hp:int=0
         self.base_atk:int=0
@@ -24,7 +25,7 @@ class Player:
     
     def load(self,db:Database)->None:
         from Database.Actions.Load_player import load_base,get_inventory
-        data:Tuple[int,int,int,int,int,int,int,int,int,str]=load_base(db,self.username)
+        data:Tuple[int,int,int,int,int,int,int,int,int,str,int]=load_base(db,self.username)
         self.base_hp=data[0]
         self.base_atk=data[1]
         self.base_speed=data[2]
@@ -35,6 +36,7 @@ class Player:
         self.add_mana=data[7]
         self.coins=data[8]
         self.trida=data[9]
+        self.current_hp=data[10]
         
         for item in get_inventory(db,self.username):
             tmp:Item=Item(item)
@@ -44,3 +46,13 @@ class Player:
                 self.items_mana+=tmp.add_mana
                 self.items_speed+=tmp.add_speed
             self.inventory.append(tmp)
+            
+    def save(self,db:Database)->None:
+        from Database.Actions.Load_player import save_stats
+        from Database.Actions.Inventory_db import get_inventory_2
+        save_stats(db,self)
+        database:List[Tuple[str,str,int]]=get_inventory_2(db,self.username)
+        my_inventory:List[Tuple[str,str,int]]=[(element.nazev,element.code,int(element.is_using)) for element in self.inventory]
+        print(database)
+        print(my_inventory)
+        pass

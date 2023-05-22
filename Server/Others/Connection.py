@@ -98,5 +98,8 @@ class Connection:
     def load_player(self)->None:
         self.player.load(self.databaze)
         
+    def save_player(self)->None:
+        self.player.save(self.databaze)
+        
 if __name__=="__main__":
     pass
