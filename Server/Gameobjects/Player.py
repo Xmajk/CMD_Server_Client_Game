@@ -23,7 +23,24 @@ class Player:
         self.inventory:List[Item]=[]
     
     def load(self,db:Database)->None:
-        from Database.Actions.Load_player import load_base
+        from Database.Actions.Load_player import load_base,get_inventory
         data:Tuple[int,int,int,int,int,int,int,int,int,str]=load_base(db,self.username)
-        print(data)
+        self.base_hp=data[0]
+        self.base_atk=data[1]
+        self.base_speed=data[2]
+        self.base_mana=data[3]
+        self.add_hp=data[4]
+        self.add_atk=data[5]
+        self.add_speed=data[6]
+        self.add_mana=data[7]
+        self.coins=data[8]
+        self.trida=data[9]
         
+        for item in get_inventory(db,self.username):
+            tmp:Item=Item(item)
+            if tmp.is_using:
+                self.items_atk+=tmp.add_atk
+                self.items_hp+=tmp.add_hp
+                self.items_mana+=tmp.add_mana
+                self.items_speed+=tmp.add_speed
+            self.inventory.append(tmp)
