@@ -22,7 +22,7 @@ Napsaný v jazyce :snake: Python 3.10.10
 | time_delay          | `pauza po zpracování protokolu` |
 
 Pro náš veřejný server:
-```
+```JSON
 {
     "server_address":"dev.spsejecna.net",
     "server_port":20148,
