@@ -6,6 +6,7 @@ from Enums.Next_message import Next_message
 from Database.Actions.Set_status import set_building
 from Interfaces.Profil.Profile import Profil_view
 from Database.Actions.Authentication import username_exists
+from Interfaces.Inventory_level import Inventory_level
 
 class Building(CMD_level):
     
@@ -15,6 +16,7 @@ class Building(CMD_level):
         if not "ven" in commands.keys():commands["ven"]=Ven_command(self)
         if not "help" in commands.keys():commands["help"]=Full_help_command(self)
         if not "profil" in commands.keys():commands["profil"]=Profil_command(self)
+        if not "inventar" in commands.keys():commands["inventar"]=Inventar_command(self)
         
         super().__init__(
             connect=connect,
@@ -79,3 +81,16 @@ class Profil_command(ICommand):
         else:
             Profil_view(self.building.connect,self.building.prompt).loop()
         return True
+    
+class Inventar_command(ICommand):
+    
+    def __init__(self,building:Building) -> None:
+        self.building:Building=building
+        
+    def execute(self,options:List[str]):
+        if not len(options) == 0:
+            self.building.connect.send("Příkaz \"inventar\" nemá žadné argumenty",next_message=Next_message.PRIJMI,prompt=self.building.prompt)
+            return True
+        Inventory_level(self.building.connect,self.building.prompt).loop()
+        return True
+        

@@ -26,7 +26,7 @@ class Place(CMD_level):
         if not "vypis_budovy" in commands.keys():commands["vypis_budovy"]=Vypis_budovy_command(self)
         if not "vypis_NPCs" in commands.keys():commands["vypis_NPCs"]=None
         if not "vypis_cesty" in commands.keys():commands["vypis_cesty"]=Vypis_cesty_command(self)
-        if not "inventář" in commands.keys():commands["inventář"]=Inventar_command(self)
+        if not "inventar" in commands.keys():commands["inventar"]=Inventar_command(self)
         
         super().__init__(connect,prompt,commands)
         self.name:str=name
@@ -47,7 +47,7 @@ class Place(CMD_level):
         self.connect.send("zobrazíte svůj profil, jinak zobrazíte profil hráče",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-vypis_cesty=>vypíšou se cesty v dané lokaci",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-cesta --[název cesty]=>přejdete na cestu",next_message=Next_message.PRIJMI,prompt=self.prompt)
-        self.connect.send("-inventář=>přejdete do svého inventáře",next_message=Next_message.PRIJMI,prompt=self.prompt)
+        self.connect.send("-inventar=>přejdete do svého inventáře",next_message=Next_message.PRIJMI,prompt=self.prompt)
         super().supplementary_help()
         
         
@@ -169,7 +169,7 @@ class Inventar_command(ICommand):
         
     def execute(self,options:List[str]) -> bool:
         if not len(options)==0:
-            self.place.connect.send("Příkaz \"inventář\" nemá žádné argumenty",next_message=Next_message.PRIJMI,prompt=self.place.prompt)
+            self.place.connect.send("Příkaz \"inventar\" nemá žádné argumenty",next_message=Next_message.PRIJMI,prompt=self.place.prompt)
             return True
         Inventory_level(connect=self.place.connect,base_prompt=self.place.prompt).loop()
         return True

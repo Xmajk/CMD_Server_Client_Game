@@ -1,10 +1,10 @@
 # Details
 
-Date : 2023-05-22 11:32:51
+Date : 2023-05-23 12:31:03
 
 Directory c:\\Users\\Misah\\OneDrive\\Plocha\\soubor\\PV-Game
 
-Total : 38 files,  1403 codes, 120 comments, 250 blanks, all 1773 lines
+Total : 38 files,  1525 codes, 130 comments, 267 blanks, all 1922 lines
 
 [Summary](results.md) / Details / [Diff Summary](diff.md) / [Diff Details](diff-details.md)
 
@@ -18,7 +18,8 @@ Total : 38 files,  1403 codes, 120 comments, 250 blanks, all 1773 lines
 | [README.md](/README.md) | Markdown | 59 | 0 | 18 | 77 |
 | [Server/Database/Actions/Authentication.py](/Server/Database/Actions/Authentication.py) | Python | 32 | 0 | 4 | 36 |
 | [Server/Database/Actions/Get_user_informations.py](/Server/Database/Actions/Get_user_informations.py) | Python | 24 | 2 | 3 | 29 |
-| [Server/Database/Actions/Load_player.py](/Server/Database/Actions/Load_player.py) | Python | 17 | 6 | 3 | 26 |
+| [Server/Database/Actions/Inventory_db.py](/Server/Database/Actions/Inventory_db.py) | Python | 40 | 6 | 6 | 52 |
+| [Server/Database/Actions/Load_player.py](/Server/Database/Actions/Load_player.py) | Python | 24 | 7 | 3 | 34 |
 | [Server/Database/Actions/Quests.py](/Server/Database/Actions/Quests.py) | Python | 10 | 4 | 1 | 15 |
 | [Server/Database/Actions/Registration.py](/Server/Database/Actions/Registration.py) | Python | 35 | 0 | 5 | 40 |
 | [Server/Database/Actions/Set_quests.py](/Server/Database/Actions/Set_quests.py) | Python | 8 | 1 | 1 | 10 |
@@ -35,18 +36,17 @@ Total : 38 files,  1403 codes, 120 comments, 250 blanks, all 1773 lines
 | [Server/Gameobjects/Map/Route1/Route1.py](/Server/Gameobjects/Map/Route1/Route1.py) | Python | 21 | 0 | 3 | 24 |
 | [Server/Gameobjects/Map/Route2/Route2.py](/Server/Gameobjects/Map/Route2/Route2.py) | Python | 20 | 0 | 2 | 22 |
 | [Server/Gameobjects/NPC.py](/Server/Gameobjects/NPC.py) | Python | 2 | 0 | 0 | 2 |
-| [Server/Gameobjects/Player.py](/Server/Gameobjects/Player.py) | Python | 42 | 0 | 4 | 46 |
+| [Server/Gameobjects/Player.py](/Server/Gameobjects/Player.py) | Python | 60 | 2 | 9 | 71 |
 | [Server/Interfaces/CMD_level.py](/Server/Interfaces/CMD_level.py) | Python | 28 | 0 | 9 | 37 |
 | [Server/Interfaces/First_view.py](/Server/Interfaces/First_view.py) | Python | 87 | 25 | 19 | 131 |
-| [Server/Interfaces/Inventory.py](/Server/Interfaces/Inventory.py) | Python | 13 | 0 | 6 | 19 |
-| [Server/Interfaces/Inventory_level.py](/Server/Interfaces/Inventory_level.py) | Python | 26 | 0 | 7 | 33 |
+| [Server/Interfaces/Inventory_level.py](/Server/Interfaces/Inventory_level.py) | Python | 91 | 1 | 18 | 110 |
 | [Server/Interfaces/Load_user.py](/Server/Interfaces/Load_user.py) | Python | 31 | 0 | 2 | 33 |
 | [Server/Interfaces/Profil/Profile.py](/Server/Interfaces/Profil/Profile.py) | Python | 47 | 0 | 10 | 57 |
 | [Server/Interfaces/Register_view.py](/Server/Interfaces/Register_view.py) | Python | 164 | 0 | 27 | 191 |
-| [Server/Others/Connection.py](/Server/Others/Connection.py) | Python | 48 | 46 | 8 | 102 |
+| [Server/Others/Connection.py](/Server/Others/Connection.py) | Python | 50 | 46 | 9 | 105 |
 | [Server/Others/Crossing.py](/Server/Others/Crossing.py) | Python | 16 | 0 | 5 | 21 |
 | [Server/Others/Help_methods.py](/Server/Others/Help_methods.py) | Python | 8 | 16 | 1 | 25 |
-| [Server/__init__.py](/Server/__init__.py) | Python | 60 | 12 | 11 | 83 |
+| [Server/__init__.py](/Server/__init__.py) | Python | 63 | 12 | 11 | 86 |
 | [Server/database.json](/Server/database.json) | JSON | 5 | 0 | 0 | 5 |
 | [Server/lib/ICommand.py](/Server/lib/ICommand.py) | Python | 5 | 0 | 1 | 6 |
 

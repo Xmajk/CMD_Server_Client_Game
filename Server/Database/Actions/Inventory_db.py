@@ -24,8 +24,29 @@ def get_inventory_2(db:Database,username:str)->List[Tuple[str,str,int]]:
     template:str="""SELECT i.nazev,i.kod,o.is_using FROM
 item i inner join 
 (player p inner join own_item o on p.id=o.id_playera)
-on i.id=o.id_itemu where o.is_using=0 and p.username=%s;"""
+on i.id=o.id_itemu where p.username=%s;"""
     with db.mydb.cursor() as cursor:
         cursor.execute(template,data)
         db_output:List[Tuple[str,str,int]]=cursor.fetchall()
     return db_output
+
+def create_owning(db:Database,username:str,item_code:str)->None:
+    data:Tuple[str]=(username,item_code)
+    template:str="""insert into own_item(id_playera,id_itemu) values ((SELECT id FROM player WHERE username=%s LIMIT 1),(SELECT id FROM item WHERE kod=%s LIMIT 1))"""
+    with db.mydb.cursor() as cursor:
+        cursor.execute(template,data)
+        db.mydb.commit()
+
+def delete_owning(db:Database,username:str,item_code:str)->None:
+    data:Tuple[str]=(username,item_code)
+    template:str="""DELETE FROM own_item WHERE id_playera=(SELECT id FROM player WHERE username=%s LIMIT 1) and id_itemu=(SELECT id FROM item WHERE kod=%s LIMIT 1) """
+    with db.mydb.cursor() as cursor:
+        cursor.execute(template,data)
+        db.mydb.commit()
+        
+def change_owning_put_on(db:Database,username:str,item_code:str,put_in:bool)->None:
+    data:Tuple[str]=(int(put_in),int(not put_in),username,item_code)
+    template:str="""UPDATE own_item SET is_using=%s WHERE is_using=%s and id_playera=(SELECT id FROM player WHERE username=%s LIMIT 1) and id_itemu=(SELECT id FROM item WHERE kod=%s LIMIT 1)"""
+    with db.mydb.cursor() as cursor:
+        cursor.execute(template,data)
+        db.mydb.commit()

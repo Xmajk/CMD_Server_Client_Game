@@ -13,3 +13,6 @@ class Item:
         self.ability:Union[str,None]=db_data[7]
         self.is_using:bool=db_data[8]==1
         
+    def __str__(self):
+        return f'{self.nazev}[{self.code}]==>is_using:{self.is_using}'
+        

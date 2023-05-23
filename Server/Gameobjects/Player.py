@@ -38,6 +38,8 @@ class Player:
         self.trida=data[9]
         self.current_hp=data[10]
         
+        self.inventory:List[Item]=[]
+        
         for item in get_inventory(db,self.username):
             tmp:Item=Item(item)
             if tmp.is_using:
@@ -49,10 +51,28 @@ class Player:
             
     def save(self,db:Database)->None:
         from Database.Actions.Load_player import save_stats
-        from Database.Actions.Inventory_db import get_inventory_2
+        from Database.Actions.Inventory_db import get_inventory_2,change_owning_put_on
         save_stats(db,self)
-        database:List[Tuple[str,str,int]]=get_inventory_2(db,self.username)
-        my_inventory:List[Tuple[str,str,int]]=[(element.nazev,element.code,int(element.is_using)) for element in self.inventory]
-        print(database)
-        print(my_inventory)
-        pass
+        database:List[Tuple[str,str,bool]]=[(nazev,kod,bool(is_using)) for nazev,kod,is_using in get_inventory_2(db,self.username)]
+        my_inventory:List[Tuple[str,str,bool]]=[(element.nazev,element.code,element.is_using) for element in self.inventory]
+        tmp_database = [t for t in database if t not in my_inventory]
+        tmp_my_inventory = [t for t in my_inventory if t not in database]
+        database:List[Tuple[str,str,bool]]=tmp_database
+        my_inventory:List[Tuple[str,str,bool]]=tmp_my_inventory
+        #kontrola změny
+        if not len(database)==0 and not len(my_inventory)==0:
+            common_tuples:List[Tuple[str,str,bool]] = [t for t in my_inventory if any(t[:2] == x[:2] for x in database)]
+            for common_nazev,common_kod,common_is_using in common_tuples:
+                for index,tup in enumerate(database,start=0):
+                    db_nazev,db_kod,db_is_using=tup
+                    if db_nazev==common_nazev and db_kod==common_kod:
+                        database.pop(index)
+                        break
+                for index,tup in enumerate(my_inventory,start=0):
+                    mi_nazev,mi_kod,mi_is_using=tup
+                    if mi_nazev==common_nazev and mi_kod==common_kod:
+                        my_inventory.pop(index)
+                change_owning_put_on(db,self.username,common_kod,common_is_using)
+        #kontrola existence
+        if True:
+            pass
