@@ -18,7 +18,9 @@ class Inventory_level(CMD_level):
                 "vypis_inventar":Print_inventory_command(self),
                 "vypis_postavu":Print_character(self),
                 "nasadit":Put_on_command(self),# jeden povinný a n nepovinných atributů
-                "informace":Information_command(self)#jeden povinný atribut
+                "informace":Information_command(self),#jeden povinný atribut
+                "zpet":Back_command(self),
+                "pouzij":Use_command(self)#jeden povinný atribut
             })
         self.base_prompt:str=base_prompt
         
@@ -33,6 +35,8 @@ class Inventory_level(CMD_level):
         self.connect.send("-vypis_postavu=>vypíšou se  itemy, které má hráč na sobě",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-vypis_inventar=>vypíše všechny itemy, které uživatel má v inventáři",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-svleknout n x --[kód itemu, který chcete svléknout]=>postava svlekne všechno vynavení, které má na sobě",next_message=Next_message.PRIJMI,prompt=self.prompt)
+        self.connect.send("-pouzij --[kód itemu, který chcete použít]=>použije se item",next_message=Next_message.PRIJMI,prompt=self.prompt)
+        self.connect.send("-zpet=>vyjdete z inventáře",next_message=Next_message.PRIJMI,prompt=self.prompt)
         return super().supplementary_help()
     
 class Full_help_command(ICommand):
@@ -143,6 +147,9 @@ class Put_on_command(ICommand):
             if not kod in [item.code for item in self.inventory.connect.player.inventory if not item.is_using]:
                 self.inventory.connect.send(f'Nemáte v inventáři předmět s kódem \"{kod}\"',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
                 continue
+            if not kod in [item.code for item in self.inventory.connect.player.inventory if not item.is_using and not item.type in ["story_item","useable","combat_useable"]]:
+                self.inventory.connect.send(f'Item s kóddem \"{kod}\" není nasaditelný',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+                continue
             change_item:Union[Item,None]=None
             for item in [element for element in self.inventory.connect.player.inventory if not element.is_using]:
                 if item.code==kod:
@@ -164,4 +171,64 @@ class Information_command(ICommand):
         if not len(options)==1:
             self.inventory.connect.send("Příkaz \"informace\" má 1 povinný atribut",next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
             return True
-        raise NotADirectoryError("not implemented, inventář")
+        kod:str=options[0]
+        if not len(kod)==4:
+            self.inventory.connect.send(f'Kód \"{kod}\" nesplňuje pravidla kódů itemů',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+            return True
+        if False in [element in [str(i) for i in range(10)] for element in kod]:
+            self.inventory.connect.send(f'Kód \"{kod}\" nesplňuje pravidla kódů itemů',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+            return True
+        if not kod in [item.code for item in self.inventory.connect.player.inventory]:
+            self.inventory.connect.send(f'Nevlastníte předmět s kódem \"{kod}\"',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+            return True
+        item:Item=[item for item in self.inventory.connect.player.inventory if item.code==kod][0]
+        self.inventory.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+        self.inventory.connect.send(f'název:{item.nazev}',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+        self.inventory.connect.send(f'kod:{item.code}',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+        self.inventory.connect.send(f'typ:{item.type.upper()}',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+        self.inventory.connect.send(f'životy[hp]:{item.add_hp}',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+        self.inventory.connect.send(f'útok[atk]:{item.add_atk}',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+        self.inventory.connect.send(f'mana:{item.add_mana}',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+        self.inventory.connect.send(f'rychlost[speed]:{item.add_speed}',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+        if item.ability==None:
+            self.inventory.connect.send(f'schopnost[ability]:-',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+        else:
+            self.inventory.connect.send(f'schopnost[ability]:{item.ability}',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+        self.inventory.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+        return True
+
+class Back_command(ICommand):
+    
+    def __init__(self,inventory:Inventory_level) -> None:
+        self.inventory:Inventory_level=inventory
+    
+    def execute(self,options:List[str]) -> bool:
+        if not len(options)==0:
+            self.inventory.connect.send("Příkaz \"zpet\" nemá žádné atributy",next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+            return True
+        return False
+    
+class Use_command(ICommand):
+    
+    def __init__(self,inventory:Inventory_level) -> None:
+        self.inventory:Inventory_level=inventory
+    
+    def execute(self,options:List[str]) -> bool:
+        if not len(options)==1:
+            self.inventory.connect.send("Příkaz \"pouzij\" má jeden povinný atribut",next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+            return True
+        kod:str=options[0]
+        if not len(kod)==4:
+            self.inventory.connect.send(f'Kód \"{kod}\" nesplňuje pravidla kódů itemů',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+            return True
+        if False in [element in [str(i) for i in range(10)] for element in kod]:
+            self.inventory.connect.send(f'Kód \"{kod}\" nesplňuje pravidla kódů itemů',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+            return True
+        if not kod in [item.code for item in self.inventory.connect.player.inventory]:
+            self.inventory.connect.send(f'Nevlastníte předmět s kódem \"{kod}\"',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+            return True
+        item:Item=[item for item in self.inventory.connect.player.inventory if item.code==kod][0]
+        if not item.type == "useable":
+            self.inventory.connect.send(f'Předmět s kódem \"{kod}\" nelze použít',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+            return True
+        raise NotImplementedError("inventar-pouzij")

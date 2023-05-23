@@ -8,7 +8,7 @@ import sys
 class Client:
     
     def __init__(self,ip_address='localhost',port=5000,response_size=4096) -> None:
-        self.client_socket:socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.client_socket:socket.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client_socket.connect((ip_address,port))
         self.response_size:int=response_size
         self.prompt:str=None
