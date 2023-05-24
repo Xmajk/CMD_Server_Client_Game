@@ -1,16 +1,17 @@
 # Diff Details
 
-Date : 2023-05-23 16:41:29
+Date : 2023-05-24 20:12:28
 
 Directory c:\\Users\\Misah\\OneDrive\\Plocha\\soubor\\PV-Game
 
-Total : 1 files,  12 codes, 0 comments, 2 blanks, all 14 lines
+Total : 2 files,  21 codes, 0 comments, 1 blanks, all 22 lines
 
 [Summary](results.md) / [Details](details.md) / [Diff Summary](diff.md) / Diff Details
 
 ## Files
 | filename | language | code | comment | blank | total |
 | :--- | :--- | ---: | ---: | ---: | ---: |
-| [Server/Interfaces/Inventory_level.py](/Server/Interfaces/Inventory_level.py) | Python | 12 | 0 | 2 | 14 |
+| [Server/Gameobjects/Player.py](/Server/Gameobjects/Player.py) | Python | 8 | 0 | 1 | 9 |
+| [Server/Interfaces/Inventory_level.py](/Server/Interfaces/Inventory_level.py) | Python | 13 | 0 | 0 | 13 |
 
 [Summary](results.md) / [Details](details.md) / [Diff Summary](diff.md) / Diff Details

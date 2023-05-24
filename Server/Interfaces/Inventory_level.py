@@ -233,12 +233,25 @@ class Use_command(ICommand):
             return True
         item:Union[Item,None]=None
         for for_item in self.inventory.connect.player.inventory:
-            if not item.is_using and item.code==kod:
+            if not for_item.is_using and for_item.code==kod:
                 item:Item=for_item
                 break
         if item==None:
             return True
-        if item.code=="0009": #léčivý lektvar
+        if item.code=="0009": # health potion
+            if self.inventory.connect.player.get_full_hp()>=item.add_hp+self.inventory.connect.player.current_hp:
+                self.inventory.connect.player.current_hp+=item.add_hp
+                self.inventory.connect.send(f'Vyléčil jste si {item.add_hp} životů',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+                self.inventory.connect.player.inventory.remove(item)
+            elif self.inventory.connect.player.get_full_hp()==self.inventory.connect.player.current_hp :
+                self.inventory.connect.send(f'Nelze vyléčit, už máte plný počet životů',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+            else:
+                self.inventory.connect.send(f'Vyléčil jste si {self.inventory.connect.player.get_full_hp()-self.inventory.connect.player.current_hp} životů',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+                self.inventory.connect.player.current_hp=self.inventory.connect.player.get_full_hp()
+                self.inventory.connect.player.inventory.remove(item)
+            self.inventory.connect.save_player()
+            return True
+        elif item.code=="0010": #mana potion
             pass
             
         raise NotImplementedError("inventar-pouzij")

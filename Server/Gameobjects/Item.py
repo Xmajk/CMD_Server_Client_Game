@@ -2,7 +2,7 @@ from typing import Union,Tuple
 
 class Item:
     
-    def __init__(self,db_data:Tuple[str,str,str,int,int,int,int,Union[str,None]]) -> None:
+    def __init__(self,db_data:Tuple[str,str,str,int,int,int,int,Union[str,None],int]) -> None:
         self.nazev:str=db_data[0]
         self.code:str=db_data[1]
         self.type:str=db_data[2]

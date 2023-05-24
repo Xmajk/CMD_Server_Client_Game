@@ -50,3 +50,12 @@ def change_owning_put_on(db:Database,username:str,item_code:str,put_in:bool)->No
     with db.mydb.cursor() as cursor:
         cursor.execute(template,data)
         db.mydb.commit()
+        
+from Gameobjects.Item import Item 
+def get_item(db:Database,item_code:Item)->Tuple[str,str,str,int,int,int,int,str]:
+    data:Tuple[str]=(item_code,)
+    template:str="""SELECT nazev,kod, nazev, player_hp,player_damage,player_mana,player_speed,ability_info FROM item WHERE kod=%s;"""
+    with db.mydb.cursor() as cursor:
+        cursor.execute(template,data)
+        db_output:tuple=cursor.fetchone()
+    return db_output

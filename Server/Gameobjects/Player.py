@@ -22,10 +22,11 @@ class Player:
         self.items_mana:int=0
         self.coins:int=0
         self.inventory:List[Item]=[]
+        self.current_mana:int=0
     
     def load(self,db:Database)->None:
         from Database.Actions.Load_player import load_base,get_inventory
-        data:Tuple[int,int,int,int,int,int,int,int,int,str,int]=load_base(db,self.username)
+        data:Tuple[int,int,int,int,int,int,int,int,int,str,int,int]=load_base(db,self.username)
         self.base_hp=data[0]
         self.base_atk=data[1]
         self.base_speed=data[2]
@@ -37,6 +38,7 @@ class Player:
         self.coins=data[8]
         self.trida=data[9]
         self.current_hp=data[10]
+        self.current_mana=data[11]
         
         self.inventory:List[Item]=[]
         
@@ -51,7 +53,11 @@ class Player:
             
     def save(self,db:Database)->None:
         from Database.Actions.Load_player import save_stats
-        from Database.Actions.Inventory_db import get_inventory_2,change_owning_put_on
+        from Database.Actions.Inventory_db import get_inventory_2,change_owning_put_on,get_item,create_owning,delete_owning
+        if not self.get_full_hp()>=self.current_hp:
+            self.current_hp=self.get_full_hp()
+        if not self.get_full_mana()>=self.current_mana:
+            self.current_hp=self.get_full_mana()
         save_stats(db,self)
         database:List[Tuple[str,str,bool]]=[(nazev,kod,bool(is_using)) for nazev,kod,is_using in get_inventory_2(db,self.username)]
         my_inventory:List[Tuple[str,str,bool]]=[(element.nazev,element.code,element.is_using) for element in self.inventory]
@@ -74,5 +80,13 @@ class Player:
                         my_inventory.pop(index)
                 change_owning_put_on(db,self.username,common_kod,common_is_using)
         #kontrola existence
-        if True:
-            pass
+        for name,code,is_using in database:
+            delete_owning(db,self.username,code)
+        for name,code,is_using in my_inventory:
+            create_owning(db,self.username,code)
+        
+    def get_full_hp(self)->int:
+        return self.base_hp+self.add_hp+self.items_hp
+    
+    def get_full_mana(self)->int:
+        return self.base_mana+self.add_mana+self.items_mana
