@@ -1,12 +1,12 @@
-Date : 2023-05-23 12:31:03
+Date : 2023-05-24 07:36:34
 Directory : c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game
-Total : 38 files,  1525 codes, 130 comments, 267 blanks, all 1922 lines
+Total : 38 files,  1674 codes, 129 comments, 277 blanks, all 2080 lines
 
 Languages
 +----------+------------+------------+------------+------------+------------+
 | language | files      | code       | comment    | blank      | total      |
 +----------+------------+------------+------------+------------+------------+
-| Python   |         35 |      1,455 |        130 |        249 |      1,834 |
+| Python   |         35 |      1,604 |        129 |        259 |      1,992 |
 | Markdown |          1 |         59 |          0 |         18 |         77 |
 | JSON     |          2 |         11 |          0 |          0 |         11 |
 +----------+------------+------------+------------+------------+------------+
@@ -15,20 +15,20 @@ Directories
 +----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
 | path                                                                                                     | files      | code       | comment    | blank      | total      |
 +----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
-| .                                                                                                        |         38 |      1,525 |        130 |        267 |      1,922 |
+| .                                                                                                        |         38 |      1,674 |        129 |        277 |      2,080 |
 | . (Files)                                                                                                |          1 |         59 |          0 |         18 |         77 |
 | Client                                                                                                   |          4 |        210 |          2 |         22 |        234 |
 | Client (Files)                                                                                           |          2 |        199 |          2 |         21 |        222 |
 | Client\konfig                                                                                            |          1 |          6 |          0 |          0 |          6 |
 | Client\lib                                                                                               |          1 |          5 |          0 |          1 |          6 |
-| Server                                                                                                   |         33 |      1,256 |        128 |        227 |      1,611 |
+| Server                                                                                                   |         33 |      1,405 |        127 |        237 |      1,769 |
 | Server (Files)                                                                                           |          2 |         68 |         12 |         11 |         91 |
 | Server\Database                                                                                          |          9 |        214 |         20 |         30 |        264 |
 | Server\Database (Files)                                                                                  |          1 |         11 |          0 |          3 |         14 |
 | Server\Database\Actions                                                                                  |          8 |        203 |         20 |         27 |        250 |
 | Server\Enums                                                                                             |          1 |          6 |          3 |          2 |         11 |
-| Server\Gameobjects                                                                                       |         11 |        441 |          5 |         83 |        529 |
-| Server\Gameobjects (Files)                                                                               |          4 |        140 |          2 |         27 |        169 |
+| Server\Gameobjects                                                                                       |         11 |        464 |          5 |         85 |        554 |
+| Server\Gameobjects (Files)                                                                               |          4 |        163 |          2 |         29 |        194 |
 | Server\Gameobjects\Map                                                                                   |          7 |        301 |          3 |         56 |        360 |
 | Server\Gameobjects\Map (Files)                                                                           |          1 |        144 |          0 |         31 |        175 |
 | Server\Gameobjects\Map\Capital_city                                                                      |          2 |         72 |          3 |         15 |         90 |
@@ -36,8 +36,8 @@ Directories
 | Server\Gameobjects\Map\Gem_town                                                                          |          1 |         19 |          0 |          2 |         21 |
 | Server\Gameobjects\Map\Route1                                                                            |          1 |         21 |          0 |          3 |         24 |
 | Server\Gameobjects\Map\Route2                                                                            |          1 |         20 |          0 |          2 |         22 |
-| Server\Interfaces                                                                                        |          6 |        448 |         26 |         85 |        559 |
-| Server\Interfaces (Files)                                                                                |          5 |        401 |         26 |         75 |        502 |
+| Server\Interfaces                                                                                        |          6 |        574 |         25 |         93 |        692 |
+| Server\Interfaces (Files)                                                                                |          5 |        527 |         25 |         83 |        635 |
 | Server\Interfaces\Profil                                                                                 |          1 |         47 |          0 |         10 |         57 |
 | Server\Others                                                                                            |          3 |         74 |         62 |         15 |        151 |
 | Server\lib                                                                                               |          1 |          5 |          0 |          1 |          6 |
@@ -62,8 +62,8 @@ Files
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Database\Actions\Set_status.py                      | Python   |         30 |          0 |          4 |         34 |
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Database\Database.py                                | Python   |         11 |          0 |          3 |         14 |
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Enums\Next_message.py                               | Python   |          6 |          3 |          2 |         11 |
-| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Building.py                             | Python   |         66 |          0 |         15 |         81 |
-| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Item.py                                 | Python   |         12 |          0 |          3 |         15 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Building.py                             | Python   |         77 |          0 |         19 |         96 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Item.py                                 | Python   |         14 |          0 |          4 |         18 |
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Map\Capital_city\Capital_city.py        | Python   |         57 |          3 |         10 |         70 |
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Map\Capital_city\Capital_city_tawern.py | Python   |         15 |          0 |          5 |         20 |
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Map\Forest_of_life\Forest_of_life.py    | Python   |         25 |          0 |          3 |         28 |
@@ -72,10 +72,10 @@ Files
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Map\Route1\Route1.py                    | Python   |         21 |          0 |          3 |         24 |
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Map\Route2\Route2.py                    | Python   |         20 |          0 |          2 |         22 |
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\NPC.py                                  | Python   |          2 |          0 |          0 |          2 |
-| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Player.py                               | Python   |         60 |          2 |          9 |         71 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Player.py                               | Python   |         70 |          2 |          6 |         78 |
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\CMD_level.py                             | Python   |         28 |          0 |          9 |         37 |
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\First_view.py                            | Python   |         87 |         25 |         19 |        131 |
-| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\Inventory_level.py                       | Python   |         91 |          1 |         18 |        110 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\Inventory_level.py                       | Python   |        217 |          0 |         26 |        243 |
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\Load_user.py                             | Python   |         31 |          0 |          2 |         33 |
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\Profil\Profile.py                        | Python   |         47 |          0 |         10 |         57 |
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\Register_view.py                         | Python   |        164 |          0 |         27 |        191 |
@@ -85,5 +85,5 @@ Files
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\__init__.py                                         | Python   |         63 |         12 |         11 |         86 |
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\database.json                                       | JSON     |          5 |          0 |          0 |          5 |
 | c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\lib\ICommand.py                                     | Python   |          5 |          0 |          1 |          6 |
-| Total                                                                                                    |          |      1,525 |        130 |        267 |      1,922 |
+| Total                                                                                                    |          |      1,674 |        129 |        277 |      2,080 |
 +----------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

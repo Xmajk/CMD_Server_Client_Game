@@ -238,6 +238,7 @@ class Use_command(ICommand):
                 break
         if item==None:
             return True
-        if item.code=="":
+        if item.code=="0009": #léčivý lektvar
             pass
+            
         raise NotImplementedError("inventar-pouzij")
