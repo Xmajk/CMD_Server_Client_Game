@@ -231,4 +231,13 @@ class Use_command(ICommand):
         if not item.type == "useable":
             self.inventory.connect.send(f'Předmět s kódem \"{kod}\" nelze použít',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
             return True
+        item:Union[Item,None]=None
+        for for_item in self.inventory.connect.player.inventory:
+            if not item.is_using and item.code==kod:
+                item:Item=for_item
+                break
+        if item==None:
+            return True
+        if item.code=="":
+            pass
         raise NotImplementedError("inventar-pouzij")
