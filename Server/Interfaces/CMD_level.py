@@ -14,6 +14,7 @@ class CMD_level:
     def loop(self):
         self.connect.send("",next_message=Next_message.POSLI,prompt=self.prompt)
         while True:
+            self.connect.save_player()
             client_response:str=self.connect.recieve(next_message=Next_message.PRIJMI,prompt=self.prompt)
             client_command,options=edit_response(client_response)
             client_command:ICommand=self.commands.get(client_command,Unknown_command(self))

@@ -39,7 +39,7 @@ def create_owning(db:Database,username:str,item_code:str)->None:
 
 def delete_owning(db:Database,username:str,item_code:str)->None:
     data:Tuple[str]=(username,item_code)
-    template:str="""DELETE FROM own_item WHERE id_playera=(SELECT id FROM player WHERE username=%s LIMIT 1) and id_itemu=(SELECT id FROM item WHERE kod=%s LIMIT 1) """
+    template:str="""DELETE FROM own_item WHERE id_playera=(SELECT id FROM player WHERE username=%s LIMIT 1) and id_itemu=(SELECT id FROM item WHERE kod=%s LIMIT 1) LIMIT 1"""
     with db.mydb.cursor() as cursor:
         cursor.execute(template,data)
         db.mydb.commit()

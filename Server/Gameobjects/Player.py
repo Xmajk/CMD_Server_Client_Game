@@ -61,10 +61,14 @@ class Player:
         save_stats(db,self)
         database:List[Tuple[str,str,bool]]=[(nazev,kod,bool(is_using)) for nazev,kod,is_using in get_inventory_2(db,self.username)]
         my_inventory:List[Tuple[str,str,bool]]=[(element.nazev,element.code,element.is_using) for element in self.inventory]
-        tmp_database = [t for t in database if t not in my_inventory]
-        tmp_my_inventory = [t for t in my_inventory if t not in database]
-        database:List[Tuple[str,str,bool]]=tmp_database
-        my_inventory:List[Tuple[str,str,bool]]=tmp_my_inventory
+        for tup in database:
+            if tup in my_inventory:
+                database.remove(tup)
+                my_inventory.remove(tup)
+        for tup in my_inventory:
+            if tup in database:
+                database.remove(tup)
+                my_inventory.remove(tup)
         #kontrola změny
         if not len(database)==0 and not len(my_inventory)==0:
             common_tuples:List[Tuple[str,str,bool]] = [t for t in my_inventory if any(t[:2] == x[:2] for x in database)]

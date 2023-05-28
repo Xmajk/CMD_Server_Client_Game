@@ -85,6 +85,7 @@ class Cesta_command(ICommand):
             self.place.connect.send(f'Cesta \"{options[0]}\" neexistuje',next_message=Next_message.PRIJMI,prompt=self.place.prompt)
             return True
         set_location(self.place.connect.databaze,self.place.connect.player.username,options[0])
+        self.place.connect.save_player()
         self.place.ways[options[0]](self.place.connect)
         return True
         
