@@ -3,6 +3,48 @@ from Gameobjects.Item import Item
 from Database.Database import Database
 
 class Player:
+    """
+    Třída která představuje uživatele.
+    
+    Atributy
+    --------
+    username : str
+        Přezdívka uživatele.
+    current_hp : int
+        Aktuální životy.
+    trida : str|None
+        Třída uživatele.
+    base_hp : int
+        Základní počet životů.
+    base_atk : int
+        Základní hodnota útoku.
+    base_speed : int
+        Základní rychlost.
+    base_mana : int
+        Základní hodnota many.
+    add_hp : int
+        Přídavek na životy.
+    add_atk : int
+        Přídavek na útok.
+    add_speed : int
+        Přídavek na rychlost.
+    add_mana : int
+        Přídavek na manu.
+    items_hp : int
+        Celkový přídavek na životy z předmětů.
+    items_atk : int
+        Celkový přídavek na útok z předmětů.
+    items_speed : int
+        Celková přídavek na rychlost z předmětů.
+    items_mana : int
+        Celkový přídavek na manu z předmětů.
+    coins : int
+        Počet mincí.
+    inventory : List[Item]
+        Inventář předmětů.
+    current_mana : int
+        Aktuální hodnota many.
+    """
     
     def __init__(self,username) -> None:
         self.username:str=username
@@ -25,6 +67,14 @@ class Player:
         self.current_mana:int=0
     
     def load(self,db:Database)->None:
+        """
+        Načte data uživatele ze zadané databáze.
+        
+        Parametry
+        ---------
+        db : Database
+            Databáze, ze které se načítají data.
+        """
         from Database.Actions.Load_player import load_base,get_inventory
         data:Tuple[int,int,int,int,int,int,int,int,int,str,int,int]=load_base(db,self.username)
         self.base_hp=data[0]
@@ -52,6 +102,14 @@ class Player:
             self.inventory.append(tmp)
             
     def save(self,db:Database)->None:
+        """
+        Uloží data uživatele do zadané databáze.
+        
+        Parametry
+        ---------
+        db : Database
+            Databáze, do které se ukládají data.
+        """
         from Database.Actions.Load_player import save_stats
         from Database.Actions.Inventory_db import get_inventory_2,change_owning_put_on,get_item,create_owning,delete_owning
         if not self.get_full_hp()>=self.current_hp:
@@ -90,7 +148,23 @@ class Player:
             create_owning(db,self.username,code)
         
     def get_full_hp(self)->int:
+        """
+        Vrátí celkový počet životů uživatele (základní + přídavek z předmětů).
+        
+        Returns
+        -------
+        int
+            Celkový počet životů uživatele.
+        """
         return self.base_hp+self.add_hp+self.items_hp
     
     def get_full_mana(self)->int:
+        """
+        Vrátí celkovou hodnotu many uživatele (základní + přídavek z předmětů).
+        
+        Returns
+        -------
+        int
+            Celková hodnota many uživatele.
+        """
         return self.base_mana+self.add_mana+self.items_mana

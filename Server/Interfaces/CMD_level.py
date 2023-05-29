@@ -18,12 +18,15 @@ class CMD_level:
         Příkazy, které se budou spouštět.
     """
     
-    def __init__(self,connect:Connection,prompt:str,commands:Dict[str,ICommand]) -> None:
+    def __init__(self,connect:Connection,prompt:str,commands:Dict[str,ICommand]) -> None:    
         self.connect:Connection=connect
         self.prompt:str=prompt
         self.commands:Dict[str,ICommand]=commands
         
     def loop(self):
+        """
+        Loop, který slouží jako interface pro uživatele.
+        """
         self.connect.send("",next_message=Next_message.POSLI,prompt=self.prompt)
         while True:
             self.connect.save_player()
@@ -36,9 +39,20 @@ class CMD_level:
             self.connect.send('',next_message=Next_message.POSLI,prompt=self.prompt)
             
     def supplementary_help(self):
+        """
+        Pošle klientovy příkaz z metody help, který by měl mít každý level.
+        """
         self.connect.send("-help=>vypíšou se všechny příkazy, které můžete aktuálně použít",next_message=Next_message.PRIJMI,prompt=self.prompt)
             
 class Unknown_command(ICommand):
+    """
+    Třída představující příkaz, který klintovy odešle, že zadal neznámí příkaz.
+    
+    Atributy
+    --------
+    cmd_level : CMD_level
+        Instance třídy CMD_level, ze které se přichází na příkaz.
+    """
     
     def __init__(self,cmd_level:CMD_level) -> None:
         self.cmd_level:CMD_level=cmd_level

@@ -61,6 +61,14 @@ class First_view(CMD_level):
         super().loop()
             
 class Help_command(ICommand):
+    """
+    Třída představující příkaz, který klintovy odešle, příkazy, které může použít.
+    
+    Atributy
+    --------
+    first_view : First_view
+        Instance třídy First_view, ze které se přichází na příkaz.
+    """
     
     def __init__(self,first_view:First_view) -> None:
         self.first_view:First_view=first_view
@@ -77,6 +85,14 @@ class Help_command(ICommand):
         return True
         
 class Login_command(ICommand):
+    """
+    Třída představující příkaz, díky kterému se uživatel přihlásí.
+    
+    Atributy
+    --------
+    first_view : First_view
+        Instance třídy First_view, ze které se přichází na příkaz.
+    """
     
     def __init__(self,first_view:First_view) -> None:
         self.first_view:First_view=first_view
@@ -110,6 +126,14 @@ class Login_command(ICommand):
         return True
     
 class Register_command(ICommand):
+    """
+    Třída představující příkaz, díky kterému se uživatel zaregistruje.
+    
+    Atributy
+    --------
+    first_view : First_view
+        Instance třídy First_view, ze které se přichází na příkaz.
+    """
 
     def __init__(self,first_view:First_view) -> None:
         self.first_view:First_view=first_view
@@ -119,6 +143,14 @@ class Register_command(ICommand):
         return True
     
 class Exit_command(ICommand):
+    """
+    Třída představující příkaz, který klinta vyhodí z aplikace.
+    
+    Atributy
+    --------
+    first_view : First_view
+        Instance třídy First_view, ze které se přichází na příkaz.
+    """
     
     def __init__(self,first_view:First_view) -> None:
         self.first_view:First_view=first_view

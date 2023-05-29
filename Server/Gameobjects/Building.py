@@ -10,6 +10,16 @@ from Interfaces.Inventory_level import Inventory_level
 from Gameobjects.NPC import NPC
 
 class Building(CMD_level):
+    """
+    Třída představující budovu v hře.
+
+    Atributy
+    --------
+    name : str
+        Název budovy.
+    NPCs : Dict[str, NPC]
+        Slovník s NPC ve vnitřních prostorech budovy.
+    """
     
     def __init__(self,connect:Connection,prompt:str,commands:Dict[str,ICommand],name:str,
                  NPCs:List[str]) -> None:
@@ -41,6 +51,14 @@ class Building(CMD_level):
         super().supplementary_help()
         
 class Ven_command(ICommand):
+    """
+    Příkaz pro opuštění budovy.
+
+    Atributy
+    --------
+    building : Building
+        Budova, ve které se příkaz provádí.
+    """
     
     def __init__(self,building:Building) -> None:
         self.building:Building=building
@@ -54,6 +72,15 @@ class Ven_command(ICommand):
         return False
     
 class Full_help_command(ICommand):
+    """
+    Třída představující příkaz "help".
+
+    Atributy
+    --------
+    building : Building
+        Budova, ve které se příkaz vykonává.
+    """
+    
     
     def __init__(self,building:Building) -> None:
         self.building:Building=building
@@ -68,6 +95,15 @@ class Full_help_command(ICommand):
         return True
     
 class Profil_command(ICommand):
+    """
+    Třída představující příkaz "profil".
+
+    Atributy
+    --------
+    building : Building
+        Budova, ve které se příkaz vykonává.
+    """
+
     
     def __init__(self,building:Building) -> None:
         self.building:Building=building
@@ -89,6 +125,14 @@ class Profil_command(ICommand):
         return True
     
 class Inventar_command(ICommand):
+    """
+    Třída představující příkaz "inventar".
+
+    Atributy
+    --------
+    building : Building
+        Budova, ve které se příkaz vykonává.
+    """
     
     def __init__(self,building:Building) -> None:
         self.building:Building=building
@@ -101,6 +145,14 @@ class Inventar_command(ICommand):
         return True
     
 class Print_NPCs_command(ICommand):
+    """
+    Třída představující příkaz "vypis_NPCs".
+
+    Atributy
+    --------
+    building : Building
+        Budova, ve které se příkaz vykonává.
+    """
     
     def __init__(self,building:Building) -> None:
         self.building:Building=building
@@ -118,6 +170,14 @@ class Print_NPCs_command(ICommand):
         return True
     
 class NPC_command(ICommand):
+    """
+    Třída představující příkaz "NPC".
+
+    Atributy
+    --------
+    building : Building
+        Budova, ve které se příkaz vykonává.
+    """
     
     def __init__(self,building:Building) -> None:
         self.building:Building=building

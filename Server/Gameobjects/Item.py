@@ -1,6 +1,30 @@
 from typing import Union,Tuple
 
 class Item:
+    """
+    Třída představující předmět v hře.
+
+    Atributy
+    --------
+    nazev : str
+        Název předmětu.
+    code : str
+        Kód předmětu.
+    type : str
+        Typ předmětu.
+    add_hp : int
+        Přídavek na životy.
+    add_atk : int
+        Přídavek na útok.
+    add_mana : int
+        Přídavek na many.
+    add_speed : int
+        Přídavek na rychlost.
+    ability : Union[str, None]
+        Schopnost předmětu (pokud má).
+    is_using : bool
+        Určuje, zda je předmět používán.
+    """
     
     def __init__(self,db_data:Tuple[str,str,str,int,int,int,int,Union[str,None],int]) -> None:
         self.nazev:str=db_data[0]

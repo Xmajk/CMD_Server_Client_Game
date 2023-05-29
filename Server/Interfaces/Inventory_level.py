@@ -7,6 +7,16 @@ from Database.Actions.Inventory_db import all_using_to_inventory,print_inventory
 from Gameobjects.Item import Item
 
 class Inventory_level(CMD_level):
+    """
+    Třída znázorňujicí inventář.
+    
+    Atributy
+    --------
+    connect : Connection
+        Instance třídy Connection, která reprezentuje spojení s klientem.
+    base_prompt : str
+        Řetězec promptu levelu ze kterého přicházím na inventář
+    """
     
     def __init__(self, connect: Connection, base_prompt: str) -> None:
         super().__init__(
@@ -40,6 +50,14 @@ class Inventory_level(CMD_level):
         return super().supplementary_help()
     
 class Full_help_command(ICommand):
+    """
+    Třída představující příkaz, který klintovy odešle, příkazy, které může použít.
+    
+    Atributy
+    --------
+    inventory : Inventory_level
+        Instance třídy Inventory_level, ze které se přichází na příkaz.
+    """
     
     def __init__(self,inventory:Inventory_level) -> None:
         self.inventory:Inventory_level=inventory
@@ -54,6 +72,14 @@ class Full_help_command(ICommand):
         return True
 
 class Svleknout_command(ICommand):
+    """
+    Třída představující příkaz, který svlékne itemy z postavy.
+    
+    Atributy
+    --------
+    inventory : Inventory_level
+        Instance třídy Inventory_level, ze které se přichází na příkaz.
+    """
     
     def __init__(self,inventory:Inventory_level) -> None:
         self.inventory:Inventory_level=inventory
@@ -89,6 +115,14 @@ class Svleknout_command(ICommand):
             return True
                 
 class Print_inventory_command(ICommand):
+    """
+    Třída představující příkaz, který klintovy odešle, itemy, které má postava v inventáři.
+    
+    Atributy
+    --------
+    inventory : Inventory_level
+        Instance třídy Inventory_level, ze které se přichází na příkaz.
+    """
 
     def __init__(self,inventory:Inventory_level) -> None:
         self.inventory:Inventory_level=inventory
@@ -108,6 +142,15 @@ class Print_inventory_command(ICommand):
         return True
 
 class Print_character(ICommand):
+    """
+    Třída představující příkaz, který klintovy odešle, co má jeho postava na sobě.
+    
+    Atributy
+    --------
+    inventory : Inventory_level
+        Instance třídy Inventory_level, ze které se přichází na příkaz.
+    """
+    
     def __init__(self,inventory:Inventory_level) -> None:
         self.inventory:Inventory_level=inventory
     
@@ -127,6 +170,15 @@ class Print_character(ICommand):
         return True
         
 class Put_on_command(ICommand):
+    """
+    Třída představující příkaz, který nasadí item, který uživatel zadá.
+    
+    Atributy
+    --------
+    inventory : Inventory_level
+        Instance třídy Inventory_level, ze které se přichází na příkaz.
+    """
+    
     def __init__(self,inventory:Inventory_level) -> None:
         self.inventory:Inventory_level=inventory
     
@@ -163,6 +215,14 @@ class Put_on_command(ICommand):
         return True
         
 class Information_command(ICommand):
+    """
+    Třída představující příkaz, který klintovy odešle, informace o itemu, který zadá jako atribut.
+    
+    Atributy
+    --------
+    inventory : Inventory_level
+        Instance třídy Inventory_level, ze které se přichází na příkaz.
+    """
     
     def __init__(self,inventory:Inventory_level) -> None:
         self.inventory:Inventory_level=inventory
@@ -198,6 +258,14 @@ class Information_command(ICommand):
         return True
 
 class Back_command(ICommand):
+    """
+    Třída představující příkaz, který vyhodí klienta z inventáře.
+    
+    Atributy
+    --------
+    inventory : Inventory_level
+        Instance třídy Inventory_level, ze které se přichází na příkaz.
+    """
     
     def __init__(self,inventory:Inventory_level) -> None:
         self.inventory:Inventory_level=inventory
@@ -209,6 +277,14 @@ class Back_command(ICommand):
         return False
     
 class Use_command(ICommand):
+    """
+    Třída představující příkaz, který použije item, který uživatel zadá jako atribut
+    
+    Atributy
+    --------
+    inventory : Inventory_level
+        Instance třídy Inventory_level, ze které se přichází na příkaz.
+    """
     
     def __init__(self,inventory:Inventory_level) -> None:
         self.inventory:Inventory_level=inventory

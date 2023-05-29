@@ -1,0 +1,51 @@
+Date : 2023-05-29 20:35:55
+Directory : c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game
+Total : 16 files,  54 codes, 454 comments, 10 blanks, all 518 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Python   |         15 |         40 |        454 |          8 |        502 |
+| Markdown |          1 |         14 |          0 |          2 |         16 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                               | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                  |         16 |         54 |        454 |         10 |        518 |
+| . (Files)                                                                          |          1 |         14 |          0 |          2 |         16 |
+| Server                                                                             |         15 |         40 |        454 |          8 |        502 |
+| Server\Gameobjects                                                                 |          5 |         38 |        170 |          6 |        214 |
+| Server\Gameobjects (Files)                                                         |          4 |          0 |        170 |          2 |        172 |
+| Server\Gameobjects\NPCs                                                            |          1 |         38 |          0 |          4 |         42 |
+| Server\Interfaces                                                                  |          6 |          2 |        226 |          2 |        230 |
+| Server\Interfaces (Files)                                                          |          5 |          2 |        198 |          2 |        202 |
+| Server\Interfaces\Profil                                                           |          1 |          0 |         28 |          0 |         28 |
+| Server\Others                                                                      |          3 |          0 |         47 |          0 |         47 |
+| Server\lib                                                                         |          1 |          0 |         11 |          0 |         11 |
++------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                           | language | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\README.md                            | Markdown |         14 |          0 |          2 |         16 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Building.py       | Python   |          0 |         58 |          2 |         60 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Item.py           | Python   |          0 |         24 |          0 |         24 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\NPC.py            | Python   |          0 |         14 |          0 |         14 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\NPCs\Bartender.py | Python   |         38 |          0 |          4 |         42 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Player.py         | Python   |          0 |         74 |          0 |         74 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\CMD_level.py       | Python   |          0 |         26 |          0 |         26 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\First_view.py      | Python   |          0 |         32 |          0 |         32 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\Inventory_level.py | Python   |          0 |         74 |          2 |         76 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\Load_user.py       | Python   |          0 |         11 |          0 |         11 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\Profil\Profile.py  | Python   |          0 |         28 |          0 |         28 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\Register_view.py   | Python   |          2 |         55 |          0 |         57 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Others\Connection.py          | Python   |          0 |         -4 |          0 |         -4 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Others\Crossing.py            | Python   |          0 |         40 |          0 |         40 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Others\Help_methods.py        | Python   |          0 |         11 |          0 |         11 |
+| c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\lib\ICommand.py               | Python   |          0 |         11 |          0 |         11 |
+| Total                                                                              |          |         54 |        454 |         10 |        518 |
++------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
