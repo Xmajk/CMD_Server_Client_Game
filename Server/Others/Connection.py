@@ -13,10 +13,6 @@ class Connection:
     """
     Třída Connection slouží pro uchování informací o klientovi a komunikaci s ním.
     
-    Parametery
-    ----------
-    
-    
     Atributy:
     ---------
     ip_adress: str

@@ -6,25 +6,48 @@ from Others.Help_methods import edit_response
 from Database.Actions.Registration import get_info_classes,get_info_class,register
 import mysql.connector
 from Interfaces.Profil.Profile import Profil_view
+from typing import Dict
+from Interfaces.CMD_level import CMD_level
 
-class Register_view:
+class Register_view(CMD_level):
+    """
+    CMD level, který slouží k registraci uživatele
+    
+    Atributy
+    --------
+    connect : Connection
+        Instance třídy Connection, která reprezentuje spojení s klientem.
+    prompt : str
+        Prompt CMD levelu.
+    commands : Dict[str,ICommand]
+        Příkazy, které se budou spouštět.
+    trida : str|None
+        Třída, kterou si uživatel vybere.
+    username : str|None
+        Uživatelské jméno, které si uživatel vybere.
+    password : str|None
+        Heslo, které si uživatel vybere.
+    """
     
     def __init__(self,connect:Connection) -> None:
-        self.connect:Connection=connect
-        self.prompt:str="registrace>"
-        self.commands:dict={
-            "help":Help_command(),
-            "back":Exit_command(),
-            "info":Info_command(),
-            "select":Select_command(),
-            "show_all":Show_all_command(),
-            "finish":Finich_command()
-        }
+        super().__init__(connect=connect,
+                         prompt="registrace>",
+                         commands={
+                            "help":Help_command(),
+                            "back":Exit_command(),
+                            "info":Info_command(),
+                            "select":Select_command(),
+                            "show_all":Show_all_command(),
+                            "finish":Finich_command()
+                        })
         self.trida:str=None
         self.username:str=None
         self.password:str=None
         
     def loop(self):
+        """
+        Loop, který slouží jako interface.
+        """
         self.connect.send("",next_message=Next_message.POSLI,prompt="Username:")
         self.username:str=self.connect.recieve(next_message=Next_message.PRIJMI)
         if username_exists(self.connect.databaze,self.username):
@@ -58,9 +81,25 @@ class Register_view:
             self.connect.send("",next_message=Next_message.POSLI,prompt=self.prompt)
             
 def valid_password(password:str)->tuple:
+    """
+    Metoda, která zjišťuje jestli je heslo validní.
+    
+    Parametry
+    ---------
+    password : str
+        Heslo zadané uživatelem.
+    
+    Returns
+    -------
+    tuple[bool,str]
+        Tuple o dvou elementech, první je jestli je heslo validní a druhý je chyba pokud není validní
+    """
     return (True,"")
 
 class Exit_command(ICommand):
+    """
+    ICommand příkazu opuštění registrace.
+    """
     
     def __init__(self) -> None:
         pass
@@ -72,6 +111,9 @@ class Exit_command(ICommand):
         return False
 
 class Help_command(ICommand):
+    """
+    ICommand příkazu, který vypíše všechny dostupné příkazy.
+    """
     
     def __init__(self) -> None:
         pass
@@ -93,6 +135,9 @@ class Help_command(ICommand):
         return True
     
 class Show_all_command(ICommand):
+    """
+    ICommand příkazu, který zobrazí všechny dostupné třídy.
+    """
     
     def __init__(self) -> None:
         pass
@@ -110,6 +155,9 @@ class Show_all_command(ICommand):
         return True
     
 class Info_command(ICommand):
+    """
+    ICommand příkazu, který zobrazuje informace o zadané třídě.
+    """
     
     def __init__(self) -> None:
         pass
@@ -135,6 +183,9 @@ class Info_command(ICommand):
         return True
     
 class Select_command(ICommand):
+    """
+    ICommand příkazu, kterým uživatel vybere třídu.
+    """
     
     def __init__(self) -> None:
         pass
@@ -151,6 +202,9 @@ class Select_command(ICommand):
         return True
     
 class Finich_command(ICommand):
+    """
+    ICommand příkazu, který potvrdí registraci
+    """
     
     def __init__(self) -> None:
         pass
@@ -180,6 +234,9 @@ class Finich_command(ICommand):
         return False
     
 class Neznamy_command(ICommand):
+    """
+    ICommand příkazu, který vypíše pokud je příkaz neznámý.
+    """
 
     def __init__(self) -> None:
         pass

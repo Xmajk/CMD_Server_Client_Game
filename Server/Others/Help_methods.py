@@ -7,8 +7,19 @@ def edit_response(client_response:str)->tuple:
 
     Argumenty jsou odděleny '--' a mohou být dále rozděleny mezerou.
     Pokud neexistují žádné argumenty, vrátí se prázdný seznam.
+    
+    Parametry
+    ---------
+    clent_response:str
+        nezpracovaný vstup od klienta
+        
+    Returns
+    -------
+    tuple
+        tuple, kde je první element příkaz uživatele a druhý element je list argumentů
 
     Příklady:
+    ---------
     edit_response('help --jedna --dva') => ('help', ['jedna', 'dva'])
     edit_response('help --jedna--dva') => ('help', ['jedna--dva'])
     edit_response('help--jedna') => ('help--jedna', [])

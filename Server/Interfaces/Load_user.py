@@ -10,10 +10,21 @@ from Gameobjects.Map.Route2.Route2 import Route2
 from Gameobjects.Map.Gem_town.Gem_town import Gem_town
 
 class Load_user:
+    """
+    Třída sloužící pro načtení uživatele.
+    
+    Atributy
+    --------
+    connect : Connection
+        Instance třídy Connection, která reprezentuje spojení s klientem.
+    """
     def __init__(self,connect:Connection) -> None:
         self.connect:Connection=connect
     
     def load(self):
+        """
+        Metoda sloužící k načtení uživatele
+        """
         location,building=get_location(self.connect.databaze,self.connect.player)
         self.connect.send("úspěšné přihlášení",next_message=Next_message.PRIJMI)
         if location=="Hlavní město":

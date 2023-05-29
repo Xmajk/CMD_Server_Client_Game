@@ -4,6 +4,21 @@
 
 Klienta si můžete stáhnou na naší [webové stránce](https://www.spsejecna.cz).
 
+TODO
+----
+- [x] přihlášení
+- [x] registrovat
+- [x] mapa
+- [x] přechod do jiných lokacích
+- [x] vstup do budov
+- [x] inventář
+- [] používání itemů
+- [] NPC
+- [] koupě piva v hospodě
+- [] NPC souboj
+- [] multiplayer souboj
+
+
 ## CLIENT
 Napsaný v jazyce :snake: Python 3.10.10
 

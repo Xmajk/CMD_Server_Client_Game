@@ -5,6 +5,18 @@ from lib.ICommand import ICommand
 from Others.Help_methods import edit_response
 
 class CMD_level:
+    """
+    Třída, která slouží jako základ interfacu.
+    
+    Atributy
+    --------
+    connect : Connection
+        Instance třídy Connection, která reprezentuje spojení s klientem.
+    prompt : str
+        Prompt CMD levelu.
+    commands : Dict[str,ICommand]
+        Příkazy, které se budou spouštět.
+    """
     
     def __init__(self,connect:Connection,prompt:str,commands:Dict[str,ICommand]) -> None:
         self.connect:Connection=connect
