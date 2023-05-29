@@ -12,11 +12,11 @@ TODO
 - [x] přechod do jiných lokacích
 - [x] vstup do budov
 - [x] inventář
-- [] používání itemů
-- [] NPC
-- [] koupě piva v hospodě
-- [] NPC souboj
-- [] multiplayer souboj
+- [ ] používání itemů
+- [ ] NPC
+- [ ] koupě piva v hospodě
+- [ ] NPC souboj
+- [ ] multiplayer souboj
 
 
 ## CLIENT
