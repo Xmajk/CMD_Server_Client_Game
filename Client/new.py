@@ -38,6 +38,7 @@ class Client:
         return self.client_socket.recv(self.response_size).decode()
     
     def send(self,value:str)->None:
+        #try_brench
         #coment
         self.client_socket.send(value.encode())
         
