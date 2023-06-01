@@ -39,6 +39,7 @@ class Client:
     
     def send(self,value:str)->None:
         #coment
+        #hekjk
         self.client_socket.send(value.encode())
         
     def run(self)->None:
