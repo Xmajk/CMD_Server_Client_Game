@@ -39,6 +39,7 @@ class Client:
     
     def send(self,value:str)->None:
         #try_brench
+        #try_brench2
         #coment
         self.client_socket.send(value.encode())
         
