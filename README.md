@@ -4,6 +4,7 @@
 
 Klienta si můžete stáhnou na naší [webové stránce](https://www.spsejecna.cz).
 
+
 - [Klient](#klient)
     - [Podporované_operační_systémy](#klient_OP)
     - [Konfigurace](#klient_konfig)
