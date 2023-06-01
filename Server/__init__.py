@@ -84,3 +84,4 @@ if __name__=="__main__":
         if error.errno == 10048:
             input("Protokol, síťová adresa a portu socketu jsou obsazeny")
             sys.exit()    
+            
