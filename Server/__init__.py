@@ -73,7 +73,6 @@ def start_server()->None:
     while True:
         client_socket, client_address = server_socket.accept()
 
-
         client_thread = threading.Thread(target=handle_client, args=(Connection(client_address[0],client_socket,database),))
         client_thread.start()
 
