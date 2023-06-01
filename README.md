@@ -4,6 +4,10 @@
 
 Klienta si můžete stáhnou na naší [webové stránce](https://www.spsejecna.cz).
 
+- [Klient](#klient)
+    - [Podporované_operační_systémy](#klient_OP)
+    - [Konfigurace](#klient_konfig)
+
 TODO
 ----
 - [x] přihlášení
@@ -19,15 +23,15 @@ TODO
 - [ ] multiplayer souboj
 
 
-## CLIENT
+## CLIENT <a name="klient"></a>
 Napsaný v jazyce :snake: Python 3.10.10
 
-### PODPOROVANÉ OPERAČNÍ SYSTÉMY
+### PODPOROVANÉ OPERAČNÍ SYSTÉMY <a name="klient_OP"></a>
 :window: Windows 10, Windows 11
 
 :penguin: Debian
 
-### Kofigurace:
+### Kofigurace: <a name="klient_konfig"></a>
 
 | Nastavení           | Hodnota                         |
 |---------------------|---------------------------------|
