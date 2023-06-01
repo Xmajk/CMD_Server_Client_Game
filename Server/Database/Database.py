@@ -11,4 +11,3 @@ class Database:
             auth_plugin='mysql_native_password'
         )
         print("Úspěšně jste se připojili k databázi") 
-        

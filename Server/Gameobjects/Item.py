@@ -38,5 +38,13 @@ class Item:
         self.is_using:bool=db_data[8]==1
         
     def __str__(self):
+        """
+        Dunder metoda
+        
+        Return
+        ------
+        str
+            string ve formátu 'název'['kód']==>is_using:'boolean jestli se používá'
+        """
         return f'{self.nazev}[{self.code}]==>is_using:{self.is_using}'
         
