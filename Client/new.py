@@ -38,9 +38,6 @@ class Client:
         return self.client_socket.recv(self.response_size).decode()
     
     def send(self,value:str)->None:
-        #try_brench
-        #try_brench2
-        #coment
         self.client_socket.send(value.encode())
         
     def run(self)->None:
