@@ -60,6 +60,7 @@ def handle_client(connection:Connection)->None:
 def start_server()->None:
     """
     Spustí server pro síťovou aplikaci a čeká na připojení klientů.
+    
     """
     database:Database = Database()
     set_everyone_offline(database)
