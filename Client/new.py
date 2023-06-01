@@ -6,7 +6,6 @@ from lib import hashing
 import sys
 
 class Client:
-    #idk
     
     def __init__(self,ip_address='localhost',port=5000,response_size=4096) -> None:
         self.client_socket:socket.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
