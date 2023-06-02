@@ -41,6 +41,9 @@ class Profil_view(CMD_level):
         )
         
     def supplementary_help(self):
+        self.connect.send("-staty=>vypíšou se v tabulce staty",next_message=Next_message.PRIJMI,prompt=self.prompt)
+        self.connect.send("-je_online=>zobrazí se jestli je hráč online",next_message=Next_message.PRIJMI,prompt=self.prompt)
+        self.connect.send("-informace=>vypíšou se informace o uživateli",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-zpet=>odejdete z profilu",next_message=Next_message.PRIJMI,prompt=self.prompt)
         return super().supplementary_help()
         
@@ -111,6 +114,7 @@ class Print_stats_command(ICommand):
         else:
             tmp_player:Player=Player(self.profil.username)
             tmp_player.load(self.profil.connect.databaze)
+        tmp_player.update_item_stats()
         header:str=f'| stat | třídy | přidaný | z itemů |'
         self.profil.connect.send('_'*36,next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
         self.profil.connect.send(header,next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
