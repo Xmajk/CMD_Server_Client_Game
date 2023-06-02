@@ -35,9 +35,16 @@ class Profil_view(CMD_level):
             "zpet":Zpet_command(self),
             "help":Help_command(self),
             "staty":None,
-            "info":None
+            "info":None,
+            "vypis_vse":None
             }
         )
+        
+    def supplementary_help(self):
+        self.connect.send("-zpet=>odejdete z profilu",next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
+        self.connect.send("-help=>vypíšou se všechny příkazy, které můžete aktuálně použít",next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
+        return super().supplementary_help()
+        
         
     def loop(self):
         super().loop()
@@ -60,8 +67,7 @@ class Help_command(ICommand):
             self.profil.connect.send("Příkaz \"help\" nemá žádné argumenty",next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
             return True
         self.profil.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
-        self.profil.connect.send("-zpet=>odejdete z profilu",next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
-        self.profil.connect.send("-help=>vypíšou se všechny příkazy, které můžete aktuálně použít",next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
+        self.profil.supplementary_help()
         self.profil.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
         return True
     

@@ -48,6 +48,7 @@ class Building(CMD_level):
         self.connect.send("-ven=>vyjdete z budovy",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-vypis_NPCs=>vypíšou se všechny NPC ve vaší lokalitě",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-NPC --[jméno NPC se kterým chcete interagovat]=>začne interagce se zadaným NPC",next_message=Next_message.PRIJMI,prompt=self.prompt)
+        self.connect.send("-inventar=>přejdete do svého inventáře",next_message=Next_message.PRIJMI,prompt=self.prompt)
         super().supplementary_help()
         
 class Ven_command(ICommand):
