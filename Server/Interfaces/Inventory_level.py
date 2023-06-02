@@ -316,7 +316,7 @@ class Use_command(ICommand):
                 break
         if item==None:
             return True
-        if item.code=="0009": # health potion
+        if item.code=="0009" or item.code=="0013": # health potion or beer
             if self.inventory.connect.player.get_full_hp()>=item.add_hp+self.inventory.connect.player.current_hp:
                 self.inventory.connect.player.current_hp+=item.add_hp
                 self.inventory.connect.send(f'Vyléčil jste si {item.add_hp} životů',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
