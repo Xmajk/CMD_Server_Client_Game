@@ -112,6 +112,7 @@ class Svleknout_command(ICommand):
                         using_item.is_using=False
                         break
             self.inventory.connect.save_player()
+            self.inventory.connect.player.update_item_stats()
             return True
                 
 class Print_inventory_command(ICommand):
@@ -212,6 +213,7 @@ class Put_on_command(ICommand):
                 if change_item.type==is_using_item.type and not is_using_item is change_item:
                     is_using_item.is_using=False
         self.inventory.connect.save_player()
+        self.inventory.connect.player.update_item_stats()
         return True
         
 class Information_command(ICommand):

@@ -101,6 +101,21 @@ class Player:
                 self.items_speed+=tmp.add_speed
             self.inventory.append(tmp)
             
+    def update_item_stats(self)->None:
+        """
+        Aktualizují se staty, které dávají itemy z inventáře
+        """
+        self.items_atk=0
+        self.items_hp=0
+        self.items_mana=0
+        self.items_speed=0
+        for tmp in self.inventory:
+            if tmp.is_using:
+                self.items_atk+=tmp.add_atk
+                self.items_hp+=tmp.add_hp
+                self.items_mana+=tmp.add_mana
+                self.items_speed+=tmp.add_speed
+            
     def save(self,db:Database)->None:
         """
         Uloží data uživatele do zadané databáze.
