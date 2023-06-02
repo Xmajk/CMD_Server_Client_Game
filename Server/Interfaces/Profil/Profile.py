@@ -36,8 +36,7 @@ class Profil_view(CMD_level):
             "help":Help_command(self),
             "staty":Print_stats_command(self),
             "je_online":Is_online_command(self),
-            "informace":None,
-            "vypis_vse":None
+            "informace":Information_command(self)
             }
         )
         
@@ -147,4 +146,35 @@ class Is_online_command(ICommand):
             self.profil.connect.send(f'Uživatel \"{tmp_username}\" je online',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
         else:
             self.profil.connect.send(f'Uživatel \"{tmp_username}\" není online',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
+        return True
+    
+class Information_command(ICommand):
+    """
+    Třída představující příkaz, který vypíše informace o uživateli
+    
+    Atributy
+    --------
+    profil : Profil_view
+        Instance třídy Profil_view, ze které se přichází na příkaz.
+    """
+    
+    def __init__(self,profil:Profil_view) -> None:
+        self.profil:Profil_view=profil
+    
+    def execute(self,options:list) -> bool:
+        if not len(options)==0:
+            self.profil.connect.send("Příkaz \"informace\" nemá žádné argumenty",next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
+            return True
+        if self.profil.username==None:
+            tmp_player:Player=self.profil.connect.player
+        else:
+            tmp_player:Player=Player(self.profil.username)
+            tmp_player.load(self.profil.connect.databaze)
+        self.profil.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
+        self.profil.connect.send(f'hp: {tmp_player.current_hp}/{tmp_player.get_full_hp()}',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
+        self.profil.connect.send(f'atk: {tmp_player.get_full_speed()}',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
+        self.profil.connect.send(f'mana: {tmp_player.current_mana}/{tmp_player.get_full_mana()}',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
+        self.profil.connect.send(f'speed: {tmp_player.get_full_speed()}',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
+        self.profil.connect.send(f'třída: {tmp_player.trida.upper()}',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
+        self.profil.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
         return True

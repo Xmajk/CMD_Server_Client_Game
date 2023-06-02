@@ -183,3 +183,25 @@ class Player:
             Celková hodnota many uživatele.
         """
         return self.base_mana+self.add_mana+self.items_mana
+    
+    def get_full_atk(self)->int:
+        """
+        Vrátí celkovou hodnotu atk uživatele (základní + přídavek z předmětů).
+        
+        Returns
+        -------
+        int
+            Celková hodnota atk uživatele.
+        """
+        return self.base_atk+self.add_atk+self.items_atk
+    
+    def get_full_speed(self)->int:
+        """
+        Vrátí celkovou hodnotu speed uživatele (základní + přídavek z předmětů).
+        
+        Returns
+        -------
+        int
+            Celková hodnota speed uživatele.
+        """
+        return self.base_speed+self.add_speed+self.items_speed
