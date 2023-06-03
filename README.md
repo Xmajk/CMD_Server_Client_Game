@@ -16,7 +16,9 @@ TODO
 - [x] mapa
 - [x] přechod do jiných lokacích
 - [x] vstup do budov
+- [x] questy
 - [x] inventář
+- [x] profil
 - [ ] používání itemů
 - [ ] NPC
 - [ ] koupě piva v hospodě
