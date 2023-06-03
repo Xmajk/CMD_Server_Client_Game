@@ -1,6 +1,14 @@
 import mysql.connector
 
 class Database:
+    """
+    Třída reprezentující připojení k databázi
+    
+    Atributy
+    --------
+    mydb : MySQLConnection
+        instance třídy reprezentující připojení k MySQL databázi
+    """
 
     def __init__(self) -> None:
         self.mydb=mysql.connector.connect(
@@ -10,4 +18,4 @@ class Database:
             database="game",
             auth_plugin='mysql_native_password'
         )
-        print("Úspěšně jste se připojili k databázi") 
+        print("Úspěšně jste se připojili k databázi")

@@ -6,6 +6,3 @@ class Next_message:
     """
     PRIJMI="prijmi"
     POSLI="posli"
-    
-if __name__=="__main__":
-    pass

@@ -1,1 +1,1 @@
-SELECT * from player
+SELECT kod from player
