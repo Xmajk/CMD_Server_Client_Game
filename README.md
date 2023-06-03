@@ -6,7 +6,7 @@ Klienta si můžete stáhnou na naší [webové stránce](https://www.spsejecna.
 
 
 - [Klient](#klient)
-    - [Podporované operační systémy](#klient_OP)
+    - [Podporované operační systémy](#klientOP)
     - [Konfigurace](#klient_konfig)
 
 TODO
@@ -29,7 +29,7 @@ TODO
 ## CLIENT <a name="klient"></a>
 Napsaný v jazyce :snake: Python 3.10.10
 
-### PODPOROVANÉ OPERAČNÍ SYSTÉMY <a name="klient_OP"></a>
+### PODPOROVANÉ OPERAČNÍ SYSTÉMY <a name="klientOP"></a>
 :window: Windows 10, Windows 11
 
 :penguin: Debian
