@@ -22,7 +22,7 @@ TODO
 - [x] používání itemů
 - [x] NPC
 - [x] koupě piva v hospodě
-- [] ukládání uživatele
+- [x] ukládání uživatele
 - [ ] NPC souboj
 - [ ] multiplayer souboj
 
