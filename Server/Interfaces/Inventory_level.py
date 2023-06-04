@@ -330,6 +330,16 @@ class Use_command(ICommand):
             self.inventory.connect.save_player()
             return True
         elif item.code=="0010": #mana potion
-            pass
-            
+            if self.inventory.connect.player.get_full_mana()>=item.add_mana+self.inventory.connect.player.current_mana:
+                self.inventory.connect.player.current_mana+=item.add_mana
+                self.inventory.connect.send(f'Přidal jste si {item.add_mana} many',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+                self.inventory.connect.player.inventory.remove(item)
+            elif self.inventory.connect.player.get_full_mana()==self.inventory.connect.player.current_mana :
+                self.inventory.connect.send(f'Nelze přidat manu, už máte plno many',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+            else:
+                self.inventory.connect.send(f'Přidal jste si {self.inventory.connect.player.get_full_mana()-self.inventory.connect.player.current_mana} many',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
+                self.inventory.connect.player.current_mana=self.inventory.connect.player.get_full_mana()
+                self.inventory.connect.player.inventory.remove(item)
+            self.inventory.connect.save_player()
+            return True
         raise NotImplementedError("inventar-pouzij")
