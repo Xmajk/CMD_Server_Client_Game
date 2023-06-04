@@ -19,9 +19,10 @@ TODO
 - [x] questy
 - [x] inventář
 - [x] profil
-- [ ] používání itemů
-- [ ] NPC
-- [ ] koupě piva v hospodě
+- [x] používání itemů
+- [x] NPC
+- [x] koupě piva v hospodě
+- [] ukládání uživatele
 - [ ] NPC souboj
 - [ ] multiplayer souboj
 

@@ -80,7 +80,7 @@ class Buy_beer(ICommand):
             self.bartender.connect.send(f'Nemáte dostatek coinů, pivo stojí {self.bartender.beer_cost} coinů',next_message=Next_message.PRIJMI,prompt=self.bartender.prompt)
             return True
         item:Item=Item(get_item(self.bartender.connect.databaze,'0013')+(0,))
-        self.bartender.connect.player.coins-self.bartender.beer_cost
+        self.bartender.connect.player.coins-=self.bartender.beer_cost
         self.bartender.connect.player.inventory.append(item)
         self.bartender.connect.send(f'Zakoupil jste si pivo',next_message=Next_message.PRIJMI,prompt=self.bartender.prompt)
         return True

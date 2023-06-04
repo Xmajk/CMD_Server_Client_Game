@@ -1,6 +1,7 @@
 from typing import List,Union,Tuple
 from Gameobjects.Item import Item
 from Database.Database import Database
+from copy import deepcopy
 
 class Player:
     """
@@ -134,11 +135,11 @@ class Player:
         save_stats(db,self)
         database:List[Tuple[str,str,bool]]=[(nazev,kod,bool(is_using)) for nazev,kod,is_using in get_inventory_2(db,self.username)]
         my_inventory:List[Tuple[str,str,bool]]=[(element.nazev,element.code,element.is_using) for element in self.inventory]
-        for tup in database:
+        for tup in deepcopy(database):
             if tup in my_inventory:
                 database.remove(tup)
                 my_inventory.remove(tup)
-        for tup in my_inventory:
+        for tup in deepcopy(my_inventory):
             if tup in database:
                 database.remove(tup)
                 my_inventory.remove(tup)
@@ -155,12 +156,16 @@ class Player:
                     mi_nazev,mi_kod,mi_is_using=tup
                     if mi_nazev==common_nazev and mi_kod==common_kod:
                         my_inventory.pop(index)
+                        break
                 change_owning_put_on(db,self.username,common_kod,common_is_using)
         #kontrola existence
         for name,code,is_using in database:
+            print(f'mažu {code}')
             delete_owning(db,self.username,code)
         for name,code,is_using in my_inventory:
+            print(f'vytvářím {code}')
             create_owning(db,self.username,code)
+        print("konec ukládání")
         
     def get_full_hp(self)->int:
         """

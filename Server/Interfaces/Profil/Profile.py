@@ -176,7 +176,7 @@ class Information_command(ICommand):
             tmp_player.load(self.profil.connect.databaze)
         self.profil.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
         self.profil.connect.send(f'hp: {tmp_player.current_hp}/{tmp_player.get_full_hp()}',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
-        self.profil.connect.send(f'atk: {tmp_player.get_full_speed()}',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
+        self.profil.connect.send(f'atk: {tmp_player.get_full_atk()}',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
         self.profil.connect.send(f'mana: {tmp_player.current_mana}/{tmp_player.get_full_mana()}',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
         self.profil.connect.send(f'speed: {tmp_player.get_full_speed()}',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
         self.profil.connect.send(f'třída: {tmp_player.trida.upper()}',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
