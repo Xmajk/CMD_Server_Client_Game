@@ -2,7 +2,7 @@ from typing import Union,Tuple
 
 class Item:
     """
-    Třída představující předmět v hře.
+    Třída představující předmět ve hře.
 
     Atributy
     --------
@@ -39,7 +39,7 @@ class Item:
         
     def __str__(self):
         """
-        Dunder metoda
+        Dunder metoda, vypisující objekt jako string
         
         Return
         ------
