@@ -1,10 +1,10 @@
 # Details
 
-Date : 2023-06-04 09:08:28
+Date : 2023-06-06 16:12:53
 
 Directory c:\\Users\\Misah\\OneDrive\\Plocha\\soubor\\PV-Game
 
-Total : 40 files,  1948 codes, 1025 comments, 314 blanks, all 3287 lines
+Total : 42 files,  2013 codes, 1041 comments, 329 blanks, all 3383 lines
 
 [Summary](results.md) / Details / [Diff Summary](diff.md) / [Diff Details](diff-details.md)
 
@@ -15,7 +15,7 @@ Total : 40 files,  1948 codes, 1025 comments, 314 blanks, all 3287 lines
 | [Client/konfig/client.json](/Client/konfig/client.json) | JSON | 6 | 0 | 0 | 6 |
 | [Client/lib/hashing.py](/Client/lib/hashing.py) | Python | 5 | 0 | 1 | 6 |
 | [Client/new.py](/Client/new.py) | Python | 80 | 1 | 7 | 88 |
-| [README.md](/README.md) | Markdown | 78 | 0 | 22 | 100 |
+| [README.md](/README.md) | Markdown | 79 | 0 | 22 | 101 |
 | [Server/Database/Actions/Authentication.py](/Server/Database/Actions/Authentication.py) | Python | 32 | 47 | 4 | 83 |
 | [Server/Database/Actions/Get_user_informations.py](/Server/Database/Actions/Get_user_informations.py) | Python | 17 | 32 | 2 | 51 |
 | [Server/Database/Actions/Inventory_db.py](/Server/Database/Actions/Inventory_db.py) | Python | 49 | 115 | 7 | 171 |
@@ -30,20 +30,22 @@ Total : 40 files,  1948 codes, 1025 comments, 314 blanks, all 3287 lines
 | [Server/Gameobjects/Item.py](/Server/Gameobjects/Item.py) | Python | 14 | 32 | 4 | 50 |
 | [Server/Gameobjects/Map/Capital_city/Capital_city.py](/Server/Gameobjects/Map/Capital_city/Capital_city.py) | Python | 57 | 3 | 10 | 70 |
 | [Server/Gameobjects/Map/Capital_city/Capital_city_tawern.py](/Server/Gameobjects/Map/Capital_city/Capital_city_tawern.py) | Python | 18 | 0 | 4 | 22 |
-| [Server/Gameobjects/Map/Forest_of_life/Forest_of_life.py](/Server/Gameobjects/Map/Forest_of_life/Forest_of_life.py) | Python | 25 | 0 | 3 | 28 |
+| [Server/Gameobjects/Map/Forest/Forest.py](/Server/Gameobjects/Map/Forest/Forest.py) | Python | 28 | 0 | 3 | 31 |
 | [Server/Gameobjects/Map/Gem_town/Gem_town.py](/Server/Gameobjects/Map/Gem_town/Gem_town.py) | Python | 19 | 0 | 2 | 21 |
 | [Server/Gameobjects/Map/Place.py](/Server/Gameobjects/Map/Place.py) | Python | 145 | 0 | 31 | 176 |
 | [Server/Gameobjects/Map/Route1/Route1.py](/Server/Gameobjects/Map/Route1/Route1.py) | Python | 21 | 0 | 3 | 24 |
 | [Server/Gameobjects/Map/Route2/Route2.py](/Server/Gameobjects/Map/Route2/Route2.py) | Python | 20 | 0 | 2 | 22 |
 | [Server/Gameobjects/NPC.py](/Server/Gameobjects/NPC.py) | Python | 10 | 14 | 2 | 26 |
 | [Server/Gameobjects/NPCs/Bartender.py](/Server/Gameobjects/NPCs/Bartender.py) | Python | 84 | 0 | 12 | 96 |
-| [Server/Gameobjects/Player.py](/Server/Gameobjects/Player.py) | Python | 101 | 95 | 11 | 207 |
+| [Server/Gameobjects/Player.py](/Server/Gameobjects/Player.py) | Python | 103 | 95 | 11 | 209 |
 | [Server/Interfaces/CMD_level.py](/Server/Interfaces/CMD_level.py) | Python | 29 | 26 | 9 | 64 |
 | [Server/Interfaces/First_view.py](/Server/Interfaces/First_view.py) | Python | 87 | 57 | 19 | 163 |
 | [Server/Interfaces/Inventory_level.py](/Server/Interfaces/Inventory_level.py) | Python | 243 | 74 | 28 | 345 |
 | [Server/Interfaces/Load_user.py](/Server/Interfaces/Load_user.py) | Python | 31 | 11 | 2 | 44 |
 | [Server/Interfaces/Profil/Profile.py](/Server/Interfaces/Profil/Profile.py) | Python | 116 | 52 | 20 | 188 |
 | [Server/Interfaces/Register_view.py](/Server/Interfaces/Register_view.py) | Python | 166 | 55 | 27 | 248 |
+| [Server/NPC_battle/Battle_NPC.py](/Server/NPC_battle/Battle_NPC.py) | Python | 6 | 0 | 1 | 7 |
+| [Server/NPC_battle/NPC_battle.py](/Server/NPC_battle/NPC_battle.py) | Python | 53 | 16 | 14 | 83 |
 | [Server/Others/Connection.py](/Server/Others/Connection.py) | Python | 50 | 42 | 9 | 101 |
 | [Server/Others/Crossing.py](/Server/Others/Crossing.py) | Python | 16 | 40 | 5 | 61 |
 | [Server/Others/Help_methods.py](/Server/Others/Help_methods.py) | Python | 8 | 27 | 1 | 36 |
