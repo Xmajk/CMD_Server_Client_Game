@@ -160,12 +160,9 @@ class Player:
                 change_owning_put_on(db,self.username,common_kod,common_is_using)
         #kontrola existence
         for name,code,is_using in database:
-            print(f'mažu {code}')
             delete_owning(db,self.username,code)
         for name,code,is_using in my_inventory:
-            print(f'vytvářím {code}')
             create_owning(db,self.username,code)
-        print("konec ukládání")
         
     def get_full_hp(self)->int:
         """

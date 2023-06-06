@@ -24,7 +24,7 @@ def to_route1(connect:Connection):
     from Gameobjects.Map.Route1.Route1 import Route1
     Route1(connect).loop()
     
-def to_life_of_forest(connect:Connection):
+def to_forest(connect:Connection):
     """
     Metoda sloužící k přechodu na lokaci Lesa
 
@@ -33,8 +33,8 @@ def to_life_of_forest(connect:Connection):
     connect : Connection
         Instance třídy Connection, která reprezentuje spojení s klientem.
     """
-    from Gameobjects.Map.Forest_of_life.Forest_of_life import Forest_of_life
-    Forest_of_life(connect).loop()
+    from Gameobjects.Map.Forest.Forest import Forest
+    Forest(connect).loop()
     
 def to_route2(connect:Connection):
     """

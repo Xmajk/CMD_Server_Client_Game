@@ -6,12 +6,12 @@ from Others.Crossing import to_route1
 from Enums.Next_message import Next_message
 from NPC_battle.NPC_battle import NPC_battle
 
-class Forest_of_life(Place):
+class Forest(Place):
 
     def __init__(self,connect:Connection) -> None:
         super().__init__(
-            name="Les života",
-            prompt="Les_života>",
+            name="Les",
+            prompt="Les>",
             connect=connect,
             NPCs=[],
             buildings={},
