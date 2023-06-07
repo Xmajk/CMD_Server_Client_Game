@@ -207,3 +207,9 @@ class Player:
             Celková hodnota speed uživatele.
         """
         return self.base_speed+self.add_speed+self.items_speed
+    
+    def reboot(self)->None:
+        """
+        Zresetuje účet uživatele
+        """
+        raise NotImplementedError("Player")

@@ -81,7 +81,7 @@ class Print_enemy_informations_command(ICommand):
             return True  
         self.npc_battle.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
         self.npc_battle.connect.send(f'Jméno:{self.npc_battle.enemy.name}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
-        self.npc_battle.connect.send(f'Hp:{self.npc_battle.enemy.hp}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+        self.npc_battle.connect.send(f'Hp:{self.npc_battle.tmp_player.current_hp}/{self.npc_battle.enemy.hp}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
         self.npc_battle.connect.send(f'Atk:{self.npc_battle.enemy.atk}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
         self.npc_battle.connect.send(f'Speed:{self.npc_battle.enemy.speed}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
         self.npc_battle.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)

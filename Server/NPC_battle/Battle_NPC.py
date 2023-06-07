@@ -5,3 +5,4 @@ class Battle_NPC:
         self.hp:int=hp
         self.atk:int=atk
         self.speed:int=speed
+        self.current_hp:int=hp
