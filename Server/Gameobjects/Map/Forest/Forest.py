@@ -5,6 +5,7 @@ from Gameobjects.Map.Place import Place
 from Others.Crossing import to_route1
 from Enums.Next_message import Next_message
 from NPC_battle.NPC_battle import NPC_battle
+from NPC_battle.Battle_NPC import Battle_NPC
 
 class Forest(Place):
 
@@ -24,7 +25,7 @@ class Forest(Place):
         
     def loop(self):
         if not capital_city_tawern(self.connect.databaze,self.connect.player.username):
-            battle:NPC_battle=NPC_battle(self.connect,base_prompt=self.prompt)
+            battle:NPC_battle=NPC_battle(self.connect,self.prompt,Battle_NPC("bandita",100,30,35))
             battle.loop()
             set_capital_city_tawern(self.connect.databaze,self.connect.player.username)
             self.connect.send("Zachránil jste hospodského a splnili jste úkol!",next_message=Next_message.PRIJMI,prompt=self.prompt)
