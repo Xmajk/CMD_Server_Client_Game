@@ -19,7 +19,8 @@ class NPC_battle(CMD_level):
                              "zautocit":None,
                              "pouzit":None,
                              "vypis_ability":None,
-                             "pouzit_abilitu":None
+                             "pouzit_abilitu":None,
+                             "vypis_informace":None
                          })
         if left_able:
             self.commands["opustit"]=Left_command(self)
@@ -37,6 +38,7 @@ class NPC_battle(CMD_level):
         self.connect.send("-pouzit --[kod, itemu, který chcete použít]=>použijete item",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-vypis_ability=>vypíšou se ability",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-pouzit_abilitu --[]=>použijete abilitu",next_message=Next_message.PRIJMI,prompt=self.prompt)
+        self.connect.send("-vypis_informace=>vypíšou se informace o vaší postavě",next_message=Next_message.PRIJMI,prompt=self.prompt)
         if self.leftable:
             self.connect.send("-opustit=>opustíte souboj",next_message=Next_message.PRIJMI,prompt=self.prompt)
         return super().supplementary_help()

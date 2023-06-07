@@ -1,42 +1,42 @@
 # Summary
 
-Date : 2023-06-06 16:12:53
+Date : 2023-06-07 21:39:04
 
 Directory c:\\Users\\Misah\\OneDrive\\Plocha\\soubor\\PV-Game
 
-Total : 42 files,  2013 codes, 1041 comments, 329 blanks, all 3383 lines
+Total : 42 files,  1976 codes, 1056 comments, 324 blanks, all 3356 lines
 
 Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-details.md)
 
 ## Languages
 | language | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| Python | 38 | 1,922 | 1,041 | 307 | 3,270 |
+| Python | 37 | 1,880 | 1,056 | 302 | 3,238 |
 | Markdown | 1 | 79 | 0 | 22 | 101 |
-| JSON | 2 | 11 | 0 | 0 | 11 |
+| JSON | 3 | 16 | 0 | 0 | 16 |
 | SQL | 1 | 1 | 0 | 0 | 1 |
 
 ## Directories
 | path | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| . | 42 | 2,013 | 1,041 | 329 | 3,383 |
+| . | 42 | 1,976 | 1,056 | 324 | 3,356 |
 | . (Files) | 2 | 80 | 0 | 22 | 102 |
-| Client | 4 | 210 | 2 | 22 | 234 |
-| Client (Files) | 2 | 199 | 2 | 21 | 222 |
+| Client | 3 | 130 | 1 | 15 | 146 |
+| Client (Files) | 1 | 119 | 1 | 14 | 134 |
 | Client\\konfig | 1 | 6 | 0 | 0 | 6 |
 | Client\\lib | 1 | 5 | 0 | 1 | 6 |
-| Server | 36 | 1,723 | 1,039 | 285 | 3,047 |
-| Server (Files) | 2 | 68 | 12 | 10 | 90 |
+| Server | 37 | 1,766 | 1,055 | 287 | 3,108 |
+| Server (Files) | 3 | 73 | 12 | 10 | 95 |
 | Server\\Database | 9 | 211 | 411 | 28 | 650 |
 | Server\\Database (Files) | 1 | 11 | 8 | 2 | 21 |
 | Server\\Database\\Actions | 8 | 200 | 403 | 26 | 629 |
 | Server\\Enums | 1 | 4 | 3 | 1 | 8 |
-| Server\\Gameobjects | 12 | 630 | 202 | 110 | 942 |
+| Server\\Gameobjects | 12 | 631 | 202 | 110 | 943 |
 | Server\\Gameobjects (Files) | 4 | 238 | 199 | 43 | 480 |
-| Server\\Gameobjects\\Map | 7 | 308 | 3 | 55 | 366 |
+| Server\\Gameobjects\\Map | 7 | 309 | 3 | 55 | 367 |
 | Server\\Gameobjects\\Map (Files) | 1 | 145 | 0 | 31 | 176 |
 | Server\\Gameobjects\\Map\\Capital_city | 2 | 75 | 3 | 14 | 92 |
-| Server\\Gameobjects\\Map\\Forest | 1 | 28 | 0 | 3 | 31 |
+| Server\\Gameobjects\\Map\\Forest | 1 | 29 | 0 | 3 | 32 |
 | Server\\Gameobjects\\Map\\Gem_town | 1 | 19 | 0 | 2 | 21 |
 | Server\\Gameobjects\\Map\\Route1 | 1 | 21 | 0 | 3 | 24 |
 | Server\\Gameobjects\\Map\\Route2 | 1 | 20 | 0 | 2 | 22 |
@@ -44,7 +44,7 @@ Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-
 | Server\\Interfaces | 6 | 672 | 275 | 105 | 1,052 |
 | Server\\Interfaces (Files) | 5 | 556 | 223 | 85 | 864 |
 | Server\\Interfaces\\Profil | 1 | 116 | 52 | 20 | 188 |
-| Server\\NPC_battle | 2 | 59 | 16 | 15 | 90 |
+| Server\\NPC_battle | 2 | 96 | 32 | 17 | 145 |
 | Server\\Others | 3 | 74 | 109 | 15 | 198 |
 | Server\\lib | 1 | 5 | 11 | 1 | 17 |
 
