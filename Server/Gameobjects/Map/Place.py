@@ -13,6 +13,26 @@ from Database.Actions.Set_status import set_building
 from Interfaces.Inventory_level import Inventory_level
 
 class Place(CMD_level):
+    """
+    Třída, která reprezentuje nějakou polohu/lokaci
+    
+    Atributy
+    --------
+    connect : Connection
+        Instance třídy Connection
+    prompt : str
+        Prompt na daném CMD levelu
+    commands : Dict[str,ICommand]
+        Slovník příkazů v dané lokalitě
+    name : str
+        Název loakce
+    NPCs : List[NPC]
+        List včech NPC v dané lokaci
+    buildings : Dict[str,Building]
+        Slovník všech budov v lokaci
+    ways : Dict[str,Callable]
+        Slovník metod, pro přechod do jiné lokace
+    """
     
     def __init__(self,name:str,prompt:str,connect:Connection,
                  NPCs:List[NPC],buildings:Dict[str,Building],ways:Dict[str,Callable],
@@ -42,7 +62,6 @@ class Place(CMD_level):
         self.connect.send("-budova --[název budovy]",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-vypis_NPCs=>vypíšou se NPC v dané lokaci",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-NPC --[název NPC]",next_message=Next_message.PRIJMI,prompt=self.prompt)
-        self.connect.send("-vypis_hrace=>vypíšou se online hráči ve vaší lokaci",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-profil --[jméno hráče (dobrovolné)]=>když napíšete příkaz bez argumentu, tak",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("zobrazíte svůj profil, jinak zobrazíte profil hráče",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-vypis_cesty=>vypíšou se cesty v dané lokaci",next_message=Next_message.PRIJMI,prompt=self.prompt)
@@ -52,6 +71,14 @@ class Place(CMD_level):
         
         
 class Profil_command(ICommand):
+    """
+    Příkaz díky kterému se přejde na profil
+    
+    Atributy
+    --------
+    place : Place
+        Instance třídy Place, ze které se příkaz volá
+    """
     
     def __init__(self,place:Place) -> None:
         self.place:Place=place
@@ -73,6 +100,14 @@ class Profil_command(ICommand):
         return True
     
 class Cesta_command(ICommand):
+    """
+    Příkaz pro přesun do jiné lokace
+    
+    Atributy
+    --------
+    place : Place
+        Instance třídy Place, ze které se příkaz volá
+    """
     
     def __init__(self,place:Place) -> None:
         self.place:Place=place    
@@ -90,6 +125,14 @@ class Cesta_command(ICommand):
         return True
         
 class Budova_command(ICommand):
+    """
+    Příkaz pro vstup do budovy
+    
+    Atributy
+    --------
+    place : Place
+        Instance třídy Place, ze které se příkaz volá
+    """
     
     def __init__(self,place:Place) -> None:
         self.place:Place=place    
@@ -106,12 +149,28 @@ class Budova_command(ICommand):
         return True
     
 class NPC_command(ICommand):
+    """
+    Příkaz pro interakci s NPC
+    
+    Atributy
+    --------
+    place : Place
+        Instance třídy Place, ze které se příkaz volá
+    """
     
     def __init__(self,place:Place) -> None:
         self.place:Place=place    
         
     def execute(self,options:List[str]) -> bool:
-        raise NotImplementedError("NPC_command")
+        if not len(options) == 1:
+            self.place.connect.send("Příkaz \"NPC\" má jeden povinný argument",next_message=Next_message.PRIJMI,prompt=self.place.prompt)
+            return True
+        npc_name:str=options[0]
+        if not npc_name in self.place.NPCs.keys():
+            self.place.connect.send(f'NPC \"{npc_name}\" není ve vaší lokalitě',next_message=Next_message.PRIJMI,prompt=self.place.prompt)
+            return True
+        self.place.NPCs[npc_name].loop()
+        return True
     
 class Full_help_command(ICommand):
     
@@ -128,6 +187,14 @@ class Full_help_command(ICommand):
         return True
     
 class Vypis_budovy_command(ICommand):
+    """
+    Příkaz pro vypsání všech dostupných budov
+    
+    Atributy
+    --------
+    place : Place
+        Instance třídy Place, ze které se příkaz volá
+    """
     
     def __init__(self,place:Place) -> None:
         self.place:Place=place    
@@ -146,6 +213,14 @@ class Vypis_budovy_command(ICommand):
         return True
     
 class Vypis_cesty_command(ICommand):
+    """
+    Příkaz pro vypsání všech dostupných cest do jiných lokalit
+    
+    Atributy
+    --------
+    place : Place
+        Instance třídy Place, ze které se příkaz volá
+    """
     
     def __init__(self,place:Place) -> None:
         self.place:Place=place    
@@ -164,6 +239,14 @@ class Vypis_cesty_command(ICommand):
         return True
     
 class Inventar_command(ICommand):
+    """
+    Příkaz pro vstup do inventáře uživatele
+    
+    Atributy
+    --------
+    place : Place
+        Instance třídy Place, ze které se příkaz volá
+    """
     
     def __init__(self,place:Place) -> None:
         self.place:Place=place    

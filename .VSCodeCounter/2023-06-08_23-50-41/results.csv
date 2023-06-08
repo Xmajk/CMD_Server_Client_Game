@@ -1,7 +1,7 @@
 "filename", "language", "Markdown", "Python", "JSON", "comment", "blank", "total"
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Client\__init__.py", "Python", 0, 119, 0, 1, 14, 134
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Client\konfig\client.json", "JSON", 0, 0, 6, 0, 0, 6
-"c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\README.md", "Markdown", 73, 0, 0, 0, 21, 94
+"c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\README.md", "Markdown", 72, 0, 0, 0, 19, 91
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Database\Actions\Ability_CRUD.py", "Python", 0, 20, 0, 46, 4, 70
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Database\Actions\Authentication.py", "Python", 0, 32, 0, 47, 4, 83
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Database\Actions\Get_user_informations.py", "Python", 0, 17, 0, 32, 2, 51
@@ -20,7 +20,7 @@
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Map\Capital_city\Capital_city_tawern.py", "Python", 0, 18, 0, 0, 4, 22
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Map\Forest\Forest.py", "Python", 0, 29, 0, 0, 3, 32
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Map\Gem_town\Gem_town.py", "Python", 0, 19, 0, 0, 2, 21
-"c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Map\Place.py", "Python", 0, 145, 0, 0, 31, 176
+"c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Map\Place.py", "Python", 0, 152, 0, 76, 31, 259
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Map\Route1\Route1.py", "Python", 0, 21, 0, 0, 3, 24
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Map\Route2\Route2.py", "Python", 0, 27, 0, 0, 2, 29
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\NPC.py", "Python", 0, 10, 0, 14, 2, 26
@@ -42,4 +42,4 @@
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\lib\ICommand.py", "Python", 0, 5, 0, 11, 1, 17
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\lib\hashing.py", "Python", 0, 5, 0, 13, 1, 19
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\server.json", "JSON", 0, 0, 5, 0, 0, 5
-"Total", "-", 73, 2113, 18, 1186, 357, 3747
+"Total", "-", 72, 2120, 18, 1262, 355, 3827

@@ -1,14 +1,6 @@
 <img src="/readme_content/Jecna_logo.png" alt="SPŠE Ječná"/>
 
 # PV-Game
-
-Klienta si můžete stáhnou na naší [webové stránce](https://www.spsejecna.cz).
-
-
-- [Klient](#klient)
-    - [Podporované operační systémy](#kop)
-    - [Konfigurace](#klient_konfig)
-
 TODO
 ----
 - [x] přihlášení
@@ -51,6 +43,22 @@ Napsaný v jazyce :snake: Python 3.10.10
 
 od serveru jde zprava ve formátu ==> @|start|@prompt@@value@@next_message@@typ@|end|@
 po přijetí serveru se odešle zpráva |||doručeno|||
+
+### Konfigurace - databáze
+| Nastavení           | Hodnota                         |
+|---------------------|---------------------------------|
+| host                | `ip adresa databáze`            |
+| user                | `uživatel databáze`             |
+| passwod             | `heslo uživatele`               |
+| database            | `název databáze`                |
+| auth_plugin         | `jak se chceme přihlašovat`     |
+
+### Konfigurace - serveru
+| Nastavení           | Hodnota                         |
+|---------------------|---------------------------------|
+| ip_adress           | `ip adresa serveru`             |
+| port                | `port serveru`                  |
+| max_hosts           | `maximální počet uživatelů`     |
 
 ## Hra
 
