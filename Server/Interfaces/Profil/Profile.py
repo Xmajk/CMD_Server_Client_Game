@@ -184,5 +184,11 @@ class Information_command(ICommand):
             self.profil.connect.send(f'Uživatel je online',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
         else:
             self.profil.connect.send(f'Uživatel není online',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
+        if len(tmp_player.abilities)==0:
+            self.profil.connect.send(f'Uživatel nemá žádné ability',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
+        else:
+            self.profil.connect.send(f'Ability:',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
+            for abilita in tmp_player.abilities:
+                self.profil.connect.send(f'-{abilita.name}[{abilita.code}]',next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
         self.profil.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.profil.prompt)
         return True

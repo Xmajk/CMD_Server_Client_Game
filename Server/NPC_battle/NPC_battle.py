@@ -17,7 +17,7 @@ class NPC_battle(CMD_level):
                              "vypis_inventar":Print_inventory_command(self),
                              "help":Full_help_command(self),
                              "vypis_informace_o_nepriteli":Print_enemy_informations_command(self),
-                             "zautocit":None,
+                             "zautocit":Attack_command(self),
                              "pouzit":Use_command(self),
                              "vypis_ability":Print_abilities_command(self),
                              "vypis_informace":Print_informations_command(self)
@@ -38,12 +38,21 @@ class NPC_battle(CMD_level):
         self.connect.send("-zautocit=>zautočíte na nepřítele",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-pouzit --[kod, itemu, který chcete použít]=>použijete item",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-vypis_ability=>vypíšou se ability",next_message=Next_message.PRIJMI,prompt=self.prompt)
-        self.connect.send("-pouzit_abilitu --[]=>použijete abilitu",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-vypis_informace=>vypíšou se informace o vaší postavě",next_message=Next_message.PRIJMI,prompt=self.prompt)
         if self.leftable:
             self.connect.send("-opustit=>opustíte souboj",next_message=Next_message.PRIJMI,prompt=self.prompt)
         return super().supplementary_help()
     
+    def player_won(self):
+        self.connect.send(f'vyhrál jste v souboji proti \"{self.enemy.name}\"',next_message=Next_message.PRIJMI,prompt=self.prompt)
+        self.connect.player.current_hp=self.tmp_player.current_hp
+        self.connect.player.current_mana=self.tmp_player.current_mana
+        self.connect.player.inventory=self.tmp_player.inventory
+        
+    def NPC_won(self):
+        self.connect.send(f'Prohrál jste v souboji proti \"{self.enemy.name}\"',next_message=Next_message.PRIJMI,prompt=self.prompt)
+        self.connect.player.reboot()
+        
 class Left_command(ICommand):
     """
     Třída reprezentující příkaz opuštění souboje.
@@ -231,7 +240,7 @@ class Print_informations_command(ICommand):
     
 class Print_abilities_command(ICommand):
     """
-
+    Vypíšou se ability, které má uživatel
     
     Atributy
     --------
@@ -255,7 +264,7 @@ class Print_abilities_command(ICommand):
     
 class Attack_command(ICommand):
     """
-
+    Útok na NPC
     
     Atributy
     --------
@@ -267,4 +276,47 @@ class Attack_command(ICommand):
         self.npc_battle:NPC_battle=npc_battle
         
     def execute(self,options:List[str]) -> bool:
+        tmp_enemy=self.npc_battle.enemy
+        tmp_player=self.npc_battle.tmp_player
+        
+        for tuple in self.npc_battle.effects:
+            tuple[1]-=1
+            if tuple[1]==0:
+                if tuple[0].code=="0011":
+                    self.npc_battle.connect.send("Efekt energy drinku skončil",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+                    tmp_player.add_speed-=tuple[0].add_speed
+        for element in [x for x in self.npc_battle.effects if x[1]==0]:
+            self.npc_battle.effects.remove(element)
+            
+        if tmp_player.get_full_speed()>=tmp_enemy.speed:
+            if tmp_player.get_full_speed()==tmp_enemy.speed:
+                self.npc_battle.connect.send("Máte stejnou ryhclost s NPC, ale začínáte",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            else:
+                self.npc_battle.connect.send("Máte vyšší rychlost, a proto začínáte",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            tmp_curhp:int=tmp_enemy.current_hp
+            tmp_enemy.current_hp-=tmp_player.get_full_atk()
+            self.npc_battle.connect.send(f'NPC:{tmp_curhp}-{tmp_player.get_full_atk()}={tmp_enemy.current_hp}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            if tmp_enemy.current_hp<=0:
+                self.npc_battle.player_won()
+                return False
+            tmp_curhp:int=tmp_player.current_hp
+            tmp_player.current_hp-=tmp_enemy.atk
+            self.npc_battle.connect.send(f'{tmp_player.username}:{tmp_curhp}-{tmp_enemy.atk}={tmp_player.current_hp}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            if tmp_player.current_hp<=0:
+                self.npc_battle.NPC_won()
+                return False
+        else:
+            self.npc_battle.connect.send("NPC je rychlejší, a proto začíná",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            tmp_curhp:int=tmp_player.current_hp
+            tmp_player.current_hp-=tmp_enemy.atk
+            self.npc_battle.connect.send(f'{tmp_player.username}:{tmp_curhp}-{tmp_enemy.atk}={tmp_player.current_hp}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            if tmp_player.current_hp<=0:
+                self.npc_battle.NPC_won()
+                return False
+            tmp_curhp:int=tmp_enemy.current_hp
+            tmp_enemy.current_hp-=tmp_player.get_full_atk()
+            self.npc_battle.connect.send(f'NPC:{tmp_curhp}-{tmp_player.get_full_atk()}={tmp_enemy.current_hp}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            if tmp_enemy.current_hp<=0:
+                self.npc_battle.player_won()
+                return False
         return True

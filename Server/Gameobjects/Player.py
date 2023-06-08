@@ -3,7 +3,7 @@ from Gameobjects.Item import Item
 from Database.Database import Database
 from copy import deepcopy
 from Gameobjects.Ability import Ability
-from Database.Actions.Ability_CRUD import player_abilities
+from Database.Actions.Ability_CRUD import player_abilities,get_ability
 
 class Player:
     """

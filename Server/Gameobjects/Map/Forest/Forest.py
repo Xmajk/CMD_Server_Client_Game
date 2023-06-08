@@ -25,7 +25,7 @@ class Forest(Place):
         
     def loop(self):
         if not capital_city_tawern(self.connect.databaze,self.connect.player.username):
-            battle:NPC_battle=NPC_battle(self.connect,self.prompt,Battle_NPC("bandita",100,30,35))
+            battle:NPC_battle=NPC_battle(self.connect,self.prompt,Battle_NPC("bandita",300,30,35))
             battle.loop()
             set_capital_city_tawern(self.connect.databaze,self.connect.player.username)
             self.connect.send("Zachránil jste hospodského a splnili jste úkol!",next_message=Next_message.PRIJMI,prompt=self.prompt)

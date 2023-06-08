@@ -5,7 +5,8 @@ from Others.Connection import Connection
 from Enums.Next_message import Next_message
 from Database.Actions.Inventory_db import all_using_to_inventory,print_inventory
 from Gameobjects.Item import Item
-from Database.Actions.Ability_CRUD import create_abiliti_owning
+from Database.Actions.Ability_CRUD import create_abiliti_owning,get_ability
+from Gameobjects.Ability import Ability
 
 class Inventory_level(CMD_level):
     """
@@ -345,6 +346,9 @@ class Use_command(ICommand):
             return True
         elif item.code=="0014":
             create_abiliti_owning(self.inventory.connect.databaze,self.inventory.connect.player.username,"A001")
+            tmp:Ability=Ability()
+            tmp.create_by_tuple(get_ability(self.inventory.connect.databaze,"A0001"))
+            self.inventory.connect.player.abilities.append(tmp)
             self.inventory.connect.player.inventory.remove(item)
             return True
         raise NotImplementedError("inventar-pouzij")

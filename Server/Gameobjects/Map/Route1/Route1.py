@@ -13,7 +13,7 @@ class Route1(Place):
             buildings={},
             ways={
                 "Hlavní město":to_capital_city,
-                "Les života":to_forest,
+                "Les":to_forest,
                 "Route2":to_route2
             },
             commands={
