@@ -8,6 +8,7 @@ import mysql.connector
 from Interfaces.Profil.Profile import Profil_view
 from typing import Dict
 from Interfaces.CMD_level import CMD_level
+from lib.hashing import hash_string
 
 class Register_view(CMD_level):
     """
@@ -218,7 +219,7 @@ class Finich_command(ICommand):
             return True
         try:
             rv.connect.send("Prosím vyčkejte než vás zaregistrujeme",next_message=Next_message.PRIJMI)
-            register(rv.connect.databaze,rv.username,rv.trida,rv.password)
+            register(rv.connect.databaze,rv.username,rv.trida,hash_string(rv.password))
         except mysql.connector.Error as error:
             print(error.sqlstate)
             if error.sqlstate=="45000":

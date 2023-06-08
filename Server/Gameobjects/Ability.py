@@ -15,7 +15,6 @@ class Ability:
         
     def create_by_tuple(self,value:Tuple[str,int,int,int,int,bool,int,int,str])->None:
         self.name,self.hp,self.atk,self.speed,self.damage,self.effect,self.round_of_effect,self.mana_cost,self.code=value
-        return self
         
     
     

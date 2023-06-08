@@ -13,7 +13,7 @@ TODO
 ----
 - [x] přihlášení
 - [x] registrovat
-- [ ] hashování hesel
+- [x] hashování hesel
 - [x] mapa
 - [x] přechod do jiných lokacích
 - [x] vstup do budov
@@ -25,6 +25,7 @@ TODO
 - [x] koupě piva v hospodě
 - [x] ukládání uživatele
 - [x] NPC souboj
+- [ ] zresetování účtu uživatele po smrti
 - [ ] používání abilit v souboji
 - [ ] multiplayer souboj
 
@@ -57,10 +58,6 @@ po přijetí serveru se odešle zpráva |||doručeno|||
 - warrior
 - assasin
 - wizard
-
-### Ability
-
-### Itemy
 
 ### Lokace
 - Hlavní město

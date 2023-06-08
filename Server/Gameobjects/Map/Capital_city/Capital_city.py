@@ -50,6 +50,14 @@ class Help_command(ICommand):
         return True
     
 class Budova_command(ICommand):
+    """
+    Poupravená command budova, díky kterému se mi kontroluje, že když chci do hospody musím splnit quest
+    
+    Atributy
+    --------
+    capital_city : Capital_city
+        Instance třídy Capital_city
+    """
     
     def __init__(self,capital_city:Capital_city) -> None:
         self.capital_city:Capital_city=capital_city   

@@ -9,6 +9,7 @@ from Database.Actions.Authentication import username_exists
 from Database.Actions.Get_user_informations import player_is_online
 from Interfaces.Register_view import Register_view
 from Interfaces.CMD_level import CMD_level
+from lib.hashing import hash_string
 
 name_of_game:str="""███╗   ███╗██╗   ██╗███████╗████████╗██╗ ██████╗         ██╗███████╗██╗    ██╗███████╗██╗     ███████╗
 ████╗ ████║╚██╗ ██╔╝██╔════╝╚══██╔══╝██║██╔════╝         ██║██╔════╝██║    ██║██╔════╝██║     ██╔════╝
@@ -108,7 +109,7 @@ class Login_command(ICommand):
             else:
                 self.first_view.connect.send("",next_message=Next_message.POSLI,prompt="heslo:",typ="heslo")
             password:str=self.first_view.connect.recieve(next_message=Next_message.PRIJMI)
-            if login(self.first_view.connect,username,password):
+            if login(self.first_view.connect,username,hash_string(password)):
                 if player_is_online(self.first_view.connect.databaze,username):
                     self.first_view.connect.send(f'Uživatel \"{username}\" je online',next_message=Next_message.PRIJMI)
                     return True

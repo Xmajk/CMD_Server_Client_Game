@@ -8,6 +8,16 @@ from Gameobjects.Item import Item
 from Database.Actions.Inventory_db import get_item
 
 class Bartender(NPC):
+    """
+    Třída představující NPC typu hospodský (bartender) ve hře.
+
+    Atributy
+    --------
+    bar_beer_cost : int
+        Cena piva na baru.
+    beer_cost : int
+        Cena nákupu piva.
+    """
     
     def __init__(self, connect: Connection, base_prompt: str) -> None:
         self.bar_beer_cost:int=20
@@ -45,6 +55,14 @@ class Full_help_command(ICommand):
         return True
 
 class Bar_beer_command(ICommand):
+    """
+    Příkaz pivo, díky kterému si koupí uživatel pivo a uzdraví se
+    
+    Atributy
+    --------
+    bartender : Bartender
+        instance třídy Bartender
+    """
     def __init__(self,bartender:Bartender) -> None:
         self.bartender:Bartender=bartender
         
@@ -69,6 +87,14 @@ class Bar_beer_command(ICommand):
         return True
     
 class Buy_beer(ICommand):
+    """
+    Příkaz pivo, díky kterému si koupí uživatel pivo a vloží jej do inventáře
+    
+    Atributy
+    --------
+    bartender : Bartender
+        instance třídy Bartender
+    """
     def __init__(self,bartender:Bartender) -> None:
         self.bartender:Bartender=bartender
         
