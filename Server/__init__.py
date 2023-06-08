@@ -1,6 +1,6 @@
 import socket
 import threading
-from typing import IO,Union
+from typing import IO,Union,Dict
 from Others.Connection import Connection
 from Interfaces.First_view import First_view
 from Database.Database import Database
@@ -9,14 +9,29 @@ import sys
 from Database.Actions.Set_status import set_everyone_offline
 from cmd import Cmd as konzole
 import os
+import json
 
-MAX_HOSTS:int=2
+try:
+    with open('database.json', 'r') as file:
+        database_conf:Dict[str,Union[str,int]] = json.load(file)
+except:
+    input("Při otevírání souboru \"database.json\" nastala chyba, zkontrolujte jestli existuje a jestli máte všechna práva")
+    sys.exit(0)
+
+try:
+    with open('server.json', 'r') as file:
+        server_conf:Dict[str,Union[str,int]] = json.load(file)
+except:
+    input("Při otevírání souboru \"server.json\" nastala chyba, zkontrolujte jestli existuje a jestli máte všechna práva")
+    sys.exit(0)
+
+MAX_HOSTS:int=server_conf["max_hosts"]
 clients:list=[]
 
 semaphore:threading.Semaphore = threading.Semaphore(1)
 
-ip_adresa:str="0.0.0.0"
-port_number:int=5000
+ip_adresa:str=server_conf["ip_adress"]
+port_number:int=server_conf["port"]
 
 def handle_client(connection:Connection)->None:
     """
@@ -43,7 +58,7 @@ def handle_client(connection:Connection)->None:
         connection.close_connection()
         raise NotImplementedError(e)
     except ConnectionResetError:
-        print(f'{connection.ip_adress}-uživatel se odpojil')
+        pass#uživatel se odpojil
     except ConnectionAbortedError:
         print(f'{connection.ip_adress}-Sever spadnul')
     except BaseException as be:
@@ -61,7 +76,11 @@ def start_server()->None:
     """
     Spustí server pro síťovou aplikaci a čeká na připojení klientů.
     """
-    database:Database = Database()
+    try:
+        database:Database = Database(database_conf["host"],database_conf["user"],database_conf["password"],database_conf["database"],database_conf["auth_plugin"])
+    except:
+        input("Při připojování na databázi nastala chyba")
+        sys.exit(0)
     set_everyone_offline(database)
     
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

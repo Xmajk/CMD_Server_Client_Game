@@ -1,5 +1,7 @@
 {
-    "host":"localhost",
-    "user":"Player",
-    "password":"Password"
+    "host":"127.0.0.1",
+    "user":"player_loc",
+    "password":"heslojeveslo",
+    "database":"game",
+    "auth_plugin":"mysql_native_password"
 }

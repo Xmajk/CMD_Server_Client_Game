@@ -1,4 +1,4 @@
-from typing import Dict,List
+from typing import Dict,List,Tuple
 from Interfaces.CMD_level import CMD_level
 from lib.ICommand import ICommand
 from Others.Connection import Connection
@@ -21,13 +21,14 @@ class NPC_battle(CMD_level):
                              "pouzit":Use_command(self),
                              "vypis_ability":None,
                              "pouzit_abilitu":None,
-                             "vypis_informace":None
+                             "vypis_informace":Print_informations_command(self)
                          })
         if left_able:
             self.commands["opustit"]=Left_command(self)
         self.leftable:bool=left_able
         self.enemy:Battle_NPC=enemy
         self.tmp_player:Player=deepcopy(self.connect.player)
+        self.effects:List[Tuple[Item,int]]=[]
     
     def loop(self):
         return super().loop()
@@ -86,6 +87,7 @@ class Print_enemy_informations_command(ICommand):
         self.npc_battle.connect.send(f'Atk:{self.npc_battle.enemy.atk}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
         self.npc_battle.connect.send(f'Speed:{self.npc_battle.enemy.speed}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
         self.npc_battle.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+        return True
     
 class Print_inventory_command(ICommand):
     """
@@ -175,6 +177,71 @@ class Use_command(ICommand):
             if item.code==selected_code:
                 selected_item:Item=item
                 break
-        print(selected_item.nazev)
+        if selected_item.code in ["0009","0013"]: #léčivý lektvar
+            if self.npc_battle.tmp_player.current_hp==self.npc_battle.tmp_player.get_full_hp():
+                self.npc_battle.connect.send(f'Máte plný počet životů a nepotřebujete použít \"{selected_item.nazev}\"',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+                return True
+            if self.npc_battle.tmp_player.current_hp+selected_item.add_hp>self.npc_battle.tmp_player.get_full_hp():
+                self.npc_battle.connect.send(f'Vyléčil jste si {self.npc_battle.tmp_player.get_full_hp()-self.npc_battle.tmp_player.current_hp} životů',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            else:
+                self.npc_battle.connect.send(f'Vyléčil jste si {selected_item.add_hp} životů',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            self.npc_battle.tmp_player.add_to_current_health(selected_item.add_hp)
+        elif selected_item.code=="0010": # mana lektvar
+            if self.npc_battle.tmp_player.current_mana==self.npc_battle.tmp_player.get_full_mana():
+                self.npc_battle.connect.send(f'Máte plný počet many a nepotřebujete použít \"{selected_item.nazev}\"',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+                return True
+            if self.npc_battle.tmp_player.current_mana+selected_item.add_mana>self.npc_battle.tmp_player.get_full_mana():
+                self.npc_battle.connect.send(f'Přidal jste si {self.npc_battle.tmp_player.get_full_mana()-self.npc_battle.tmp_player.current_mana} many',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            else:
+                self.npc_battle.connect.send(f'Přidal jste si {selected_item.add_mana} many',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            self.npc_battle.tmp_player.add_to_current_mana(selected_item.add_mana)
+        elif selected_item.code=="0011":
+            self.npc_battle.tmp_player.add_to_add_speed(selected_item.add_speed)
+            self.npc_battle.effects.append((selected_item,3))
+            self.npc_battle.connect.send(f'Použil se item \"{selected_item.nazev}\" a efekt potrvá 3 kola',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            self.npc_battle.connect.send(f'Item \"{selected_item.nazev}\" vám přidal {selected_item.add_speed} k rychlosti',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+        else:
+            raise ValueError(f'{selected_code} není zaznamenán jako použítelný item')
+        self.npc_battle.tmp_player.inventory.remove(selected_item)
+        return True
+    
+class Print_informations_command(ICommand):
+    """
+    Třída reprezentující příkaz pro vypsání informací o uživatelu
+    
+    Atributy
+    --------
+    npc_battle : NPC_battle
+        Instance NPC_battle, ze které byl příkaz spuštěn
+    """
+    
+    def __init__(self,npc_battle:NPC_battle) -> None:
+        self.npc_battle:NPC_battle=npc_battle
         
+    def execute(self,options:List[str]) -> bool:
+        if not len(options)==0:
+            self.npc_battle.connect.send("Příkaz \"vypis_infomace\" nemá žádné argumenty",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            return True
+        self.npc_battle.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+        self.npc_battle.connect.send(f'Hp:{self.npc_battle.tmp_player.current_hp}/{self.npc_battle.tmp_player.get_full_hp()}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+        self.npc_battle.connect.send(f'Atk:{self.npc_battle.tmp_player.get_full_atk()}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+        self.npc_battle.connect.send(f'Mana:{self.npc_battle.tmp_player.current_mana}/{self.npc_battle.tmp_player.get_full_mana()}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+        self.npc_battle.connect.send(f'Speed:{self.npc_battle.tmp_player.get_full_speed()}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+        self.npc_battle.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+        return True
+    
+class Attack_command(ICommand):
+    """
+
+    
+    Atributy
+    --------
+    npc_battle : NPC_battle
+        Instance NPC_battle, ze které byl příkaz spuštěn
+    """
+    
+    def __init__(self,npc_battle:NPC_battle) -> None:
+        self.npc_battle:NPC_battle=npc_battle
+        
+    def execute(self,options:List[str]) -> bool:
         return True

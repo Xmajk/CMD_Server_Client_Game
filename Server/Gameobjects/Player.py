@@ -2,6 +2,8 @@ from typing import List,Union,Tuple
 from Gameobjects.Item import Item
 from Database.Database import Database
 from copy import deepcopy
+from Gameobjects.Ability import Ability
+from Database.Actions.Ability_CRUD import player_abilities
 
 class Player:
     """
@@ -45,6 +47,8 @@ class Player:
         Inventář předmětů.
     current_mana : int
         Aktuální hodnota many.
+    abilities : List[Ability]
+        List abilit, které uživatel vlastní.
     """
     
     def __init__(self,username) -> None:
@@ -66,6 +70,7 @@ class Player:
         self.coins:int=0
         self.inventory:List[Item]=[]
         self.current_mana:int=0
+        self.abilities:List[Ability]=[]
     
     def load(self,db:Database)->None:
         """
@@ -101,6 +106,11 @@ class Player:
                 self.items_mana+=tmp.add_mana
                 self.items_speed+=tmp.add_speed
             self.inventory.append(tmp)
+            
+        for ability_tuple in player_abilities(db,self.username):
+            tmp:Ability=Ability()
+            tmp.create_by_tuple(ability_tuple)
+            self.abilities.append(tmp)
             
     def update_item_stats(self)->None:
         """
@@ -207,6 +217,22 @@ class Player:
             Celková hodnota speed uživatele.
         """
         return self.base_speed+self.add_speed+self.items_speed
+    
+    def add_to_current_health(self,value:int)->None:
+        self.current_hp+=value
+        if self.current_hp>self.get_full_hp():
+            self.current_hp=self.get_full_hp()
+    
+    def add_to_current_mana(self,value:int)->None:
+        self.current_mana+=value
+        if self.current_mana>self.get_full_mana():
+            self.current_mana=self.get_full_mana()
+    
+    def add_to_add_speed(self,value:int)->None:
+        self.add_speed+=value
+        
+    def remove_from_add_speed(self,value:int)->None:
+        self.add_speed+=value
     
     def reboot(self)->None:
         """

@@ -10,12 +10,12 @@ class Database:
         instance třídy reprezentující připojení k MySQL databázi
     """
 
-    def __init__(self) -> None:
+    def __init__(self,host,user,password,database,auth_plugin) -> None:
         self.mydb=mysql.connector.connect(
-            host="127.0.0.1",
-            user="player_loc",
-            password="heslojeveslo",
-            database="game",
-            auth_plugin='mysql_native_password'
+            host=host,
+            user=user,
+            password=password,
+            database=database,
+            auth_plugin=auth_plugin
         )
         print("Úspěšně jste se připojili k databázi")
