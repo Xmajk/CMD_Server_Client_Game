@@ -44,7 +44,6 @@ class Place(CMD_level):
         if not "NPC" in commands.keys():commands["NPC"]=NPC_command(self)
         if not "help" in commands.keys():commands["help"]=Full_help_command(self)
         if not "vypis_budovy" in commands.keys():commands["vypis_budovy"]=Vypis_budovy_command(self)
-        if not "vypis_NPCs" in commands.keys():commands["vypis_NPCs"]=None
         if not "vypis_cesty" in commands.keys():commands["vypis_cesty"]=Vypis_cesty_command(self)
         if not "inventar" in commands.keys():commands["inventar"]=Inventar_command(self)
         
@@ -60,7 +59,6 @@ class Place(CMD_level):
     def supplementary_help(self):
         self.connect.send("-vypis_budovy=>vypíšou se budovy, které jsou v dané lokaci",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-budova --[název budovy]",next_message=Next_message.PRIJMI,prompt=self.prompt)
-        self.connect.send("-vypis_NPCs=>vypíšou se NPC v dané lokaci",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-NPC --[název NPC]",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("-profil --[jméno hráče (dobrovolné)]=>když napíšete příkaz bez argumentu, tak",next_message=Next_message.PRIJMI,prompt=self.prompt)
         self.connect.send("zobrazíte svůj profil, jinak zobrazíte profil hráče",next_message=Next_message.PRIJMI,prompt=self.prompt)

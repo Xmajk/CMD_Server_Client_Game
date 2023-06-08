@@ -185,7 +185,7 @@ CREATE TABLE `lokace` (
 
 LOCK TABLES `lokace` WRITE;
 /*!40000 ALTER TABLE `lokace` DISABLE KEYS */;
-INSERT INTO `lokace` VALUES (1,1,'Hlavní město'),(2,2,'Route1'),(3,3,'Route2'),(4,4,'Les života'),(5,5,'Rubínové město');
+INSERT INTO `lokace` VALUES (1,1,'Hlavní město'),(2,2,'Route1'),(3,3,'Route2'),(4,4,'Les'),(5,5,'Rubínové město');
 /*!40000 ALTER TABLE `lokace` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -34,7 +34,7 @@ class Load_user:
             place.loop()
         elif location=="Route1":
             Route1(self.connect).loop()
-        elif location=="Les života":
+        elif location=="Les":
             Forest(self.connect).loop() 
         elif location=="Route2":
             Route2(self.connect).loop()
