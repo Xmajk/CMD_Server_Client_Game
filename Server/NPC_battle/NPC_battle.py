@@ -19,8 +19,7 @@ class NPC_battle(CMD_level):
                              "vypis_informace_o_nepriteli":Print_enemy_informations_command(self),
                              "zautocit":None,
                              "pouzit":Use_command(self),
-                             "vypis_ability":None,
-                             "pouzit_abilitu":None,
+                             "vypis_ability":Print_abilities_command(self),
                              "vypis_informace":Print_informations_command(self)
                          })
         if left_able:
@@ -229,6 +228,30 @@ class Print_informations_command(ICommand):
         self.npc_battle.connect.send(f'Speed:{self.npc_battle.tmp_player.get_full_speed()}',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
         self.npc_battle.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
         return True
+    
+class Print_abilities_command(ICommand):
+    """
+
+    
+    Atributy
+    --------
+    npc_battle : NPC_battle
+        Instance NPC_battle, ze které byl příkaz spuštěn
+    """
+    
+    def __init__(self,npc_battle:NPC_battle) -> None:
+        self.npc_battle:NPC_battle=npc_battle
+        
+    def execute(self,options:List[str]) -> bool:
+        if len(self.npc_battle.tmp_player.abilities)==0:
+            self.npc_battle.connect.send(f'Nemáte žádné ability',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            return True
+        self.npc_battle.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+        for ability in self.npc_battle.tmp_player.abilities:
+            self.npc_battle.connect.send(f'-{ability.name}[{ability.code}]',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+        self.npc_battle.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+        return True
+        
     
 class Attack_command(ICommand):
     """

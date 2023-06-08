@@ -5,6 +5,7 @@ from Others.Connection import Connection
 from Enums.Next_message import Next_message
 from Database.Actions.Inventory_db import all_using_to_inventory,print_inventory
 from Gameobjects.Item import Item
+from Database.Actions.Ability_CRUD import create_abiliti_owning
 
 class Inventory_level(CMD_level):
     """
@@ -200,7 +201,7 @@ class Put_on_command(ICommand):
             if not kod in [item.code for item in self.inventory.connect.player.inventory if not item.is_using]:
                 self.inventory.connect.send(f'Nemáte v inventáři předmět s kódem \"{kod}\"',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
                 continue
-            if not kod in [item.code for item in self.inventory.connect.player.inventory if not item.is_using and not item.type in ["story_item","useable","combat_useable"]]:
+            if not kod in [item.code for item in self.inventory.connect.player.inventory if not item.is_using and not item.type in ["non_combat_useable","useable","combat_useable"]]:
                 self.inventory.connect.send(f'Item s kóddem \"{kod}\" není nasaditelný',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
                 continue
             change_item:Union[Item,None]=None
@@ -306,7 +307,7 @@ class Use_command(ICommand):
             self.inventory.connect.send(f'Nevlastníte předmět s kódem \"{kod}\"',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
             return True
         item:Item=[item for item in self.inventory.connect.player.inventory if item.code==kod][0]
-        if not item.type == "useable":
+        if not item.type in ["useable","non_combat_useable"]:
             self.inventory.connect.send(f'Předmět s kódem \"{kod}\" nelze použít',next_message=Next_message.PRIJMI,prompt=self.inventory.prompt)
             return True
         item:Union[Item,None]=None
@@ -341,5 +342,9 @@ class Use_command(ICommand):
                 self.inventory.connect.player.current_mana=self.inventory.connect.player.get_full_mana()
                 self.inventory.connect.player.inventory.remove(item)
             self.inventory.connect.save_player()
+            return True
+        elif item.code=="0014":
+            create_abiliti_owning(self.inventory.connect.databaze,self.inventory.connect.player.username,"A001")
+            self.inventory.connect.player.inventory.remove(item)
             return True
         raise NotImplementedError("inventar-pouzij")
