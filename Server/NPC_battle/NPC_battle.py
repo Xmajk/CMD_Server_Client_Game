@@ -6,6 +6,7 @@ from Enums.Next_message import Next_message
 from NPC_battle.Battle_NPC import Battle_NPC
 from copy import deepcopy
 from Gameobjects.Player import Player
+from Gameobjects.Item import Item
 
 class NPC_battle(CMD_level):
     
@@ -17,7 +18,7 @@ class NPC_battle(CMD_level):
                              "help":Full_help_command(self),
                              "vypis_informace_o_nepriteli":Print_enemy_informations_command(self),
                              "zautocit":None,
-                             "pouzit":None,
+                             "pouzit":Use_command(self),
                              "vypis_ability":None,
                              "pouzit_abilitu":None,
                              "vypis_informace":None
@@ -135,4 +136,45 @@ class Full_help_command(ICommand):
         self.npc_battle.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
         self.npc_battle.supplementary_help()
         self.npc_battle.connect.send("----------------------",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+        return True
+
+class Use_command(ICommand):
+    """
+    Třída reprezentující příkaz použítí itemu
+    
+    Atributy
+    --------
+    npc_battle : NPC_battle
+        Instance NPC_battle, ze které byl příkaz spuštěn
+    """
+    
+    def __init__(self,npc_battle:NPC_battle) -> None:
+        self.npc_battle:NPC_battle=npc_battle
+        
+    def execute(self,options:List[str]) -> bool:
+        if not len(options)==1:
+            self.npc_battle.connect.send("Příkaz \"pouzij\" má jeden povinný argument kód itemu",next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            return True
+        selected_code:str=options[0]
+        if not len(selected_code)==4:
+            self.npc_battle.connect.send(f'Kód \"{selected_code}\" nesplňuje pravidla kódů itemů',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            return True
+        if False in [element in [str(i) for i in range(10)] for element in selected_code]:
+            self.npc_battle.connect.send(f'Kód \"{selected_code}\" nesplňuje pravidla kódů itemů',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            return True
+        if not selected_code in [item.code for item in self.npc_battle.tmp_player.inventory if item.type in ["useable","combat_useable"]]:
+            self.npc_battle.connect.send(f'Nevlastníte předmět s kódem \"{selected_code}\"',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            return True
+        if not selected_code in [item.code for item in self.npc_battle.tmp_player.inventory if item.type in ["useable","combat_useable"]]:
+            self.npc_battle.connect.send(f'Nemáte v inventáři předmět s kódem \"{selected_code}\"',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            return True
+        if not selected_code in [item.code for item in self.npc_battle.tmp_player.inventory if item.type in ["useable","combat_useable"]]:
+            self.npc_battle.connect.send(f'Item s kóddem \"{selected_code}\" nelze použít',next_message=Next_message.PRIJMI,prompt=self.npc_battle.prompt)
+            return True
+        for item in self.npc_battle.tmp_player.inventory:
+            if item.code==selected_code:
+                selected_item:Item=item
+                break
+        print(selected_item.nazev)
+        
         return True

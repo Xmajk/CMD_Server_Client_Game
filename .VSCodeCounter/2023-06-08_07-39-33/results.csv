@@ -24,15 +24,15 @@
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Map\Route2\Route2.py", "Python", 0, 0, 20, 0, 0, 2, 22
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\NPC.py", "Python", 0, 0, 10, 0, 14, 2, 26
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\NPCs\Bartender.py", "Python", 0, 0, 84, 0, 0, 12, 96
-"c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Player.py", "Python", 0, 0, 103, 0, 95, 11, 209
+"c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Gameobjects\Player.py", "Python", 0, 0, 105, 0, 98, 12, 215
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\CMD_level.py", "Python", 0, 0, 29, 0, 26, 9, 64
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\First_view.py", "Python", 0, 0, 87, 0, 57, 19, 163
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\Inventory_level.py", "Python", 0, 0, 243, 0, 74, 28, 345
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\Load_user.py", "Python", 0, 0, 31, 0, 11, 2, 44
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\Profil\Profile.py", "Python", 0, 0, 116, 0, 52, 20, 188
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Interfaces\Register_view.py", "Python", 0, 0, 166, 0, 55, 27, 248
-"c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\NPC_battle\Battle_NPC.py", "Python", 0, 0, 6, 0, 0, 1, 7
-"c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\NPC_battle\NPC_battle.py", "Python", 0, 0, 73, 0, 16, 15, 104
+"c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\NPC_battle\Battle_NPC.py", "Python", 0, 0, 7, 0, 0, 1, 8
+"c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\NPC_battle\NPC_battle.py", "Python", 0, 0, 121, 0, 40, 18, 179
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Others\Connection.py", "Python", 0, 0, 50, 0, 42, 9, 101
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Others\Crossing.py", "Python", 0, 0, 16, 0, 40, 5, 61
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\Others\Help_methods.py", "Python", 0, 0, 8, 0, 27, 1, 36
@@ -41,4 +41,4 @@
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\lib\ICommand.py", "Python", 0, 0, 5, 0, 11, 1, 17
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\Server\server.json", "JSON", 0, 0, 0, 5, 0, 0, 5
 "c:\Users\Misah\OneDrive\Plocha\soubor\PV-Game\mystic_jewels.session.sql", "SQL", 1, 0, 0, 0, 0, 0, 1
-"Total", "-", 1, 79, 1863, 16, 1040, 323, 3322
+"Total", "-", 1, 79, 1914, 16, 1067, 327, 3404

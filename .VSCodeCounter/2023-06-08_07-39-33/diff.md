@@ -1,24 +1,23 @@
 # Diff Summary
 
-Date : 2023-06-07 19:23:54
+Date : 2023-06-08 07:39:33
 
 Directory c:\\Users\\Misah\\OneDrive\\Plocha\\soubor\\PV-Game
 
-Total : 2 files,  -75 codes, -1 comments, -7 blanks, all -83 lines
+Total : 1 files,  5 codes, 0 comments, 0 blanks, all 5 lines
 
 [Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)
 
 ## Languages
 | language | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| JSON | 1 | 5 | 0 | 0 | 5 |
-| Python | 1 | -80 | -1 | -7 | -88 |
+| Python | 1 | 5 | 0 | 0 | 5 |
 
 ## Directories
 | path | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| . | 2 | -75 | -1 | -7 | -83 |
-| Client | 1 | -80 | -1 | -7 | -88 |
+| . | 1 | 5 | 0 | 0 | 5 |
 | Server | 1 | 5 | 0 | 0 | 5 |
+| Server\\NPC_battle | 1 | 5 | 0 | 0 | 5 |
 
 [Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)
