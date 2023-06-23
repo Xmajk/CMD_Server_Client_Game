@@ -1,5 +1,3 @@
-<img src="/readme_content/Jecna_logo.png" alt="SPŠE Ječná"/>
-
 # PV-Game
 TODO
 ----
